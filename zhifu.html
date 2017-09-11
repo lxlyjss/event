@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <title>支付</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/media.css">
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="js/main.js"></script>
+</head>
+<body class="md">
+    <header>
+        <div class="header-container">
+            <div class="header-left">
+                <a href="index.html"><img src="images/72-logo.png" alt=""></a>
+            </div>
+            <div class="header-right">
+                <div class="header-nav">
+                    <ul>
+                        <li class="Tcenter"><a href="#" class="Fcolor-text-black">首页</a></li>
+                        <li class="Tcenter"><a href="#" class="Fcolor-text-black">滑步车培训</a></li>
+                        <li class="Tcenter"><a href="#" class="Fcolor-text-black">活动赛事</a></li>
+                        <li class="Tcenter"><a href="#" class="Fcolor-text-black">官网</a></li>
+                    </ul>
+                </div>
+                <div class="header-search">
+                    <p><input type="text"><span class="iconfont icon-sousuo"></span></p>
+                </div>
+                <div class="header-user">
+                    <div class="user-info">
+                    	<div class="menu-btn-sm">
+							<span class="menu-line"></span>
+							<span class="menu-line"></span>
+							<span class="menu-line"></span>
+						</div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="user-list">
+            <ul>
+                <li><a href="userCenter.html">个人中心</a></li>
+                <li><a href="javascript:;" id="loginOut">退出</a></li>
+            </ul>
+        </div>
+    </header>
+    <section>
+        <div class="content-container">
+            <div class="zhifu-content">
+                <h3 class="baoming-title">支付</h3>
+                <div class="dingdan-content">
+                    <h3 class="sm-title">订单信息</h3>
+                    <div class="zhifu-dingdan">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td width="90"><nobr>商品名称：</nobr></td>
+                                <td class="product-title"></td>
+                            </tr>
+                            <tr>
+                                <td><nobr>订单号码：</nobr></td>
+                                <td class="product-number"></td>
+                            </tr>
+                            <tr>
+                                <td><nobr>商品总价：</nobr></td>
+                                <td class="product-all-price">￥<span></span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <table class="meal-list">
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="zhifu-type">
+                <h3 class="sm-title">支付方式</h3>
+                <div class="zhifu-box">
+                    <div class="zhifu-list">
+                        <label for="weipay">
+                            <img src="images/weipay.png" alt="">
+                            <input type="radio" name="weipay" id="weipay" checked>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-one">
+                <a href="javascript:;" class="pay-btn" id="payBtn">立即支付</a>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="bottom-info">
+            <p>骑二无比网络科技有限公司</p>
+            <p>本站图文是骑二无比版权盗版必究</p>
+            <p>客服电话：010-80448861</p>
+            <p><a href="#">使用条款</a><a href="#">隐私政策</a></p>
+        </div>
+    </footer>
+    <script>
+        $(function (){
+            $.fn.isSign();
+            var user = window.userInfo;
+            var data = location.search.split("&");
+            var myId = data[0].split("=")[1];
+            var orderId = data[1].split("=")[1];
+//            console.log(myId);
+//            console.log(orderId);
+            var resultData;
+            //获取订单列表信息
+            $.ajax({
+                url:"http://sport.72bike.com/activity/front/order/orderInfo",
+                data:{
+                    id:orderId
+                },
+                dataType:"json",
+                success:function (result){
+                    if(result.result == 1){
+                        resultData = result;
+                        $(".zhifu-dingdan .product-title").text(resultData.activityName);
+                        $(".zhifu-dingdan .product-number").text(resultData.orderCode);
+                        $(".zhifu-dingdan .product-all-price").text("￥"+resultData.allPrice);
+                        $(".meal-list tbody").empty();
+                        for(var i = 0; i < resultData.comboList.length;i++){
+                        	if(resultData.comboList[i].count != 0){
+                        		var temp = $("<tr><td width='90'>"+(i==0?'报名套餐：':'')+"</td>" +
+                                "<td style=\"text-align:left!important;\"><span>"+resultData.comboList[i].comboName+"</span>&nbsp;&nbsp;&nbsp;&nbsp;<span></span>&nbsp;&nbsp;&nbsp;&nbsp;<span>"+resultData.comboList[i].count+"</span></td></tr>");
+                            	$(".meal-list tbody").append(temp);
+                        	}
+                        }
+                        $(".zhifu-dingdan .product-all-price").text(result.price);
+                    }else{
+                        alert("获取订单信息失败!");
+                    }
+                },
+                error:function (){
+                }
+            });
+            function tijiao(){
+                submit(myId,orderId);
+                //$("#payBtn").unbind("click",tijiao);
+            }
+            $("#payBtn").bind("click",tijiao);
+
+            function submit(myId,orderId){
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://sport.72bike.com/activity/wechatPay/jsOarder',
+                    data: {openId:myId,orderId:orderId},
+                    beforeSend:function (){
+                          $("#payBtn").text("支付中...");
+                    },
+                    dataType: "json",
+                    success: function(data){
+                        console.log(data.obj);
+                        var appId=data.obj.appId;
+                        var timeStamp=data.obj.timeStamp;
+                        var nonceStr=data.obj.nonceStr;
+                        var Package=data.obj.Package;
+                        var paySign=data.obj.paySign;
+                        WeixinJSBridge.invoke(
+                            'getBrandWCPayRequest', {
+                                "appId":appId,     //公众号名称，由商户传入
+                                "timeStamp":timeStamp,         //时间戳，自1970年以来的秒数
+                                "nonceStr":nonceStr, //随机串
+                                "package":Package,
+                                "signType":"MD5",         //微信签名方式：
+                                "paySign":paySign //微信签名
+                            },
+                            function(res){
+                                WeixinJSBridge.log(res.err_msg);
+                                if(res.err_msg == "get_brand_wcpay_request:ok"){
+                                    <!--支付成功调用-->
+                                    <!--history.go(0);   -->
+                                    window.location.href = "http://sport.72bike.com/zhifu-success.html?orderId="+orderId;
+                                }else if(res.err_msg == "get_brand_wcpay_request:cancel"){
+                                    <!--取消支付调用-->
+                                   window.location.href = "http://sport.72bike.com/userCenter.html";
+								
+                                }else{
+                                    <!--支付失败-->
+                                    alert("参数错误"+res.err_msg);
+                                    $("#payBtn").text("立即支付");
+                                    //$("#payBtn").bind("click",tijiao);
+                                }
+                            }
+                        );
+                    },
+                    error:function (){
+                        alert("支付失败!请检查网络");
+                        window.location.href="http://sport.72bike.com/userCenter.html";
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

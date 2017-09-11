@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <title>赛事报名</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/media.css">
+    <link rel="stylesheet" href="css/date.css">
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/date.js"></script>
+    <script src="js/main.js"></script>
+    <style>
+        /*#addParent{*/
+            /*display: none;*/
+        /*}*/
+        input[type=text]{
+        	height:30px!important;
+        	background:#fff;
+        	padding-left: 5px;
+        }
+        :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+		    color: #ccc; opacity:1; 
+		}
+		
+		::-moz-placeholder { /* Mozilla Firefox 19+ */
+		    color: #ccc;opacity:1;
+		}
+		
+		input:-ms-input-placeholder{
+		    color: #ccc;opacity:1;
+		}
+		
+		input::-webkit-input-placeholder{
+		    color: #ccc;opacity:1;
+		}
+    </style>
+</head>
+<body class="md">
+    <header>
+        <div class="header-container">
+            <div class="header-left">
+                <a href="index.html"><img src="images/72-logo.png" alt=""></a>
+            </div>
+            <div class="header-right">
+                <div class="header-nav">
+                    <ul>
+                        <li class="Tcenter"><a href="#" class="Fcolor-text-black">首页</a></li>
+                        <li class="Tcenter"><a href="#" class="Fcolor-text-black">滑步车培训</a></li>
+                        <li class="Tcenter"><a href="#" class="Fcolor-text-black">活动赛事</a></li>
+                        <li class="Tcenter"><a href="#" class="Fcolor-text-black">官网</a></li>
+                    </ul>
+                </div>
+                <div class="header-search">
+                    <p><input type="text"><span class="iconfont icon-sousuo"></span></p>
+                </div>
+                <div class="header-user">
+                    <div class="user-info">
+                    	<div class="menu-btn-sm">
+							<span class="menu-line"></span>
+							<span class="menu-line"></span>
+							<span class="menu-line"></span>
+						</div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="user-list">
+            <ul>
+                <li><a href="userCenter.html">个人中心</a></li>
+                <li><a href="javascript:;" id="loginOut">退出</a></li>
+            </ul>
+        </div>
+    </header>
+    <section>
+        <!--<p class="baoming-title">活动详情</p>
+        <div class="top-container">
+            <div class="event-img">
+                <div class="img-container">
+                    <img src="images/saishi.jpeg" alt="">
+                </div>
+            </div>
+            <div class="event-info">
+                <p class="event-title"></p>
+                <p class="event-age">年龄：<span id="activityAge"></span></p>
+                <p class="event-type">赛事类型：<span id="activityType"></span></p>
+                <p class="event-startDate">比赛开始时间：<span id="activityBeginDate"></span></p>
+                <p class="event-startDate">比赛结束时间：<span id="activityEndDate"></span></p>
+                <p class="event-registerDate">报名开始时间：<span id="enrollBeginDate"></span></p>
+                <p class="event-registerDate">报名结束时间：<span id="enrollEndDate"></span></p>
+                <p class="event-registered">已报名：<span id="nowCount"></span>/<span id="totalCount"></span>人</p>
+                <p class="event-place">地点：<span id="address"></span></p>
+                <p style="font-size: 20px;"><span class="iconfont icon-faxian" style="font-size: 24px;color: #2c9eee;"></span><span id="viewCount"></span></p>
+            </div>
+            <div class="event-code">
+                <div class="code-container">
+                    <img src="images/code.png" alt="">
+                </div>
+            </div>
+        </div>
+        --><div class="content-container">
+            <h3 class="baoming-title">选择报名套餐</h3>
+            <div class="baoming-page" style="padding: 15px;">
+                <p>家庭类型：(必选)</p>
+                <ul class="jichu" id="baseMeal">
+                    <li>一大一小</li>
+                    <li style="width: 20%;"><span></span></li>
+                    <li style="text-align: center;"><input type="radio" value="3" checked name="baseMeal"></li>
+                </ul>
+                <ul class="jichu" id="baseMeal1">
+                    <li>两大一小</li>
+                    <li style="width: 20%;"><span></span></li>
+                    <li style="text-align: center;"><input type="radio" value="4" name="baseMeal"></li>
+                </ul>
+                <p>附加套餐：(可选)</p>
+                <ul class="fujia" id="niceHotel">
+                    <li style="width:59%;text-align:left;">豪华酒店住宿(福朋喜来登酒店)</li>
+                    <li style="width: 1%;"><span></span></li>
+                    <li class="select-num"><input type="checkbox" id="nice"></li>
+                </ul>
+                <ul class="fujia" id="normalHotel">
+                    <li style="width:59%;text-align:left;">舒适酒店住宿(Funny概念酒店或百悦酒店)</li>
+                    <li style="width: 1%;"><span></span></li>
+                    <li class="select-num"><input type="checkbox" id="normal"></li>
+                </ul>
+                <ul class="fujia" id="goodHotel">
+                    <li style="width:59%;text-align:left;">经济酒店住宿 <br>(贝壳酒店)</li>
+                    <li style="width: 1%;"><span></span></li>
+                    <li class="select-num"><input type="checkbox" id="good"></li>
+                </ul>
+                <ul class="fujia" id="addChildren">
+                    <li>增加小孩</li>
+                    <li style="width: 20%;"><span></span></li>
+                    <li class="select-num"><button>-</button><button class="child-num"></button><button>+</button></li>
+                </ul>
+            </div>
+            <div class="price" id="allPrice">
+                <p>套餐总金额：￥<span></span></p>
+            </div>
+            <div class="user-info">
+                <h3 class="sm-title">填写资料:</h3>
+                <p class="alert-info">*因购买保险等需要,请准确填写报名人信息，以免在参赛时出现问题</p>
+                <div class="info-content">
+                    <table>
+                        <tbody>
+                        <tr><td><nobr>家长姓名</nobr></td><td><input type="text" id="realName" placeholder="请输入真实姓名"></td></tr>
+                        <tr><td>性别</td><td id="userSex"><label><input type="radio" checked name="userSex" value="0">男</label><label><input type="radio" name="userSex" value="1">女</label></td></tr>
+                        <tr><td>出生日期</td><td><input type="text" id="bornDate1" placeholder="请选择出生日期"></td></tr>
+                        <tr><td>证件类型</td><td>
+                            <select id="zhengjianType1">
+                                <option value="0">身份证</option>
+                                <option value="1">护照</option>
+                                <option value="2">港澳通行证</option>
+                                <option value="3">台湾通行证</option>
+                            </select>
+                        </td></tr>
+                        <tr><td>证件号码</td><td><input type="text" id="zhengjianNumber1" placeholder="请输入证件号码"></td></tr>
+                        <tr><td>电话号码</td><td><input type="text" id="phoneNumber" placeholder="电话号码"></td></tr>
+                        <tr><td>电子邮箱</td><td><input type="text" id="Email" placeholder="电子邮箱（选填）"></td></tr>
+                        <tr><td>备注</td><td><textarea class="note" rows="5" style="width: 96%;resize: none;" id="beizhu"></textarea></td></tr>
+                        </tbody>
+                        </table>
+                        <table>
+                            <tbody>
+                            <tr><td><nobr>家长姓名</nobr></td><td><input type="text" id="realName2" placeholder="请输入真实姓名"></td></tr>
+                            <tr><td>性别</td><td id="userSex2"><label><input type="radio" checked name="userSex2" value="0">男</label><label><input type="radio" name="userSex2" value="1">女</label></td></tr>
+                            <tr><td>出生日期</td><td><input type="text" id="bornDate2" placeholder="请选择出生日期"></td></tr>
+                            <tr><td>证件类型</td><td>
+                                <select id="zhengjianType2">
+                                    <option value="0">身份证</option>
+                                    <option value="1">护照</option>
+                                    <option value="2">港澳通行证</option>
+                                    <option value="3">台湾通行证</option>
+                                </select>
+                            </td></tr>
+                            <tr><td>证件号码</td><td><input type="text" id="zhengjianNumber2" placeholder="请输入证件号码"></td></tr>
+                            </tbody>
+                        </table>
+                        <hr>
+                        <table>
+                            <tbody>
+
+
+                        <tr><td>小孩姓名</td><td><input type="text" id="childName" placeholder="请输入真实姓名"></td></tr>
+                        <tr><td>性别</td><td id="childSex"><label><input type="radio" checked name="childSex" value="0">男</label><label><input type="radio" name="childSex" value="1">女</label></td></tr>
+                        <tr><td>出生日期</td><td><input type="text" id="childBornDate" placeholder="请选择出生日期"></td></tr>
+                        <tr><td>证件类型</td><td>
+                            <select id="zhengjianType3">
+                                <option value="0">身份证</option>
+                                <option value="1">护照</option>
+                                <option value="2">港澳通行证</option>
+                                <option value="3">台湾通行证</option>
+                            </select>
+                        </td></tr>
+                        <tr><td>证件号码</td><td><input type="text" id="zhengjianNumber3" placeholder="请输入证件号码"></td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="addChildrenContainer"></div>
+                <div class="addParentContainer"></div>
+                <div class="danger-info">
+                    <h3 class="sm-title">填写紧急联系人:</h3>
+                    <table>
+                        <tbody>
+                            <tr><td>真实姓名</td><td><input type="text" id="jinjiName"  placeholder="请输入真实姓名"></td></tr>
+                            <tr><td>电话号码</td><td><input type="number" id="jinjiPhone" placeholder="电话号码"></td></tr>
+                            <tr><td>电子邮箱</td><td><input type="text" placeholder="电子邮箱（选填）" id="jinjiEmail"></td></tr>
+                            <tr><td></td><td><input type="checkbox" id="readTrue"><span>我已阅读并同意<a href="javascript:;" id="mianze">《免责声明》</a></span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="btn-one">
+                <a href="javascript:;" class="gray-btn" id="sendInfo">提交资料</a>
+            </div>
+        </div>
+        <div class="querenBox" style="display: none;">
+            <div class="content-container">
+                <h3 class="baoming-title">确认信息</h3>
+                <p class="alert-info">*请确认套餐信息是否正确</p>
+                <div class="baoming-page tijiao-page">
+                    <h3 class="sm-title">已选套餐</h3>
+                    <p style="text-align: center" class="base-title">家庭类型：</p>
+                    <!--<ul class="jichu">-->
+                        <!--<li>一大一小</li>-->
+                        <!--<li>￥<span>472.00</span></li>-->
+                        <!--<li class="Tcenter"><span>1</span>份</li>-->
+                        <!--<li>两大一小</li>-->
+                        <!--<li>￥<span>472.00</span></li>-->
+                        <!--<li class="Tcenter"><span>1</span>份</li>-->
+                    <!--</ul>-->
+                    <p style="text-align:center;">附加套餐：</p>
+                </div>
+                <div class="price">
+                    <p>套餐总金额：￥<span id="QallPrice"></span></p>
+                </div>
+                <div class="user-info">
+                    <p class="alert-info">*请核对所有填写的信息，以免在参赛时出现问题</p>
+                    <h3 class="sm-title">资料信息</h3>
+                    <div class="info-content"></div>
+                    <h3 class="sm-title">报名人</h3>
+                    <div class="otherInfo">
+                        <table>
+                            <tbody>
+                            <tr><td width="120">电话号码：</td><td id="QuserPhone"></td></tr>
+                            <tr><td>电子邮箱：</td><td id="Qemail"></td></tr>
+                            <tr><td>备注：</td><td id="Qremark"></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="danger-info">
+                        <h3 class="sm-title">紧急联系人</h3>
+                        <table>
+                            <tbody>
+                            <tr><td width="120">真实姓名：</td><td id="QjinjiName"></td></tr>
+                            <tr><td>电话号码：</td><td id="QjinjiPhone"></td></tr>
+                            <tr><td>电子邮箱：</td><td id="QjinjiEmail"></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <a href="javascript:;" id="returnPrev">返回修改</a>
+                    <a href="javascript:;" id="tijiao">提交订单</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="bottom-info">
+            <p>骑二无比网络科技有限公司</p>
+            <p>本站图文是骑二无比版权盗版必究</p>
+            <p>客服电话：010-80448861</p>
+            <p><a href="#">使用条款</a><a href="#">隐私政策</a></p>
+        </div>
+    </footer>
+    <div class="alert-container" style="display: none;">
+        <div class="alert-content">
+            <h3 class="alert-title">
+                提示
+            </h3>
+            <div class="alert-info">
+                <p>
+                    <span style="color: #63c427;">恭喜您，订单提交成功！</span><br>
+                    <span>请在30分钟之内完成支付，谢谢！</span>
+                </p>
+            </div>
+            <div class="alert-btn">
+                <a href="javascript:;" class="pay-btn">立即支付</a>
+                <a href="userCenter.html" class="read-dingdan" style="background: #0079bf;">查看订单</a>
+            </div>
+        </div>
+    </div>
+    <style>
+        .alert-container1{
+            position: fixed;
+            top: 0;
+            right: 0;
+            background: rgba(0,0,0,.6);
+            overflow: scroll;
+            height: 100%;
+        }
+        .closeText{
+            width: 100%;
+            height: 40px;
+            background: #2c9eee;
+        }
+        .closeText p{
+            text-align: center;
+            font-size: 20px;
+            color: #fff;
+            line-height: 40px;
+        }
+        .closeText img{
+            position: absolute;
+            right: 0;
+            top: 0px;
+            width: 30px;
+            height: 30px;
+            margin: 5px;
+        }
+        .alert-container1 .alert-content{
+            background: #fff;
+            width: 92%;
+            margin: 0px auto;
+            padding: 15px 4%;
+        }
+        .alert-container1 .alert-content .activity-text{
+            line-height:28px;
+            font-size: 16px;
+            text-indent:2em;
+        }
+    </style>
+    <div class="alert-container1" style="display: none;">
+        <div class="closeText">
+            <p>免责声明</p>
+            <img src="images/closeImg.png" alt="">
+        </div>
+        <div class="alert-content">
+            <div class="alert-info">
+                <h3 style="text-align: center;font-weight: 900;font-size: 20px">《中国2017儿童滑步车赛事嘉年华——北京站》免责声明</h3>
+                <p class="activity-text">
+                    本人自愿参加“中国2017儿童滑步车赛事嘉年华——北京站“活动（以下简称为“滑步车嘉年华”），在已经完全熟知滑步车嘉年华活动规则并充分了解风险警示的情况下，特作出如下声明：
+                </p>
+                <p class="activity-text">
+                    1.本人/监护人已充分知悉，户外骑行活动具有一定的危险性和不可预见性。本人确认已经详细阅读本声明书，并已清楚了解本声明书的全部内容，自愿接受本声明书内容的约束。
+                </p><p class="activity-text">
+                2.本人已经年满18周岁，是具备完全民事行为能力的成年人，或本人虽未满18周岁，但本人的法定监护人已同意本人参加滑步车嘉年华的活动，并陪同本人签署此声明书。本人/监护人已充分了解参加滑步车嘉年华活动存在伤亡的风险（包括经济损失及其相关损失的风险），前述风险既可能因本人的行为、不行为或疏忽而造成，也可能因他人的行为、不行为或疏忽而造成，或者因对活动的有关设备、设施、道具或场区的状况条件不熟悉等因素造成。本人对上述风险已经知悉，并且自愿承担上述风险。
+            </p>
+                <p class="activity-text">
+                3.本人/监护人了解参与滑步车嘉年华活动时购买人身意外伤害（商业）保险的意义，并委托主办方代为本人购买相关保险，并自行承担在滑步车嘉年华活动中发生人身伤亡的全部后果（包括但不限于医疗费用、交通费、误工费等）、全部或部分丧失能力或死亡的后果等，并自行承受由此引起的任何风险。
+            </p>
+                <p class="activity-text">
+                4.本人/监护人充分理解户外活动可能对身体有严格的要求，如可能需在崎岖地带和恶劣天气中进行活动。当参加户外活动时，发生的风险有可能使活动参与人受到伤害。这些风险包括并不限于摔伤、磕碰等意外。本人/监护人清楚理解活动共同发起人、活动策划人、联系人、其他参与者均无法全面预见该活动中所有的风险和其他无法预见的不利因素。本人/监护人理解以上所列的风险并不完全含括了活动中所有可能遇到的风险，并且同意本文件中关于免责和放弃权利的声明并不仅局限于以上所列的风险中。
+            </p>
+                <p class="activity-text">
+                5.本人/监护人承诺不会就滑步车嘉年华参与人的人身伤害、财产损失或死亡后果向活动任何赞助商、推广单位、主办单位、协办单位、承办单位、组委会和活动场地单位等提起关于因活动参与人参加滑步车嘉年华活动而导致的损害赔偿的诉讼或提出有关索赔。
+            </p>
+                <p class="activity-text">
+                    6.本人/监护人承诺已预先熟悉活动场地、遵守活动规程。
+            </p>
+                <p class="activity-text">
+                7.本人/监护人同意凡是与本人参加滑步车嘉年华活动有关的本人的所有照片、图片、影片、录像片和影音片等权属归活动组委会所有，并同意活动组委会使用前述照片、图片、影片、录像片和影音片等资料，保证不向组委会收取任何费用。
+            </p>
+                <p class="activity-text">
+                    8.本人/监护人保证滑步车嘉年华活动报名时所提供的个人信息是本人/监护人自愿提供且真实有效，如果提供虚假信息的，本人/监护人将自愿承担由此引起的一切责任和后果。
+                </p>
+                <p class="activity-text">
+                    9.本人/监护人保证，本人将亲自参与滑步车嘉年华活动，并不会将活动名额以任何形式转让给第三人。如本人转让或者由第三人代替本人参加活动的，由此产生的任何风险或者责任将由本人/监护人自行承担。
+                </p>
+                <p class="activity-text">
+                    特此声明并承诺！
+                </p>
+                <p class="activity-text">
+                    安全提示：
+                </p>
+                <p class="activity-text">
+                    1.严禁在活动中单独行动，严禁在赛道之外骑行。
+                </p>
+                <p class="activity-text">
+                    2.骑行时严禁追逐打闹，严禁做危险性动作。
+                </p>
+                <p class="activity-text">
+                    3.如遇见紧急情况，应立即联系主办方处理。
+                </p>
+                <p class="activity-text">
+                    4.必须全程佩戴安全护具。
+                </p>
+                <p class="activity-text">
+                    5.请严格遵守活动现场秩序，不蓄意破坏。
+                </p>
+                <p class="activity-text">
+                    6.参加活动前，请确保身体无碍。
+                </p>
+                <p class="activity-text">
+                    本人对上述声明书及安全警示的内容已经详细阅读，承诺并保证在活动中遵守上述规定。
+                </p>
+            </div>
+        </div>
+    </div>
+    <div id="datePlugin"></div>
+    <script>
+        $(function (){
+            $.fn.isSign();//判断登录
+            var user = window.userInfo;
+            //获取数据
+            var resultData;
+            /*function getActivityData(){
+                $.ajax({
+                    url:"http://sport.72bike.com/activity/front/activity/activityInfo",
+                    data:{
+                        id:"2"
+                    },
+                    dataType:"json",
+                    success:function (result){
+                        if(result.result == 1){
+                            resultData = result;
+                            setActivityData();
+                        }else{
+                            alert("获取活动详情失败!result=0");
+                        }
+                    },
+                    error:function (){
+                        alert("获取活动详情失败!");
+                    }
+                });
+            }*/
+            //传给后台数据格式
+            var data = {
+                id:"2",//活动id
+                userId:window.userInfo.userId,
+                parentCount:2,//成人的数量
+                childrenCount:1,//孩子的数量
+                //套餐区域
+                mealData :[
+                    {
+                        type:"0",
+                        comboName:"一大一小",
+                        comboTypeId:"3",
+                        comboPrice:"472",
+                        count:"1"
+                    },
+                    {
+                        type:"0",
+                        comboName:"两大一小",
+                        comboTypeId:"4",
+                        comboPrice:"472",
+                        count:"0"
+                    },
+                    {
+                        type:"1",
+                        comboName:"豪华酒店住宿(福朋喜来登酒店)",
+                        comboTypeId:"8",
+                        comboPrice:"520",
+                        count:"0"
+                    },
+                    {
+                        type:"1",
+                        comboName:"舒适酒店住宿(Funny概念或百悦酒店)",
+                        comboTypeId:"11",
+                        comboPrice:"300",
+                        count:"0"
+                    },
+                    {
+                        type:"1",
+                        comboName:"经济酒店住宿(贝壳酒店)",
+                        comboTypeId:"7",
+                        comboPrice:"130",
+                        count:"0"
+                    },
+                    {
+                        type:"1",
+                        comboName:"增加小孩",
+                        comboTypeId:"5",
+                        comboPrice:"172",
+                        count:"0"
+                    }
+                ],
+                allPrice: 0,//总价格
+                //资料信息
+                userInfo:{//基础用户的资料
+                    remark:"",//备注
+                    urgentUser:"",//紧急联系人
+                    urgentTelephone:"",//紧急联系人电话
+                    urgentEmail:""//紧急联系人邮箱
+                },
+                person:[
+//                    {//增加成人基础信息数据
+//                        type:"0",//基础信息 0成人  1小孩
+//                        id:"1",//增加人的唯一标识
+//                        realname:"",
+//                        documentType:"",//证件类型
+//                        documentNum:"",
+//                        sex:"",
+//                        birthday:"",
+//                        telephone:"",//联系电话
+//                        email:""//联系邮箱
+//                    },
+//                    {//增加成人基础信息数据
+//                        type:"0",//基础信息 0成人  1小孩
+//                        id:"2",//增加人的唯一标识
+//                        realname:"",
+//                        documentType:"",//证件类型
+//                        documentNum:"",
+//                        sex:"",
+//                        birthday:"",
+//                        telephone:"",//联系电话
+//                        email:""//联系邮箱
+//                    },
+//                    {//增加小孩基础信息数据
+//                        type:"1",//基础信息 0成人  1小孩
+//                        id:"3",//增加人的唯一标识
+//                        realname:"",
+//                        documentType:"",//证件类型
+//                        documentNum:"",
+//                        sex:"",
+//                        birthday:"",
+//                        telephone:"",//联系电话
+//                        email:""//联系邮箱
+//                    }
+                ]
+            };
+            var childData = {//增加小孩基础信息数据
+                type:"1",//基础信息 0成人  1小孩
+                realname:"",
+                documentType:"",//证件类型
+                documentNum:"",
+                sex:"",
+                birthday:"",
+                telephone:"",//联系电话
+                email:"",//联系邮箱
+                id:""//增加人的唯一标识
+            };
+            var parentData = {//增加成人基础信息数据
+                type:"0",//基础信息 0成人  1小孩
+                realname:"",
+                documentType:"",//证件类型
+                documentNum:"",
+                sex:"",
+                birthday:"",
+                telephone:"",//联系电话
+                email:"",//联系邮箱
+                id:""//增加人的唯一标识
+            };
+            //写入页面活动数据
+           /* function setActivityData(){
+                var activity = resultData.activity;
+                $(".event-info .event-title").text(activity.title);
+                $("#activityAge").text(activity.age+"岁");
+                $("#activityType").text(activity.type);
+                $("#activityBeginDate").text(activity.activityBeginDate);
+                $("#activityEndDate").text(activity.activityEndDate);
+                $("#enrollBeginDate").text(activity.enrollBeginDate);
+                $("#enrollEndDate").text(activity.enrollEndDate);
+                $("#nowCount").text(activity.nowCount);
+                $("#totalCount").text(activity.totalCount);
+                $("#address").text(activity.address);
+                $("#viewCount").text(resultData.count.viewCount);
+            }*/
+            //写入页面套餐数据
+            function setResultData(){
+                //写入基础套餐价格
+                //setPrice($("#baseMeal li").eq(1).children("span"),data.mealData[0].comboPrice);
+                //setPrice($("#baseMeal1 li").eq(1).children("span"),data.mealData[1].comboPrice);
+                //写入增加儿童价格
+                //setPrice($("#addChildren li").eq(1).children("span"),data.mealData[2].comboPrice);
+                //写入增加儿童数量
+                setCount($("#addChildren li").eq(2).children("button").eq(1),data.mealData[5].count);
+
+                //写入增加成人价格
+               // setPrice($("#addParent li").eq(1).children("span"),data.mealData[3].comboPrice);
+//                //写入增加成人数量
+                //setCount($("#addParent li").eq(2).children("button").eq(1),data.mealData[3].count);
+
+                //写入增加标间价格
+               // setPrice($("#normalHotel li").eq(1).children("span"),data.mealData[4].comboPrice);
+                //写入增加标间数量
+                //setCount($("#normalHotel li").eq(2).children("button").eq(1),data.mealData[4].count);
+                //写入增加豪华间价格
+                //setPrice($("#goodHotel li").eq(1).children("span"),data.mealData[5].comboPrice);
+                //写入增加豪华间数量
+                //setCount($("#goodHotel li").eq(2).children("button").eq(1),data.mealData[5].count);
+                //写入总价格
+                setPrice($("#allPrice p span"),getAllPrice());
+                data.allPrice = getAllPrice();
+            }
+            //设置数量
+            function setCount(ele,count){
+                ele.text(count);
+            }
+            //设置价格
+            function setPrice(ele,price){
+                ele.text(price+"")
+            }
+            //总价格的计算
+            function getAllPrice(){
+                var price;
+                var basePrice = parseInt(data.mealData[0].comboPrice);
+                var childrenPrice = parseInt(data.mealData[2].count*data.mealData[2].comboPrice);
+                var parentPrice = parseInt(data.mealData[3].count*data.mealData[3].comboPrice);
+                var normalPrice = parseInt(data.mealData[4].count*data.mealData[4].comboPrice);
+                var goodPrice = parseInt(data.mealData[5].count*data.mealData[5].comboPrice);
+                var price = childrenPrice+parentPrice+normalPrice+goodPrice+basePrice;
+                return price;
+            }
+            var baseMeal = 3;//默认选择一大一小
+            //选择基础套餐
+            function setBaseMeal(){
+                var nowIndex = $("input[name=baseMeal]:checked").val();
+                baseMeal = nowIndex;
+                for(var i = 0;i < data.mealData.length;i++){
+                    if(data.mealData[i].type == "0"){
+                        if(data.mealData[i].comboTypeId == nowIndex){
+                            data.mealData[i].count = "1";
+                            $("#realName2").parent().parent().show();
+                            $("#userSex2").parent().show();
+                            $("#bornDate2").parent().parent().show();
+                            $("#zhengjianType2").parent().parent().show();
+                            $("#zhengjianNumber2").parent().parent().show();
+                        }else{
+                            data.mealData[i].count = "0";
+                            $("#realName2").parent().parent().hide();
+                            $("#userSex2").parent().hide();
+                            $("#bornDate2").parent().parent().hide();
+                            $("#zhengjianType2").parent().parent().hide();
+                            $("#zhengjianNumber2").parent().parent().hide();
+                        }
+                    }
+                }
+            }
+            setBaseMeal();
+            $("input[name=baseMeal]").on("change",function (){
+                setBaseMeal();
+                //选择套餐出现的人数设置
+            });
+            //选择三个套餐
+            //豪华
+            $("#nice").on("change",function (){
+                $("#normal").removeAttr("checked");
+                $("#good").removeAttr("checked");
+                //设置数据
+                data.mealData[3].count = "0";
+                data.mealData[4].count = "0";
+                if($(this).is(":checked")){
+                    data.mealData[2].count = "1";
+                }else{
+                    data.mealData[2].count = "0";
+                }
+                //写入总价格
+                setPrice($("#allPrice p span"),getAllPrice());
+                data.allPrice = getAllPrice();
+            });
+            //舒适
+            $("#normal").on("change",function (){
+                $("#nice").removeAttr("checked");
+                $("#good").removeAttr("checked");
+
+                data.mealData[2].count = "0";
+                data.mealData[4].count = "0";
+                if($(this).is(":checked")){
+                    data.mealData[3].count = "1";
+
+                }else{
+                    data.mealData[3].count = "0";
+                }
+                //写入总价格
+                setPrice($("#allPrice p span"),getAllPrice());
+                data.allPrice = getAllPrice();
+            });
+            //经济
+            $("#good").on("change",function (){
+                $("#nice").removeAttr("checked");
+                $("#normal").removeAttr("checked");
+
+                data.mealData[2].count = "0";
+                data.mealData[3].count = "0";
+                if($(this).is(":checked")){
+                    data.mealData[4].count = "1";
+                }else{
+                    data.mealData[4].count = "0";
+                }
+                //写入总价格
+                setPrice($("#allPrice p span"),getAllPrice());
+                data.allPrice = getAllPrice();
+            });
+
+            //增加和减少儿童数量。
+            function setChildren(btn,add){
+                btn.click(function (){
+                    if(add == true){
+                        data.mealData[5].count++;//套餐数量增加
+                    }else{
+                        data.mealData[5].count <= 0 ? 0 : --data.mealData[5].count;
+                    }
+                    //显示数据
+                    setResultData();
+                    //添加填写信息的框
+                    setInputArea();
+                });
+                function setInputArea(){
+                    $(".addChildrenContainer").empty();
+                    var count = parseInt(data.mealData[5].count);
+                    for(var i = 0; i < count;i++){
+                        var cloneChild = $('<div class="child-info" id="addChildren'+i+'"><h3 class="sm-title">增加小孩('+(i+1)+'):</h3><table><tbody><tr><td>小孩姓名</td><td><input type="text" class="childName" placeholder="请输入真实姓名"></td></tr><tr><td>性别</td><td><label><input type="radio" checked name="childSex'+i+'" value="0">男</label><label><input type="radio" name="childSex'+i+'" value="1">女</label></td></tr><tr><td>出生日期</td><td><input type="text" class="bornDate" placeholder="请选择出生日期"></td></tr><tr><td>证件类型</td><td><select class="zhengjianType"><option value="0">身份证</option><option value="1">护照</option><option value="2">港澳通行证</option><option value="3">台湾通行证</option></select></td></tr><tr><td>证件号码</td><td><input type="text" class="zhengjianNumber" placeholder="请输入证件号码"></td></tr></tbody></table></div>');
+                        $(".addChildrenContainer").append(cloneChild);
+                        var newBorn = "addChildren"+i;
+                        $("#"+newBorn+" .bornDate").date();
+                    }
+                }
+            }
+            //当点击增加和减少儿童数量。
+            setChildren($("#addChildren .select-num").children("button").eq(0),false);
+            setChildren($("#addChildren .select-num").children("button").eq(2),true);
+            //增加和减少成人数量。
+            function setParent(btn,add){
+                btn.click(function (){
+                    if(add == true){
+                        data.mealData[3].count++;
+                    }else{
+                        data.mealData[3].count <= 0 ? 0 : --data.mealData[3].count;
+                    }
+                    setResultData();
+                    //添加填写信息的框
+                    setInputArea();
+                });
+                function setInputArea(){
+                    $(".addParentContainer").empty();
+                    var count = parseInt(data.mealData[5].count);
+                    for(var i = 0; i < count;i++){
+                        var cloneParent = $('<div class="parent-info" id="addParent'+i+'"><h3 class="sm-title">增加成人('+(i+1)+'):</h3><table><tbody><tr><td>家长姓名</td><td><input type="text" class="parentName" placeholder="请输入真实姓名"></td></tr><tr><td>性别</td><td><label><input type="radio" checked name="parentSex'+i+'" value="0">男</label><label><input type="radio" name="parentSex'+i+'" value="1">女</label></td></tr><tr><td>出生日期</td><td><input type="text" class="bornDate" placeholder="请选择出生日期"></td></tr><tr><td>证件类型</td><td><select class="zhengjianType"><option value="0">身份证</option><option value="1">护照</option><option value="2">港澳通行证</option><option value="3">台湾通行证</option></select></td></tr><tr><td>证件号码</td><td><input type="text" class="zhengjianNumber" placeholder="请输入证件号码"></td></tr></tbody></table></div>');
+                        $(".addParentContainer").append(cloneParent);
+                        var newBorn = "addParent"+i;
+                        $("#"+newBorn+" .bornDate").date();
+                    }
+                }
+            }
+            //当点击增加和减少成人数量。
+            //setParent($("#addParent .select-num").children("button").eq(0),false);
+            //setParent($("#addParent .select-num").children("button").eq(2),true);
+            //增加和减少标间数量。
+            function setNormal(btn,add){
+                btn.click(function (){
+                    if(add == true){
+                        data.mealData[4].count++;
+                    }else{
+                        data.mealData[4].count <= 0 ? 0 : --data.mealData[4].count;
+                    }
+                    setResultData();
+                });
+            }
+            //当点击增加和减少标间数量。
+            //setNormal($("#normalHotel .select-num").children("button").eq(0),false);
+            //setNormal($("#normalHotel .select-num").children("button").eq(2),true);
+            //增加和减少豪华间数量。
+            function setGood(btn,add){
+                btn.click(function (){
+                    if(add == true){
+                        data.mealData[5].count++;
+                    }else{
+                        data.mealData[5].count <= 0 ? 0 : --data.mealData[5].count;
+                    }
+                    setResultData();
+                });
+            }
+            //当点击增加和减少豪华间数量。
+            //setGood($("#goodHotel .select-num").children("button").eq(0),false);
+            //setGood($("#goodHotel .select-num").children("button").eq(2),true);
+            //提交资料验证
+            function checkInput(){
+                //
+                if($("#realName").val() == ""){
+                    alert("请输入家长姓名！");
+                    return false;
+                }
+                if($("#bornDate1").val() == "" && $("#bornDate2").val() == ""){
+                    alert("请输入出生日期！");
+                    return false;
+                }
+                //判断证件
+                if($("#zhengjianNumber1").val() == ""){
+                    alert("请输入证件号码!");
+                    return false;
+                }else{
+                    if($("#zhengjianType1").val() == 0){
+                        var reg = /(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+                        if(reg.test($("#zhengjianNumber1").val()) == false){
+                            alert("请输入有效证件！");
+                            return false
+                        }
+                    }
+                }
+                //判断增加的人的信息
+                if($(".childName").length> 0){
+                    if($(".childName").val() == ""){
+                        alert("请输入小孩的姓名！");
+                        return false;
+                    }
+                }
+                if($(".zhengjianNumber").length > 0 ){
+                    $(".zhengjianNumber").each(function (index){
+                        if($(".zhengjianNumber").eq(index).val() == ""){
+                            alert("请输入证件号码！");
+                            return false;
+                        }else{
+                            if($(".zhengjianType").eq(index).val() == 0){
+                                var reg = /(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+                                if(reg.test($(".zhengjianNumber").eq(index).val()) == false){
+                                    alert("请输入有效证件！");
+                                    return false;
+                                }
+                            }
+                        }
+                    });
+                }
+                if($(".bornDate").length > 0){
+                    if($(".bornDate").val() == ""){
+                        alert("请输入小孩的生日！");
+                        return false;
+                    }
+                }
+                //判断当前选的套餐
+                if(baseMeal == 4){
+                    if($("#realName2").val() == ""){
+                        alert("请输入家长姓名！");
+                        return false;
+                    }
+                    if($("#bornDate2").val() == ""){
+                        alert("请输入家长出生日期！");
+                        return false;
+                    }
+                    //判断第二个家长证件
+                    if($("#zhengjianNumber2").val() == ""){
+                        alert("请输入证件号码!");
+                        return false;
+                    }else{
+                        if($("#zhengjianType2").val() == 0) {
+                            var reg = /(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+                            if (reg.test($("#zhengjianNumber2").val()) == false) {
+                                alert("请输入有效证件！");
+                                return false;
+                            }
+                        }
+                    }
+                }
+
+                //判断电话
+                if($("#phoneNumber").val() == ""){
+                    alert("请输入电话号码！");
+                    return false;
+                }else{
+                	var reg = /^1[3|4|5|7|8][0-9]\d{4,8}$/;
+                	if(reg.test($("#phoneNumber").val()) == false){
+                		alert("手机号码格式错误");
+                		return false;
+                	}
+                }
+                //判断小孩姓名
+                if($("#childName").val() == ""){
+                    alert("请输入小孩姓名！");
+                    return false;
+                }
+                if($("#childBornDate").val() == ""){
+                    alert("请输入小孩出生日期！");
+                    return false;
+                }
+                //判断小孩证件
+                if($("#zhengjianNumber3").val() == ""){
+                    alert("请输入小孩的证件号码!");
+                    return false;
+                }else{
+                    if($("#zhengjianType3").val() == 0) {
+                        var reg = /(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+                        if (reg.test($("#zhengjianNumber3").val()) == false) {
+                            alert("请输入有效证件！");
+                            return false;
+                        }
+                    }
+                }
+                //紧急联系人姓名
+                if($("#jinjiName").val() == ""){
+                    alert("请输入紧急联系人姓名！");
+                    return false;
+                }
+                //紧急联系人电话
+                if($("#jinjiPhone").val() == ""){
+                    alert("请输入紧急联系人电话！");
+                    return false;
+                }else{
+                	var reg = /^1[3|4|5|7|8][0-9]\d{4,8}$/;
+                	if(reg.test($("#phoneNumber").val()) == false){
+                		alert("手机号码格式错误");
+                		return false;
+                	}
+                }
+                return true;
+            }
+            //点击提交资料按钮
+            $("#sendInfo").click(function (){
+                if($("#readTrue").is(':checked')){
+                    //资料验证
+                    var checkResult = checkInput();
+                    //var checkResult = true;
+                    if(checkResult){
+                        $(".querenBox").fadeIn(300);//验证成功弹出确认资料弹框
+                        //$("section>.content-container").hide();
+                        saveUserInfo();//存储用户所填写的资料
+                        showUserInfo();//展示出用户所有填写的信息
+                        console.log(data);
+                    }
+                }
+            });
+            //保存用户所填写的资料
+            function saveUserInfo(){
+                //基础资料
+                //先清空三条信息之后的数据
+                data.person = [];
+                if(baseMeal == 3){//选择了一大一小
+                    for(var i = 0;i < 2;i++){
+                        var index = i;
+                        var tempObj = {//增加成人基础信息数据
+                            type:index==1?"1":"0",//基础信息 0成人  1小孩
+                            realname:"",
+                            documentType:"",//证件类型
+                            documentNum:"",
+                            sex:"",
+                            birthday:"",
+                            telephone:"",//联系电话
+                            email:"",//联系邮箱
+                            id:""//增加人的唯一标识
+                        };
+                        data.person.push(tempObj);
+                    }
+                }else{//选择了两大一小
+                    for(var i = 0;i < 3;i++){
+                        var index = i;
+                        var tempObj = {//增加成人基础信息数据
+                            type:index==2?"1":"0",//基础信息 0成人  1小孩
+                            realname:"",
+                            documentType:"",//证件类型
+                            documentNum:"",
+                            sex:"",
+                            birthday:"",
+                            telephone:"",//联系电话
+                            email:"",//联系邮箱
+                            id:""//增加人的唯一标识
+                        };
+                        data.person.push(tempObj);
+                    }
+                }
+
+                data.person[0].telephone = $("#phoneNumber").val();
+                data.person[0].email = $("#Email").val();
+                //紧急联系人资料
+                data.userInfo.urgentUser = $("#jinjiName").val();
+                data.userInfo.urgentEmail = $("#jinjiEmail").val();
+                data.userInfo.urgentTelephone = $("#jinjiPhone").val();
+                data.userInfo.remark = $("#beizhu").val();
+                //存储联系人资料,先保存固定有的三个联系人数据data.person
+                data.person[0].realname = $("#realName").val();
+                data.person[0].sex = $("#userSex input:checked").val();
+                data.person[0].documentType = $("#zhengjianType1").val();
+                data.person[0].documentNum = $("#zhengjianNumber1").val();
+                data.person[0].birthday = $("#bornDate1").val();
+                if(baseMeal == 3){
+                    data.person[1].realname = $("#childName").val();
+                    data.person[1].sex = $("#childSex input:checked").val();
+                    data.person[1].documentType = $("#zhengjianType3").val();
+                    data.person[1].documentNum = $("#zhengjianNumber3").val();
+                    data.person[1].birthday = $("#childBornDate").val();
+                }else{
+                    data.person[1].realname = $("#realName2").val();
+                    data.person[1].sex = $("#userSex2 input:checked").val();
+                    data.person[1].documentType = $("#zhengjianType2").val();
+                    data.person[1].documentNum = $("#zhengjianNumber2").val();
+                    data.person[1].birthday = $("#bornDate2").val();
+
+                    data.person[2].realname = $("#childName").val();
+                    data.person[2].sex = $("#childSex input:checked").val();
+                    data.person[2].documentType = $("#zhengjianType3").val();
+                    data.person[2].documentNum = $("#zhengjianNumber3").val();
+                    data.person[2].birthday = $("#childBornDate").val();
+                }
+
+
+                //在查看套餐里添加了几个成人和几个小孩
+                var childNum = parseInt(data.mealData[5].count);//添加了小孩的数量
+                if(childNum > 0){
+                    for(var i= 0; i < childNum;i++){
+                        var aWord = "#addChildren"+i;
+                        console.log($(aWord+" .childName"))
+//                        var type = ["身份证","护照","港澳通行证","台湾通行证"];
+                        var aChild = {//增加小孩基础信息数据
+                            type:"1",//基础信息 0成人  1小孩
+                            realname:$(aWord+ " .childName").val(),
+                            documentType:parseInt($(aWord+ " .zhengjianType").val()),//证件类型
+                            documentNum:$(aWord+ " .zhengjianNumber").val(),
+                            sex:parseInt($(aWord+ " input[name=childSex"+i+"]:checked").val()),
+                            birthday:$(aWord+ " .bornDate").val(),
+                            telephone:"",//联系电话
+                            email:"",//联系邮箱
+                            id:data.childrenCount+i+1//增加人的唯一标识
+                        };
+                        data.person.push(aChild);
+                    }
+                }
+//                var parentNum = parseInt(data.mealData[3].count);//添加了成人的数量
+//                if(parentNum > 0){
+//                    for(var i= 0; i < parentNum;i++){
+//                        var aWord = "#addParent"+i;
+////                        var type = ["身份证","护照","港澳通行证","台湾通行证"];
+//                        var aParent = {//增加成人基础信息数据
+//                            type:"0",//基础信息 0成人  1小孩
+//                            realname:$(aWord+ " .parentName").val(),
+//                            documentType:parseInt($(aWord+ " .zhengjianType").val()),//证件类型
+//                            documentNum:$(aWord+ " .zhengjianNumber").val(),
+//                            sex:parseInt($(aWord+ " input[name=parentSex"+i+"]:checked").val()),
+//                            birthday:$(aWord+ " .bornDate").val(),
+//                            telephone:"",//联系电话
+//                            email:"",//联系邮箱
+//                            id:data.parentCount+i+1//增加人的唯一标识
+//                        };
+//                        data.person.push(aParent);
+//                    }
+//                }
+            }
+            //展示用户所有的信息
+            function showUserInfo(){
+                //展示基础套餐
+//                var baseTaocan = $("<li>"+data.mealData[0].name+"</li><li>￥<span>"+data.mealData[0].price+".00</span></li><li class=\"Tcenter\"><span>"+data.mealData[0].count+"</span>份</li>");
+//                $(".tijiao-page .jichu").append(baseTaocan);
+                //展示附加套餐
+                $(".tijiao-page .fujia").remove();//清空附加列表
+                $(".tijiao-page .jichu").remove()
+                for(var i = 0; i < data.mealData.length;i++){
+                    if(data.mealData[i].type == 0 && data.mealData[i].count != "0"){
+                        var temp = $("<ul class='jichu'><li>"+data.mealData[i].comboName+"</li><li><span></span></li><li class=\"Tcenter\"><span>"+data.mealData[i].count+"</span>份</li></ul>");
+                        $(".base-title").after(temp);
+                    }
+                    if(data.mealData[i].type == 1 && data.mealData[i].count != "0"){//找到所有type为1的附加套餐数据
+                        var temp = $("<ul class='fujia'><li>"+data.mealData[i].comboName+"</li><li><span></span></li><li class=\"Tcenter\"><span>"+data.mealData[i].count+"</span>份</li></ul>");
+                        $(".tijiao-page").append(temp);
+                    }
+                }
+                //展示总的金额
+                $("#QallPrice").text(data.allPrice);
+                //展示所有固定信息
+                $("#Qremark").text(data.userInfo.remark);
+                $("#QjinjiName").text(data.userInfo.urgentUser);
+                $("#QjinjiPhone").text(data.userInfo.urgentTelephone);
+                $("#QjinjiEmail").text(data.userInfo.urgentEmail);
+
+                //展示所有人的信息
+                var zjList = ["身份证","护照","港澳通行证","台湾通行证"];
+                $(".querenBox .info-content").empty();
+                for(var i = 0; i < data.person.length;i++){
+                    //展示所有大人信息
+                    if(data.person[i].type == 0){
+                        var temp = $("<table class='showUserInfo'><tbody><tr><td colspan='2' style='text-align: center;font-weight: 900;'>家长:</td></tr><tr><td width='120'><nobr>真实姓名：</nobr></td><td class=\"QrealName\">"+data.person[i].realname+"</td></tr><tr><td>性别：</td><td class=\"Qsex\">"+(parseInt(data.person[i].sex)==0?'男':'女')+"</td></tr><tr><td>出生日期：</td><td class=\"Qbirthday\">"+data.person[i].birthday+"</td></tr><tr><td>证件类型：</td><td class=\"QzhengjianType1\">"+zjList[parseInt(data.person[i].documentType)]+"</td></tr><tr><td>证件号码：</td><td class=\"QzhengjianNumber1\">"+data.person[i].documentNum+"</td></tr></tbody></table>");
+                        $(".querenBox .info-content").append(temp);
+                        //查找所有大人信息中有电话和邮箱的人
+                        if(data.person[i].telephone != ""){
+                            $("#QuserPhone").text(data.person[i].telephone);
+                            $("#Qemail").text(data.person[i].email);
+                        }
+                    }else if(data.person[i].type == 1){
+                        //展示所有小孩信息
+                        var temp = $("<table class='showUserInfo'><tbody><tr><td colspan='2' style='text-align: center;font-weight: 900;'>小孩:</td></tr><tr><td width='120'><nobr>真实姓名：</nobr></td><td class=\"QrealName\">"+data.person[i].realname+"</td></tr><tr><td>性别：</td><td class=\"Qsex\">"+(parseInt(data.person[i].sex)==0?'男':'女')+"</td></tr><tr><td>出生日期：</td><td class=\"Qbirthday\">"+data.person[i].birthday+"</td></tr><tr><td>证件类型：</td><td class=\"QzhengjianType1\">"+zjList[parseInt(data.person[i].documentType)]+"</td></tr><tr><td>证件号码：</td><td class=\"QzhengjianNumber1\">"+data.person[i].documentNum+"</td></tr></tbody></table>");
+                        $(".querenBox .info-content").append(temp);
+                    }
+                }
+            }
+            function tijiao(){
+                $("#tijiao").unbind("click",tijiao);
+                sendAjaxData();
+            }
+            //选择提交
+            $("#tijiao").bind("click",tijiao);
+            //返回修改
+            $("#returnPrev").click(function (){
+                $(".querenBox").fadeOut(300);
+            });
+            //选择已阅读
+            $("#readTrue").on("change",function (){
+                if($(this).is(":checked")){
+                    $("#sendInfo").removeClass("gray-btn");
+                }else{
+                    $("#sendInfo").addClass("gray-btn");
+                }
+            });
+            //提交资料
+            function sendAjaxData(){
+                console.log(88)
+                $.ajax({
+                    url:user.url+"activity/front/activity/enroll",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(data),
+                    type:"post",
+                    dataType:"JSON",
+                    beforeSend:function (){
+                        $("#tijiao").text("正在提交中..");
+                    },
+                    success:function (data){
+                        $("#tijiao").bind("click",tijiao);
+                        $("#tijiao").text("提交订单");
+                        if(data.result == 1){
+                            $(".alert-container").fadeIn(300);
+                            $(".alert-container .pay-btn").click(function (){
+                                window.location.href="http://sport.72bike.com/activity/wechatPay/getCode?orderId="+data.orderId;
+                            });
+                        }else{
+                            alert("提交失败"+data.msg);
+                        }
+                    },
+                    error:function (){
+                        alert("提交失败");
+                        $("#tijiao").bind("click",tijiao);
+                        $("#tijiao").text("提交订单");
+                    }
+                });
+            }
+            //开启和关闭免责声明
+            $("#mianze").click(function (){
+                $(".alert-container1").fadeIn(300);
+            });
+            $(".closeText img").click(function (){
+                $(".alert-container1").fadeOut(300);
+            });
+            //时间选择
+            $('#bornDate1').date();
+            $('#bornDate2').date();
+            $("#childBornDate").date();
+            //初始化数据
+            function initFun(){
+                setResultData();
+                //getActivityData()
+            }
+            initFun();
+        });
+    </script>
+</body>
+</html>

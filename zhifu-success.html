@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <title>支付成功</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/media.css">
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/main.js"></script>
+</head>
+<body class="md">
+    <header>
+        <div class="header-container">
+            <div class="header-left">
+                <a href="index.html"><img src="images/72-logo.png" alt=""></a>
+            </div>
+            <div class="header-right">
+                <div class="header-nav">
+                    <ul>
+                        <li class="Tcenter"><a href="#" class="Fcolor-text-black">首页</a></li>
+                        <li class="Tcenter"><a href="#" class="Fcolor-text-black">滑步车培训</a></li>
+                        <li class="Tcenter"><a href="#" class="Fcolor-text-black">活动赛事</a></li>
+                        <li class="Tcenter"><a href="#" class="Fcolor-text-black">官网</a></li>
+                    </ul>
+                </div>
+                <div class="header-search">
+                    <p><input type="text"><span class="iconfont icon-sousuo"></span></p>
+                </div>
+                <div class="header-user">
+                    <div class="user-info">
+                    	<div class="menu-btn-sm">
+							<span class="menu-line"></span>
+							<span class="menu-line"></span>
+							<span class="menu-line"></span>
+						</div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="user-list">
+            <ul>
+                <li><a href="userCenter.html">个人中心</a></li>
+                <li><a href="javascript:;" id="loginOut">退出</a></li>
+            </ul>
+        </div>
+    </header>
+    <section>
+        <div class="content-container">
+            <div class="zhifu-content">
+                <h3 class="baoming-title">支付结果</h3>
+                <div class="zhifu-result">
+                    <p><span class="iconfont icon-zhengque"></span><span>支付成功</span></p>
+
+                    <p>订单号码：<span id="orderCode"></span></p>
+                    <p>支付金额：<span id="allPrice"></span></p>
+                    <p>支付方式：<span id="payType">微信支付</span></p>
+                    <p style="padding: 20px;">系统已将您的报名码发送至您的手机，请注意查收并且妥善保管！</p>
+                </div>
+            </div>
+            <div class="result-content btn-group">
+                <a href="index.html" class="return-prev">返回首页</a>
+                <a href="userCenter.html" class="tijiao-btn" id="read-dingdan">查看订单</a>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="bottom-info">
+            <p>骑二无比网络科技有限公司</p>
+            <p>本站图文是骑二无比版权盗版必究</p>
+            <p>客服电话：010-80448861</p>
+            <p><a href="#">使用条款</a><a href="#">隐私政策</a></p>
+        </div>
+    </footer>
+    <script>
+        $(function (){
+            var data = location.search.split("?");
+            var orderId = data[1].split("=")[1];
+            $.ajax({
+                url:"http://sport.72bike.com/activity/front/order/orderInfo",
+                data:{
+                    id:orderId
+                },
+                dataType:"json",
+                success:function (result){
+                    if(result.result == 1){
+                        $("#orderCode").text(result.orderCode);
+                        $("#allPrice").text(result.allPrice);
+                    }else{
+                        alert("订单信息无!");
+                    }
+                },
+                error:function (){
+                    alert("获取订单信息失败!")
+                }
+            })
+        });
+    </script>
+</body>
+</html>

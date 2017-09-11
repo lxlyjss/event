@@ -1,0 +1,330 @@
+//iconfont
+@font-face {font-family: "iconfont";
+  src: url('../font/iconfont.eot?t=1504147214944'); /* IE9*/
+  src: url('../font/iconfont.eot?t=1504147214944#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('../font/iconfont.ttf?t=1504147214944') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('../font/iconfont.svg?t=1504147214944#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-QQ:before { content: "\e73e"; }
+
+.icon-QQ1:before { content: "\e633"; }
+
+.icon-weixin:before { content: "\e65b"; }
+
+.icon-qq:before { content: "\e62a"; }
+
+.icon-jiantouxia:before { content: "\e605"; }
+
+.icon-weibo:before { content: "\e502"; }
+
+.icon-sousuo:before { content: "\e613"; }
+
+.icon-zhengque:before { content: "\e6ba"; }
+
+.icon-faxian:before { content: "\e60d"; }
+//iconfont
+
+html,body,div,ul,ol,li,header,section,footer,p,h1,h2,h3,h4{
+  margin: 0;
+  padding: 0;
+}
+ul,ol,li{
+  list-style: none;
+  padding-left: 0;
+}
+a{
+  text-decoration: none;
+}
+html,body{
+  width: 100%;
+  height: 100%;
+  background-color: #f4f4f4;
+}
+//base color
+$baseColor:#0079bf;
+::-webkit-input-placeholder {
+  color:#fff;
+}
+@mixin clearBoth{
+  content:"";
+  display: block;
+  clear: both;
+}
+// font color
+.Fcolor-text-gray{
+  color: #616161;
+}
+.Fcolor-text-blue{
+  color: $baseColor;
+}
+.Fcolor-text-white{
+  color: #fff;
+}
+.Fcolor-text-black{
+  color: #888;
+}
+//bg color
+.BgColor-white{
+  background-color:#fff;
+}
+.BgColor-blue{
+  background-color: $baseColor;
+}
+//text align
+.Tcenter{
+  text-align: center;
+}
+.Tleft{
+  text-align: left;
+}
+.Tright{
+  text-align: right;
+}
+
+//头部
+header{
+  width: 100%;
+  height: 80px;
+  background-color:#fff;
+  position: relative;
+  border-bottom: 1px solid #ddd;
+  -webkit-box-shadow: 0px 0px 5px #ccc;
+  -moz-box-shadow: 0px 0px 5px #ccc;
+  box-shadow: 0px 0px 5px #ccc;
+
+  .header-container{
+    position: relative;
+    max-width: 1200px;
+    margin:0 auto;
+    
+    .header-left{
+      width: 100px;
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      a{
+        display: block;
+        width: 100%;
+        height: 100%;
+        img{
+          width: 68%;
+          padding: 10%;
+        }
+      }
+
+    }
+    .header-right{
+      width:auto;
+      position: relative;
+      margin-left: 100px;
+      height: 100%;
+
+      &::after{
+        @include clearBoth;
+      }
+      >div{
+        float: right;
+      }
+      .header-nav{
+        width: 40%;
+
+        ul{
+          width: 100%;
+
+          li{
+            float: left;
+            padding: 0 15px;
+            a{
+              display: block;
+              width: 100%;
+              line-height: 80px;
+              font-size: 14px;
+            }
+          }
+        }
+      }
+      .header-search{
+        width: 30%;
+        p{
+          width: 90% ;
+          height: 30px;
+          margin-top: 25px;
+          border:1px solid #ddd;
+          -webkit-border-radius: 3px;
+          -moz-border-radius: 3px;
+          border-radius: 3px;
+
+          input{
+            width: 200px;
+            height: 26px;
+            font-size: 18px;
+            color: #ccc;
+            padding-left: 10px;
+            outline: none;
+            border: none;
+          }
+          span{
+            float: right;
+            line-height: 30px;
+            font-size: 18px;
+            margin-right: 10px;
+            cursor: pointer;
+            color: #3171a5;
+          }
+        }
+      }
+      .header-user{
+        width: 30%;
+        padding-right: 20px;
+
+        .user-info{
+          float: right;
+          padding-right: 30px;
+
+          p{
+            a{
+              display: block;
+              width: 30px;
+              height: 30px;
+              img{
+              }
+              span{
+                font-size: 18px;
+                margin-left: 10px;
+              }
+            }
+          }
+        }
+      }
+      .user-list{
+        width: 90px;
+        background: #3b3b3c;
+        position: absolute;
+        right: 0;
+        top: 60px;
+        display: none;
+
+        ul{
+          li{
+            a{
+              display: block;
+              width: 100%;
+              height: 100%;
+              font-size: 14px;
+              color: #fff;
+              text-align: center;
+              padding: 10px 0;
+              border-bottom: 1px solid #4f4f50;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+section{
+  width: 96%;
+  max-width: 1200px;
+  margin:20px auto;
+
+  .top-container{
+    width: auto;
+    padding: 20px;
+    background: #fff;
+    //-webkit-box-shadow: 0px 0px 10px #ccc;
+    //-moz-box-shadow: 0px 0px 10px #ccc;
+    //box-shadow: 0px 0px 10px #ccc;
+
+    &::after{
+      @include clearBoth;
+    }
+    >div{
+      float: left;
+    }
+    .event-img{
+      width: 30%;
+      .img-container{
+        width: 100%;
+        height:200px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        overflow: hidden;
+        img{
+          width: 100%;
+        }
+      }
+    }
+    .event-info{
+      width: 46%;
+      padding: 0 2%;
+
+      p{
+        line-height: 25px;
+        font-size: 14px;
+        color: #958989;
+      }
+      .event-title{
+        font-size: 18px;
+        font-weight: 900;
+        color: #5a5555;
+      }
+    }
+    .event-code{
+      width: 20%;
+      
+      .code-container{
+        text-align: center;
+      }
+    }
+  }
+  .content-container{
+    width: auto;
+    background: #fff;
+    margin-top: 10px;
+    padding-bottom: 15px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 0px 5px #ccc;
+    -moz-box-shadow: 0px 0px 5px #ccc;
+    box-shadow: 0px 0px 5px #ccc;
+
+    .content-top{
+      width: 100%;
+      background: #01698f;
+      color: #fff;
+
+      ul{
+        width: 100%;
+        &::after{
+          @include clearBoth;
+        }
+        li{
+          width: 33.33%;
+          padding:15px 0px;
+          text-align: center;
+          float: left;
+          border-right: none;
+          cursor: pointer;
+
+        }
+        .active{
+          background: #fff;
+          border-bottom:none;
+          color: #888;
+        }
+      }
+    }
+  }
+}

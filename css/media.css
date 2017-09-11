@@ -1,0 +1,476 @@
+@media only screen and (max-width: 600px) {
+  header {
+    height: 80px; }
+    header .header-container .header-left {
+      width: 80px; }
+      header .header-container .header-left a img {
+        width: 85%;
+        padding: 6%; margin-top:8%}
+    header .header-container .header-right .header-nav {
+      display: none; }
+    header .header-container .header-right .header-search {
+      width: 70%;
+      display: none; }
+      header .header-container .header-right .header-search p {
+        margin-top: 15px; }
+        header .header-container .header-right .header-search p input {
+          width: 120px;
+          font-size: 16px; }
+    header .header-container .header-right .header-user {
+      width: 30%; }
+      header .header-container .header-right .header-user .user-info {
+        padding-right: 5px; }
+        header .header-container .header-right .header-user .user-info p {
+          margin-top: 15px; }
+          header .header-container .header-right .header-user .user-info p a {
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
+            overflow: hidden; }
+            header .header-container .header-right .header-user .user-info p a img {
+              width: 30px; }
+            header .header-container .header-right .header-user .user-info p a span {
+              font-size: 16px;
+              margin-left: 5px; }
+
+  section {
+    width: 96%;
+    margin: 10px auto;
+    }
+    section .baoming-title {
+      font-size: 16px;
+      margin-top: 10px;
+      line-height: 40px;
+      background: #0079bf;
+      text-align: center;
+      color: #fff;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px; }
+    section .sm-title {
+      font-size: 20px;
+      padding: 15px;
+      border-bottom: 1px solid #ccc;
+      text-align: left; }
+    section .btn-group {
+      padding: 20px; }
+      section .btn-group a {
+        display: block;
+        height: 50px;
+        font-size: 24px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        background: #0079bf;
+        color: #ffffff;
+        text-align: center;
+        line-height: 50px;
+        width: 48%;
+        float: left;
+        }
+      section .btn-group a:last-of-type {
+        width: 48%;
+        margin-left: 4%;
+        background: #0079bf; }
+      section .btn-group::after {
+        content: "";
+        display: block;
+        clear: both; }
+    section .btn-one {
+      width: auto;
+      margin: 0 15px; }
+      section .btn-one a {
+        display: block;
+        width: 100%;
+        height: 50px;
+        margin: 10px auto;
+        font-size: 24px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        background: #0079bf;
+        color: #ffffff;
+        text-align: center;
+        line-height: 50px; }
+    section .gray-btn {
+      background: #ccc !important; }
+    section .top-container {
+      width: auto; }
+      section .top-container .event-img {
+        width: 100%; }
+      section .top-container .event-info {
+        width: 96%;
+        margin-top: 10px; }
+        section .top-container .event-info .event-title {
+          font-size: 16px; }
+      section .top-container .event-code {
+        display: none; }
+    section .content-container .content-top ul li {
+      font-size: 14px; }
+    section .content-container .content-page {
+      width: 100%; }
+    section .content-container .content-page2 .content-info {
+      border-top: none;
+      padding: 15px; }
+      section .content-container .content-page2 .content-info .content-card {
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px; }
+        section .content-container .content-page2 .content-info .content-card p {
+          font-size: 16px;
+          line-height: 30px;
+          padding: 0px 10px;
+          font-weight: 900; }
+          section .content-container .content-page2 .content-info .content-card p .taocan-title {
+            color: #0079bf; }
+          section .content-container .content-page2 .content-info .content-card p .taocan-price {
+            color: #f00; }
+          section .content-container .content-page2 .content-info .content-card p .taocan-person i:nth-of-type(1) {
+            color: #0079bf; }
+          section .content-container .content-page2 .content-info .content-card p .taocan-person i:nth-of-type(2) {
+            color: #000; }
+          section .content-container .content-page2 .content-info .content-card p span {
+            font-weight: normal; }
+            section .content-container .content-page2 .content-info .content-card p span i {
+              font-style: normal; }
+      section .content-container .content-page2 .content-info .content-shuoming {
+        padding: 10px 10px;
+        border-bottom: 1px solid #ccc; }
+        section .content-container .content-page2 .content-info .content-shuoming p {
+          font-size: 16px;
+          line-height: 24px;
+          color: #5a5555; }
+    section .content-container .content-page3 .register-list {
+      width: 100%;
+      padding: 0 0 50px; }
+      section .content-container .content-page3 .register-list::after {
+        content: "";
+        display: block;
+        clear: both; }
+      section .content-container .content-page3 .register-list .list {
+        width: 80%;
+        padding: 5px 5%;
+        border: 1px solid #0079bf;
+        font-size: 16px;
+        margin: 10px auto 0;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px; }
+        section .content-container .content-page3 .register-list .list p {
+          line-height: 28px; }
+    section .content-container .baoming-page p {
+      margin: 10px 0;
+      font-size: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #ccc; }
+    section .content-container .baoming-page ul {
+      width: 95%;
+      padding-left: 5%; }
+      section .content-container .baoming-page ul::after {
+        content: "";
+        display: block;
+        clear: both; }
+      section .content-container .baoming-page ul li {
+        width: 40%;
+        text-align: center;
+        padding: 10px 0;
+        float: left;
+        font-size: 16px; }
+  section .content-container .baoming-page ul li:nth-of-type(2){
+    width: 20%!important;
+  }
+      section .content-container .baoming-page ul li:nth-of-type(3) {
+        width: 40%; }
+      section .content-container .baoming-page ul li:nth-of-type(2) span {
+        color: #43aeec; }
+    section .content-container .baoming-page .fujia li {
+      line-height: 30px; }
+      section .content-container .baoming-page .fujia li button {
+        width: 33%;
+        color: #fff;
+        height: 30px;
+        font-size: 18px;
+        border-right: none;
+        border-left: none;
+        outline: none;
+        background: #0079bf; }
+      section .content-container .baoming-page .fujia li button:nth-of-type(1) {
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 15px; }
+      section .content-container .baoming-page .fujia li button:nth-of-type(2) {
+        background: #fff;
+        color: #000; }
+      section .content-container .baoming-page .fujia li button:nth-of-type(3) {
+        border-top-right-radius: 15px;
+        border-bottom-right-radius: 15px; }
+    section .content-container .tijiao-page {
+      padding: 0 15px; }
+      section .content-container .tijiao-page ul li:nth-of-type(3) {
+        text-align: center; }
+    section .content-container .price {
+      width: auto;
+      padding: 15px;
+      border-top: 1px solid #ccc; }
+      section .content-container .price p {
+        font-size: 18px;
+        text-align: right;
+        padding: 10px 0; }
+        section .content-container .price p span {
+          color: #f00; }
+    section .content-container .alert-info {
+      color: #f00;
+      font-size: 12px;
+      margin: 5px 0;
+      text-align: center; }
+    section .content-container .user-info {
+      padding: 15px; }
+      section .content-container .user-info table {
+        width: 100%;
+        font-size: 16px; }
+        section .content-container .user-info table tbody tr td {
+          padding: 5px; }
+          section .content-container .user-info table tbody tr td input {
+            width: 96%;
+            height: 24px;
+            outline: none; }
+          section .content-container .user-info table tbody tr td label {
+            margin-left: 30px;
+            font-size: 16px; }
+            section .content-container .user-info table tbody tr td label input {
+              width: 24px;
+              margin-right: 5px;
+              vertical-align: middle;
+              margin-top: -2px; }
+          section .content-container .user-info table tbody tr td select {
+            height: 25px; }
+        section .content-container .user-info table tbody tr td:first-of-type {
+          text-align: right; }
+      section .content-container .user-info .danger-info table tbody tr:last-of-type input {
+        width: 8%;
+        vertical-align: middle; }
+      section .content-container .user-info .danger-info table tbody tr:last-of-type span {
+        font-size: 12px; }
+    section .content-container .zhifu-content .dingdan-content .zhifu-dingdan {
+      padding: 15px; }
+      section .content-container .zhifu-content .dingdan-content .zhifu-dingdan table tbody tr td {
+        padding: 5px;
+        font-size: 14px; }
+    section .content-container .zhifu-type {
+      width: 100%;
+      text-align: center; }
+      section .content-container .zhifu-type .zhifu-box {
+        padding: 15px 0; }
+        section .content-container .zhifu-type .zhifu-box .zhifu-list {
+          border-bottom: 1px solid #ccc; }
+          section .content-container .zhifu-type .zhifu-box .zhifu-list label img {
+            width: 50%;
+            vertical-align: -100%; }
+          section .content-container .zhifu-type .zhifu-box .zhifu-list label input {
+            margin-left: 50px; }
+      section .content-container .zhifu-type .pay-btn {
+        padding: 8px 30px;
+        text-align: center;
+        font-size: 24px;
+        color: #fff;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        background: #0079bf; }
+    section .content-container .zhifu-result p:nth-of-type(1) {
+      text-align: center;
+      padding-top: 20px;
+      line-height: 50px;
+      padding-left: 0%; }
+      section .content-container .zhifu-result p:nth-of-type(1) .icon-zhengque {
+        font-size: 40px;
+        color: #10ff16;
+        display: block; }
+      section .content-container .zhifu-result p:nth-of-type(1) span {
+        font-size: 30px; }
+    section .content-container .zhifu-result p:last-of-type {
+      font-size: 14px;
+      padding-left: 0; }
+    section .content-container .zhifu-result p {
+      line-height: 30px;
+      padding-left: 20%; }
+    section .content-container .dingdan-btn {
+      margin-top: 20px; }
+      section .content-container .dingdan-btn .del-btn {
+        background: #dd573a; }
+      section .content-container .dingdan-btn .pay-btn {
+        background: #0079bf; }
+    section .content-container .tel-text {
+      font-size: 14px;
+      text-align: center;
+      line-height: 30px; }
+      section .content-container .tel-text a {
+        font-size: 20px;
+        color: #0079bf; }
+    section .content-container .user-content {
+      padding: 10px 50px; }
+      section .content-container .user-content .user-img {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px; }
+      section .content-container .user-content p {
+        font-size: 20px;
+        text-align: center;
+        margin: 10px auto;
+        color: #888; }
+    section .content-container .dingdan-content {
+      width: 100%; }
+      section .content-container .dingdan-content .dingdan-list {
+        padding: 15px;
+        border-bottom: 1px solid #ccc; }
+        section .content-container .dingdan-content .dingdan-list::after {
+          content: "";
+          display: block;
+          clear: both; }
+        section .content-container .dingdan-content .dingdan-list p {
+          font-size: 16px;
+          line-height: 30px; }
+        section .content-container .dingdan-content .dingdan-list .dingdan-title {
+          font-weight: 900; }
+        section .content-container .dingdan-content .dingdan-list .dingdan-price span {
+          color: #f00; }
+        section .content-container .dingdan-content .dingdan-list .dingdan-status span {
+          color: #0079bf; }
+        section .content-container .dingdan-content .dingdan-list .dingdan-info {
+          float: left;
+          margin-top: 10px; }
+        section .content-container .dingdan-content .dingdan-list .dingdan-edit {
+          float: right;
+          margin-top: 10px; }
+        section .content-container .dingdan-content .dingdan-list .sm-btn {
+          display: inline-block;
+          width: 80px;
+          height: 35px;
+          line-height: 35px;
+          text-align: center;
+          background: #0079bf;
+          color: #fff;
+          margin-left: 10px;
+          -webkit-border-radius: 3px;
+          -moz-border-radius: 3px;
+          border-radius: 3px; }
+        section .content-container .dingdan-content .dingdan-list .dingdan-xq {
+          background: #77c6ea; }
+        section .content-container .dingdan-content .dingdan-list .dingdan-cancel {
+          background: #ccc; }
+        section .content-container .dingdan-content .dingdan-list .dingdan-delete {
+          background: #dd573a; }
+        section .content-container .dingdan-content .dingdan-list .dingdan-pay {
+          background: #37dd32; }
+    section .querenBox {
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      z-index: 9;
+      top: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.6);
+      overflow: scroll; }
+      section .querenBox .content-container {
+        width: 100%;
+        margin-top: -10px; }
+    section .content-page1 {
+      width: 90% !important;
+      padding: 10px 5% 50px; }
+      section .content-page1 .activity-text {
+        font-size: 16px;
+        line-height: 30px;
+        text-align: center; }
+  section .content-page1 .red-text{
+    color: #f00;
+  }
+      section .content-page1 .activity-img {
+        margin: 10px 0; }
+        section .content-page1 .activity-img img {
+          width: 100%; }
+
+  body > footer {
+    width: 100%;
+    margin: 0 auto;
+    background: #464c4c;
+    display: none; }
+    body > footer .bottom-info {
+      border-top: 1px solid #ccc;
+      font-size: 14px;
+      padding: 10px 0; }
+      body > footer .bottom-info p {
+        text-align: center;
+        color: #bfbfab; }
+        body > footer .bottom-info p a {
+          color: #fff; } }
+.alert-container {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10; }
+  .alert-container .alert-content {
+    width: 80%;
+    height: 200px;
+    position: absolute;
+    background: #fff;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    overflow: hidden; }
+    .alert-container .alert-content .alert-title {
+      background: #0079bf;
+      color: #fff;
+      font-size: 20px;
+      padding: 5px 10px; }
+    .alert-container .alert-content .alert-info {
+      padding: 20px; }
+      .alert-container .alert-content .alert-info p {
+        color: #000;
+        font-size: 16px;
+        line-height: 26px; }
+    .alert-container .alert-content .alert-btn {
+      width: 100%;
+      position: absolute;
+      bottom: 20px;
+      text-align: center; }
+      .alert-container .alert-content .alert-btn a {
+        font-size: 16px;
+        background: #0079bf;
+        color: #fff;
+        padding: 5px 10px;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px; }
+      .alert-container .alert-content .alert-btn a:last-of-type {
+        background: #ccc;
+        margin-left: 20px; }
+
+/*# sourceMappingURL=media.css.map */
+
+
+/**9月5日新增*/
+.menu-btn-sm{
+	width:50px;
+	padding-top:30px;		
+}
+.menu-btn-sm .menu-line{
+	display:block;
+	width:30px;
+	height:4px;
+	margin-bottom:6px;
+	background:#000;
+	-webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+        border-radius: 2px;
+}
+
+
