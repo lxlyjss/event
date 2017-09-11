@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/media.css">
     <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
     <script src="js/main.js"></script>
 </head>
 <body class="md">
@@ -67,16 +68,19 @@
                 <a href="index.html" class="return-prev">返回首页</a>
                 <a href="userCenter.html" class="tijiao-btn" id="read-dingdan">查看订单</a>
             </div>
+            <div class="share-btn btn-one">
+                <a href="javascript:;" onclick="$('.share-content').fadeIn(300)">分享</a>
+            </div>
         </div>
     </section>
-    <footer>
-        <div class="bottom-info">
-            <p>骑二无比网络科技有限公司</p>
-            <p>本站图文是骑二无比版权盗版必究</p>
-            <p>客服电话：010-80448861</p>
-            <p><a href="#">使用条款</a><a href="#">隐私政策</a></p>
+    <div class="share-content" style="display: none;">
+        <div class="share-img">
+            <img src="images/share-img.png" alt="">
         </div>
-    </footer>
+        <div class="share-ok" onclick="$('.share-content').fadeOut(300)">
+            <img src="images/share-btn.png" alt="">
+        </div>
+    </div>
     <script>
         $(function (){
             var data = location.search.split("?");

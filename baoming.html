@@ -15,9 +15,6 @@
     <script src="js/date.js"></script>
     <script src="js/main.js"></script>
     <style>
-        /*#addParent{*/
-            /*display: none;*/
-        /*}*/
         input[type=text]{
         	height:30px!important;
         	background:#fff;
@@ -47,17 +44,6 @@
                 <a href="index.html"><img src="images/72-logo.png" alt=""></a>
             </div>
             <div class="header-right">
-                <div class="header-nav">
-                    <ul>
-                        <li class="Tcenter"><a href="#" class="Fcolor-text-black">首页</a></li>
-                        <li class="Tcenter"><a href="#" class="Fcolor-text-black">滑步车培训</a></li>
-                        <li class="Tcenter"><a href="#" class="Fcolor-text-black">活动赛事</a></li>
-                        <li class="Tcenter"><a href="#" class="Fcolor-text-black">官网</a></li>
-                    </ul>
-                </div>
-                <div class="header-search">
-                    <p><input type="text"><span class="iconfont icon-sousuo"></span></p>
-                </div>
                 <div class="header-user">
                     <div class="user-info">
                     	<div class="menu-btn-sm">
@@ -78,64 +64,40 @@
         </div>
     </header>
     <section>
-        <!--<p class="baoming-title">活动详情</p>
-        <div class="top-container">
-            <div class="event-img">
-                <div class="img-container">
-                    <img src="images/saishi.jpeg" alt="">
-                </div>
-            </div>
-            <div class="event-info">
-                <p class="event-title"></p>
-                <p class="event-age">年龄：<span id="activityAge"></span></p>
-                <p class="event-type">赛事类型：<span id="activityType"></span></p>
-                <p class="event-startDate">比赛开始时间：<span id="activityBeginDate"></span></p>
-                <p class="event-startDate">比赛结束时间：<span id="activityEndDate"></span></p>
-                <p class="event-registerDate">报名开始时间：<span id="enrollBeginDate"></span></p>
-                <p class="event-registerDate">报名结束时间：<span id="enrollEndDate"></span></p>
-                <p class="event-registered">已报名：<span id="nowCount"></span>/<span id="totalCount"></span>人</p>
-                <p class="event-place">地点：<span id="address"></span></p>
-                <p style="font-size: 20px;"><span class="iconfont icon-faxian" style="font-size: 24px;color: #2c9eee;"></span><span id="viewCount"></span></p>
-            </div>
-            <div class="event-code">
-                <div class="code-container">
-                    <img src="images/code.png" alt="">
-                </div>
-            </div>
-        </div>
-        --><div class="content-container">
+       <div class="content-container">
             <h3 class="baoming-title">选择报名套餐</h3>
             <div class="baoming-page" style="padding: 15px;">
                 <p>家庭类型：(必选)</p>
+                <p class="meal-title"><span>套餐名称</span><span>剩余数量</span><span>选择</span></p>
                 <ul class="jichu" id="baseMeal">
                     <li>一大一小</li>
-                    <li style="width: 20%;"><span></span></li>
-                    <li style="text-align: center;"><input type="radio" value="3" checked name="baseMeal"></li>
+                    <li></li>
+                    <li><input type="radio" value="3" checked name="baseMeal"></li>
                 </ul>
                 <ul class="jichu" id="baseMeal1">
                     <li>两大一小</li>
-                    <li style="width: 20%;"><span></span></li>
-                    <li style="text-align: center;"><input type="radio" value="4" name="baseMeal"></li>
+                    <li></li>
+                    <li><input type="radio" value="4" name="baseMeal"></li>
                 </ul>
                 <p>附加套餐：(可选)</p>
                 <ul class="fujia" id="niceHotel">
-                    <li style="width:59%;text-align:left;">豪华酒店住宿(福朋喜来登酒店)</li>
-                    <li style="width: 1%;"><span></span></li>
+                    <li>豪华酒店住宿(福朋喜来登酒店)</li>
+                    <li></li>
                     <li class="select-num"><input type="checkbox" id="nice"></li>
                 </ul>
                 <ul class="fujia" id="normalHotel">
-                    <li style="width:59%;text-align:left;">舒适酒店住宿(Funny概念酒店或百悦酒店)</li>
-                    <li style="width: 1%;"><span></span></li>
+                    <li>舒适酒店住宿(Funny概念酒店或百悦酒店)</li>
+                    <li></li>
                     <li class="select-num"><input type="checkbox" id="normal"></li>
                 </ul>
                 <ul class="fujia" id="goodHotel">
-                    <li style="width:59%;text-align:left;">经济酒店住宿 <br>(贝壳酒店)</li>
-                    <li style="width: 1%;"><span></span></li>
+                    <li>经济酒店住宿 <br>(贝壳酒店)</li>
+                    <li></li>
                     <li class="select-num"><input type="checkbox" id="good"></li>
                 </ul>
                 <ul class="fujia" id="addChildren">
                     <li>增加小孩</li>
-                    <li style="width: 20%;"><span></span></li>
+                    <li></li>
                     <li class="select-num"><button>-</button><button class="child-num"></button><button>+</button></li>
                 </ul>
             </div>
@@ -227,14 +189,6 @@
                 <div class="baoming-page tijiao-page">
                     <h3 class="sm-title">已选套餐</h3>
                     <p style="text-align: center" class="base-title">家庭类型：</p>
-                    <!--<ul class="jichu">-->
-                        <!--<li>一大一小</li>-->
-                        <!--<li>￥<span>472.00</span></li>-->
-                        <!--<li class="Tcenter"><span>1</span>份</li>-->
-                        <!--<li>两大一小</li>-->
-                        <!--<li>￥<span>472.00</span></li>-->
-                        <!--<li class="Tcenter"><span>1</span>份</li>-->
-                    <!--</ul>-->
                     <p style="text-align:center;">附加套餐：</p>
                 </div>
                 <div class="price">
@@ -411,26 +365,60 @@
             var user = window.userInfo;
             //获取数据
             var resultData;
-            /*function getActivityData(){
+            function getActivityData(){
                 $.ajax({
                     url:"http://sport.72bike.com/activity/front/activity/activityInfo",
                     data:{
                         id:"2"
                     },
                     dataType:"json",
+                    async:false,
                     success:function (result){
                         if(result.result == 1){
-                            resultData = result;
-                            setActivityData();
+                            resultData = result.types;
+                            setMealData();
                         }else{
-                            alert("获取活动详情失败!result=0");
+                            //alert("获取活动详情失败!result=0");
                         }
                     },
                     error:function (){
-                        alert("获取活动详情失败!");
+                        //alert("获取活动详情失败!");
                     }
                 });
-            }*/
+            }
+            function setMealData(){
+                data.mealData[0].type = resultData[0].type;
+                data.mealData[0].comboName = resultData[0].name;
+                data.mealData[0].comboTypeId = resultData[0].id;
+                data.mealData[0].comboPrice = resultData[0].price;
+
+                data.mealData[1].type = resultData[1].type;
+                data.mealData[1].comboName = resultData[1].name;
+                data.mealData[1].comboTypeId = resultData[1].id;
+                data.mealData[1].comboPrice = resultData[1].price;
+
+                data.mealData[2].type = resultData[4].type;
+                data.mealData[2].comboName = resultData[4].name;
+                data.mealData[2].comboTypeId = resultData[4].id;
+                data.mealData[2].comboPrice = resultData[4].price;
+
+                data.mealData[3].type = resultData[5].type;
+                data.mealData[3].comboName = resultData[5].name;
+                data.mealData[3].comboTypeId = resultData[5].id;
+                data.mealData[3].comboPrice = resultData[5].price;
+
+                data.mealData[4].type = resultData[3].type;
+                data.mealData[4].comboName = resultData[3].name;
+                data.mealData[4].comboTypeId = resultData[3].id;
+                data.mealData[4].comboPrice = resultData[3].price;
+
+                data.mealData[5].type = resultData[2].type;
+                data.mealData[5].comboName = resultData[2].name;
+                data.mealData[5].comboTypeId = resultData[2].id;
+                data.mealData[5].comboPrice = resultData[2].price;
+
+                setResultData();
+            }
             //传给后台数据格式
             var data = {
                 id:"2",//活动id
@@ -440,45 +428,45 @@
                 //套餐区域
                 mealData :[
                     {
-                        type:"0",
-                        comboName:"一大一小",
-                        comboTypeId:"3",
-                        comboPrice:"472",
+                        type:"",
+                        comboName:"",
+                        comboTypeId:"",
+                        comboPrice:"",
                         count:"1"
                     },
                     {
-                        type:"0",
-                        comboName:"两大一小",
-                        comboTypeId:"4",
-                        comboPrice:"472",
+                        type:"",
+                        comboName:"",
+                        comboTypeId:"",
+                        comboPrice:"",
                         count:"0"
                     },
                     {
-                        type:"1",
-                        comboName:"豪华酒店住宿(福朋喜来登酒店)",
-                        comboTypeId:"8",
-                        comboPrice:"520",
+                        type:"",
+                        comboName:"",
+                        comboTypeId:"",
+                        comboPrice:"",
                         count:"0"
                     },
                     {
-                        type:"1",
-                        comboName:"舒适酒店住宿(Funny概念或百悦酒店)",
-                        comboTypeId:"11",
-                        comboPrice:"300",
+                        type:"",
+                        comboName:"",
+                        comboTypeId:"",
+                        comboPrice:"",
                         count:"0"
                     },
                     {
-                        type:"1",
-                        comboName:"经济酒店住宿(贝壳酒店)",
-                        comboTypeId:"7",
-                        comboPrice:"130",
+                        type:"",
+                        comboName:"",
+                        comboTypeId:"",
+                        comboPrice:"",
                         count:"0"
                     },
                     {
-                        type:"1",
-                        comboName:"增加小孩",
-                        comboTypeId:"5",
-                        comboPrice:"172",
+                        type:"",
+                        comboName:"",
+                        comboTypeId:"",
+                        comboPrice:"",
                         count:"0"
                     }
                 ],
@@ -490,102 +478,16 @@
                     urgentTelephone:"",//紧急联系人电话
                     urgentEmail:""//紧急联系人邮箱
                 },
-                person:[
-//                    {//增加成人基础信息数据
-//                        type:"0",//基础信息 0成人  1小孩
-//                        id:"1",//增加人的唯一标识
-//                        realname:"",
-//                        documentType:"",//证件类型
-//                        documentNum:"",
-//                        sex:"",
-//                        birthday:"",
-//                        telephone:"",//联系电话
-//                        email:""//联系邮箱
-//                    },
-//                    {//增加成人基础信息数据
-//                        type:"0",//基础信息 0成人  1小孩
-//                        id:"2",//增加人的唯一标识
-//                        realname:"",
-//                        documentType:"",//证件类型
-//                        documentNum:"",
-//                        sex:"",
-//                        birthday:"",
-//                        telephone:"",//联系电话
-//                        email:""//联系邮箱
-//                    },
-//                    {//增加小孩基础信息数据
-//                        type:"1",//基础信息 0成人  1小孩
-//                        id:"3",//增加人的唯一标识
-//                        realname:"",
-//                        documentType:"",//证件类型
-//                        documentNum:"",
-//                        sex:"",
-//                        birthday:"",
-//                        telephone:"",//联系电话
-//                        email:""//联系邮箱
-//                    }
-                ]
+                person:[]
             };
-            var childData = {//增加小孩基础信息数据
-                type:"1",//基础信息 0成人  1小孩
-                realname:"",
-                documentType:"",//证件类型
-                documentNum:"",
-                sex:"",
-                birthday:"",
-                telephone:"",//联系电话
-                email:"",//联系邮箱
-                id:""//增加人的唯一标识
-            };
-            var parentData = {//增加成人基础信息数据
-                type:"0",//基础信息 0成人  1小孩
-                realname:"",
-                documentType:"",//证件类型
-                documentNum:"",
-                sex:"",
-                birthday:"",
-                telephone:"",//联系电话
-                email:"",//联系邮箱
-                id:""//增加人的唯一标识
-            };
-            //写入页面活动数据
-           /* function setActivityData(){
-                var activity = resultData.activity;
-                $(".event-info .event-title").text(activity.title);
-                $("#activityAge").text(activity.age+"岁");
-                $("#activityType").text(activity.type);
-                $("#activityBeginDate").text(activity.activityBeginDate);
-                $("#activityEndDate").text(activity.activityEndDate);
-                $("#enrollBeginDate").text(activity.enrollBeginDate);
-                $("#enrollEndDate").text(activity.enrollEndDate);
-                $("#nowCount").text(activity.nowCount);
-                $("#totalCount").text(activity.totalCount);
-                $("#address").text(activity.address);
-                $("#viewCount").text(resultData.count.viewCount);
-            }*/
             //写入页面套餐数据
             function setResultData(){
-                //写入基础套餐价格
-                //setPrice($("#baseMeal li").eq(1).children("span"),data.mealData[0].comboPrice);
-                //setPrice($("#baseMeal1 li").eq(1).children("span"),data.mealData[1].comboPrice);
-                //写入增加儿童价格
-                //setPrice($("#addChildren li").eq(1).children("span"),data.mealData[2].comboPrice);
+                //写入套餐名称
+                for(var i = 0; i < resultData.length;i++){
+                    $(".baoming-page ul").eq(i).children("li").eq(0).text(data.mealData[i].comboName);
+                }
                 //写入增加儿童数量
                 setCount($("#addChildren li").eq(2).children("button").eq(1),data.mealData[5].count);
-
-                //写入增加成人价格
-               // setPrice($("#addParent li").eq(1).children("span"),data.mealData[3].comboPrice);
-//                //写入增加成人数量
-                //setCount($("#addParent li").eq(2).children("button").eq(1),data.mealData[3].count);
-
-                //写入增加标间价格
-               // setPrice($("#normalHotel li").eq(1).children("span"),data.mealData[4].comboPrice);
-                //写入增加标间数量
-                //setCount($("#normalHotel li").eq(2).children("button").eq(1),data.mealData[4].count);
-                //写入增加豪华间价格
-                //setPrice($("#goodHotel li").eq(1).children("span"),data.mealData[5].comboPrice);
-                //写入增加豪华间数量
-                //setCount($("#goodHotel li").eq(2).children("button").eq(1),data.mealData[5].count);
                 //写入总价格
                 setPrice($("#allPrice p span"),getAllPrice());
                 data.allPrice = getAllPrice();
@@ -637,9 +539,7 @@
             setBaseMeal();
             $("input[name=baseMeal]").on("change",function (){
                 setBaseMeal();
-                //选择套餐出现的人数设置
             });
-            //选择三个套餐
             //豪华
             $("#nice").on("change",function (){
                 $("#normal").removeAttr("checked");
@@ -717,60 +617,6 @@
             //当点击增加和减少儿童数量。
             setChildren($("#addChildren .select-num").children("button").eq(0),false);
             setChildren($("#addChildren .select-num").children("button").eq(2),true);
-            //增加和减少成人数量。
-            function setParent(btn,add){
-                btn.click(function (){
-                    if(add == true){
-                        data.mealData[3].count++;
-                    }else{
-                        data.mealData[3].count <= 0 ? 0 : --data.mealData[3].count;
-                    }
-                    setResultData();
-                    //添加填写信息的框
-                    setInputArea();
-                });
-                function setInputArea(){
-                    $(".addParentContainer").empty();
-                    var count = parseInt(data.mealData[5].count);
-                    for(var i = 0; i < count;i++){
-                        var cloneParent = $('<div class="parent-info" id="addParent'+i+'"><h3 class="sm-title">增加成人('+(i+1)+'):</h3><table><tbody><tr><td>家长姓名</td><td><input type="text" class="parentName" placeholder="请输入真实姓名"></td></tr><tr><td>性别</td><td><label><input type="radio" checked name="parentSex'+i+'" value="0">男</label><label><input type="radio" name="parentSex'+i+'" value="1">女</label></td></tr><tr><td>出生日期</td><td><input type="text" class="bornDate" placeholder="请选择出生日期"></td></tr><tr><td>证件类型</td><td><select class="zhengjianType"><option value="0">身份证</option><option value="1">护照</option><option value="2">港澳通行证</option><option value="3">台湾通行证</option></select></td></tr><tr><td>证件号码</td><td><input type="text" class="zhengjianNumber" placeholder="请输入证件号码"></td></tr></tbody></table></div>');
-                        $(".addParentContainer").append(cloneParent);
-                        var newBorn = "addParent"+i;
-                        $("#"+newBorn+" .bornDate").date();
-                    }
-                }
-            }
-            //当点击增加和减少成人数量。
-            //setParent($("#addParent .select-num").children("button").eq(0),false);
-            //setParent($("#addParent .select-num").children("button").eq(2),true);
-            //增加和减少标间数量。
-            function setNormal(btn,add){
-                btn.click(function (){
-                    if(add == true){
-                        data.mealData[4].count++;
-                    }else{
-                        data.mealData[4].count <= 0 ? 0 : --data.mealData[4].count;
-                    }
-                    setResultData();
-                });
-            }
-            //当点击增加和减少标间数量。
-            //setNormal($("#normalHotel .select-num").children("button").eq(0),false);
-            //setNormal($("#normalHotel .select-num").children("button").eq(2),true);
-            //增加和减少豪华间数量。
-            function setGood(btn,add){
-                btn.click(function (){
-                    if(add == true){
-                        data.mealData[5].count++;
-                    }else{
-                        data.mealData[5].count <= 0 ? 0 : --data.mealData[5].count;
-                    }
-                    setResultData();
-                });
-            }
-            //当点击增加和减少豪华间数量。
-            //setGood($("#goodHotel .select-num").children("button").eq(0),false);
-            //setGood($("#goodHotel .select-num").children("button").eq(2),true);
             //提交资料验证
             function checkInput(){
                 //
@@ -848,7 +694,6 @@
                         }
                     }
                 }
-
                 //判断电话
                 if($("#phoneNumber").val() == ""){
                     alert("请输入电话号码！");
@@ -908,10 +753,8 @@
                     //var checkResult = true;
                     if(checkResult){
                         $(".querenBox").fadeIn(300);//验证成功弹出确认资料弹框
-                        //$("section>.content-container").hide();
                         saveUserInfo();//存储用户所填写的资料
                         showUserInfo();//展示出用户所有填写的信息
-                        console.log(data);
                     }
                 }
             });
@@ -1009,31 +852,9 @@
                         data.person.push(aChild);
                     }
                 }
-//                var parentNum = parseInt(data.mealData[3].count);//添加了成人的数量
-//                if(parentNum > 0){
-//                    for(var i= 0; i < parentNum;i++){
-//                        var aWord = "#addParent"+i;
-////                        var type = ["身份证","护照","港澳通行证","台湾通行证"];
-//                        var aParent = {//增加成人基础信息数据
-//                            type:"0",//基础信息 0成人  1小孩
-//                            realname:$(aWord+ " .parentName").val(),
-//                            documentType:parseInt($(aWord+ " .zhengjianType").val()),//证件类型
-//                            documentNum:$(aWord+ " .zhengjianNumber").val(),
-//                            sex:parseInt($(aWord+ " input[name=parentSex"+i+"]:checked").val()),
-//                            birthday:$(aWord+ " .bornDate").val(),
-//                            telephone:"",//联系电话
-//                            email:"",//联系邮箱
-//                            id:data.parentCount+i+1//增加人的唯一标识
-//                        };
-//                        data.person.push(aParent);
-//                    }
-//                }
             }
             //展示用户所有的信息
             function showUserInfo(){
-                //展示基础套餐
-//                var baseTaocan = $("<li>"+data.mealData[0].name+"</li><li>￥<span>"+data.mealData[0].price+".00</span></li><li class=\"Tcenter\"><span>"+data.mealData[0].count+"</span>份</li>");
-//                $(".tijiao-page .jichu").append(baseTaocan);
                 //展示附加套餐
                 $(".tijiao-page .fujia").remove();//清空附加列表
                 $(".tijiao-page .jichu").remove()
@@ -1095,7 +916,6 @@
             });
             //提交资料
             function sendAjaxData(){
-                console.log(88)
                 $.ajax({
                     url:user.url+"activity/front/activity/enroll",
                     contentType: "application/json; charset=utf-8",
@@ -1105,16 +925,17 @@
                     beforeSend:function (){
                         $("#tijiao").text("正在提交中..");
                     },
-                    success:function (data){
+                    success:function (result){
                         $("#tijiao").bind("click",tijiao);
                         $("#tijiao").text("提交订单");
-                        if(data.result == 1){
+                        console.log(JSON.stringify(data));
+                        if(result.result == 1){
                             $(".alert-container").fadeIn(300);
                             $(".alert-container .pay-btn").click(function (){
-                                window.location.href="http://sport.72bike.com/activity/wechatPay/getCode?orderId="+data.orderId;
+                                window.location.href="http://sport.72bike.com/activity/wechatPay/getCode?orderId="+result.orderId;
                             });
                         }else{
-                            alert("提交失败"+data.msg);
+                            alert("提交失败"+result.msg);
                         }
                     },
                     error:function (){
@@ -1137,8 +958,7 @@
             $("#childBornDate").date();
             //初始化数据
             function initFun(){
-                setResultData();
-                //getActivityData()
+                getActivityData();
             }
             initFun();
         });
