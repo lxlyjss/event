@@ -6,7 +6,7 @@
     <meta name="Description" content=""/>
     <meta name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
-    <link rel="shortcut icon" href="" type="image/x-icon">
+    <link rel="shortcut icon" href="images/72-logo.png" type="image/x-icon">
     <title>赛事报名</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/media.css">
@@ -68,11 +68,11 @@
             <h3 class="baoming-title">选择报名套餐</h3>
             <div class="baoming-page" style="padding: 15px;">
                 <p>家庭类型：(必选)</p>
-                <p class="meal-title"><span>套餐名称</span><span>剩余数量</span><span>选择</span></p>
+                <p class="meal-title"><b><span>套餐名称</span><span>剩余数量</span><span>选择</span></b></p>
                 <ul class="jichu" id="baseMeal">
                     <li>一大一小</li>
                     <li></li>
-                    <li><input type="radio" value="3" checked name="baseMeal"></li>
+                    <li><input type="radio" value="3" name="baseMeal"></li>
                 </ul>
                 <ul class="jichu" id="baseMeal1">
                     <li>两大一小</li>
@@ -363,11 +363,85 @@
         $(function (){
             $.fn.isSign();//判断登录
             var user = window.userInfo;
+            //传给后台数据格式
+            var data = {
+                id:"2",//活动id
+                userId:window.userInfo.userId,
+//                userId:"4",
+                parentCount:2,//成人的数量
+                childrenCount:1,//孩子的数量
+                //套餐区域
+                mealData :[
+                    {
+                        type:"",
+                        comboName:"",
+                        comboTypeId:"",
+                        comboPrice:"",
+                        count:"0",
+                        nowCount:"",
+                        totalCount:""
+                    },
+                    {
+                        type:"",
+                        comboName:"",
+                        comboTypeId:"",
+                        comboPrice:"",
+                        count:"0",
+                        nowCount:"",
+                        totalCount:""
+                    },
+                    {
+                        type:"",
+                        comboName:"",
+                        comboTypeId:"",
+                        comboPrice:"",
+                        count:"0",
+                        nowCount:"",
+                        totalCount:""
+                    },
+                    {
+                        type:"",
+                        comboName:"",
+                        comboTypeId:"",
+                        comboPrice:"",
+                        count:"0",
+                        nowCount:"",
+                        totalCount:""
+                    },
+                    {
+                        type:"",
+                        comboName:"",
+                        comboTypeId:"",
+                        comboPrice:"",
+                        count:"0",
+                        nowCount:"",
+                        totalCount:""
+                    },
+                    {
+                        type:"",
+                        comboName:"",
+                        comboTypeId:"",
+                        comboPrice:"",
+                        count:"0",
+                        nowCount:"",
+                        totalCount:""
+                    }
+                ],
+                allPrice: 0,//总价格
+                //资料信息
+                userInfo:{//基础用户的资料
+                    remark:"",//备注
+                    urgentUser:"",//紧急联系人
+                    urgentTelephone:"",//紧急联系人电话
+                    urgentEmail:""//紧急联系人邮箱
+                },
+                person:[]
+            };
             //获取数据
             var resultData;
             function getActivityData(){
                 $.ajax({
-                    url:"http://sport.72bike.com/activity/front/activity/activityInfo",
+                    url:window.userInfo.url+"activity/front/activity/activityInfo",
                     data:{
                         id:"2"
                     },
@@ -387,110 +461,76 @@
                 });
             }
             function setMealData(){
+                console.log(resultData)
                 data.mealData[0].type = resultData[0].type;
                 data.mealData[0].comboName = resultData[0].name;
                 data.mealData[0].comboTypeId = resultData[0].id;
                 data.mealData[0].comboPrice = resultData[0].price;
+                data.mealData[0].nowCount = resultData[0].nowCount;
+                data.mealData[0].totalCount = resultData[0].totalCount;
 
                 data.mealData[1].type = resultData[1].type;
                 data.mealData[1].comboName = resultData[1].name;
                 data.mealData[1].comboTypeId = resultData[1].id;
                 data.mealData[1].comboPrice = resultData[1].price;
+                data.mealData[1].nowCount = resultData[1].nowCount;
+                data.mealData[1].totalCount = resultData[1].totalCount;
 
                 data.mealData[2].type = resultData[4].type;
                 data.mealData[2].comboName = resultData[4].name;
                 data.mealData[2].comboTypeId = resultData[4].id;
                 data.mealData[2].comboPrice = resultData[4].price;
+                data.mealData[2].nowCount = resultData[4].nowCount;
+                data.mealData[2].totalCount = resultData[4].totalCount;
 
                 data.mealData[3].type = resultData[5].type;
                 data.mealData[3].comboName = resultData[5].name;
                 data.mealData[3].comboTypeId = resultData[5].id;
                 data.mealData[3].comboPrice = resultData[5].price;
+                data.mealData[3].nowCount = resultData[5].nowCount;
+                data.mealData[3].totalCount = resultData[5].totalCount;
 
                 data.mealData[4].type = resultData[3].type;
                 data.mealData[4].comboName = resultData[3].name;
                 data.mealData[4].comboTypeId = resultData[3].id;
                 data.mealData[4].comboPrice = resultData[3].price;
+                data.mealData[4].nowCount = resultData[3].nowCount;
+                data.mealData[4].totalCount = resultData[3].totalCount;
 
                 data.mealData[5].type = resultData[2].type;
                 data.mealData[5].comboName = resultData[2].name;
                 data.mealData[5].comboTypeId = resultData[2].id;
                 data.mealData[5].comboPrice = resultData[2].price;
+                data.mealData[5].nowCount = resultData[2].nowCount;
+                data.mealData[5].totalCount = resultData[2].totalCount;
 
                 setResultData();
             }
-            //传给后台数据格式
-            var data = {
-                id:"2",//活动id
-                userId:window.userInfo.userId,
-                parentCount:2,//成人的数量
-                childrenCount:1,//孩子的数量
-                //套餐区域
-                mealData :[
-                    {
-                        type:"",
-                        comboName:"",
-                        comboTypeId:"",
-                        comboPrice:"",
-                        count:"1"
-                    },
-                    {
-                        type:"",
-                        comboName:"",
-                        comboTypeId:"",
-                        comboPrice:"",
-                        count:"0"
-                    },
-                    {
-                        type:"",
-                        comboName:"",
-                        comboTypeId:"",
-                        comboPrice:"",
-                        count:"0"
-                    },
-                    {
-                        type:"",
-                        comboName:"",
-                        comboTypeId:"",
-                        comboPrice:"",
-                        count:"0"
-                    },
-                    {
-                        type:"",
-                        comboName:"",
-                        comboTypeId:"",
-                        comboPrice:"",
-                        count:"0"
-                    },
-                    {
-                        type:"",
-                        comboName:"",
-                        comboTypeId:"",
-                        comboPrice:"",
-                        count:"0"
-                    }
-                ],
-                allPrice: 0,//总价格
-                //资料信息
-                userInfo:{//基础用户的资料
-                    remark:"",//备注
-                    urgentUser:"",//紧急联系人
-                    urgentTelephone:"",//紧急联系人电话
-                    urgentEmail:""//紧急联系人邮箱
-                },
-                person:[]
-            };
+            var baseMeal = 3;//默认选择一大一小
+            //设置一个默认选择
+            $("input[name=baseMeal]").each(function (index){
+                if(parseInt($(this).val()) == baseMeal){
+                    $(this).attr("checked",true);
+                }
+            });
             //写入页面套餐数据
             function setResultData(){
                 //写入套餐名称
                 for(var i = 0; i < resultData.length;i++){
                     $(".baoming-page ul").eq(i).children("li").eq(0).text(data.mealData[i].comboName);
+                    $(".baoming-page ul").eq(i).children("li").eq(1).text(data.mealData[i].totalCount-data.mealData[i].nowCount);
+                    //判断套餐数量
+                    if(data.mealData[i].nowCount >= data.mealData[i].totalCount){//当前人数等于或超过套餐总数
+                        $(".baoming-page ul").eq(i).children("li").eq(2).empty();
+                    }
                 }
                 //写入增加儿童数量
                 setCount($("#addChildren li").eq(2).children("button").eq(1),data.mealData[5].count);
                 //写入总价格
                 setPrice($("#allPrice p span"),getAllPrice());
                 data.allPrice = getAllPrice();
+
+                setBaseMeal();
             }
             //设置数量
             function setCount(ele,count){
@@ -511,11 +551,11 @@
                 var price = childrenPrice+parentPrice+normalPrice+goodPrice+basePrice;
                 return price;
             }
-            var baseMeal = 3;//默认选择一大一小
+
             //选择基础套餐
             function setBaseMeal(){
-                var nowIndex = $("input[name=baseMeal]:checked").val();
-                baseMeal = nowIndex;
+                var nowIndex = baseMeal;
+                console.log(nowIndex)
                 for(var i = 0;i < data.mealData.length;i++){
                     if(data.mealData[i].type == "0"){
                         if(data.mealData[i].comboTypeId == nowIndex){
@@ -536,7 +576,7 @@
                     }
                 }
             }
-            setBaseMeal();
+
             $("input[name=baseMeal]").on("change",function (){
                 setBaseMeal();
             });
@@ -589,7 +629,6 @@
                 setPrice($("#allPrice p span"),getAllPrice());
                 data.allPrice = getAllPrice();
             });
-
             //增加和减少儿童数量。
             function setChildren(btn,add){
                 btn.click(function (){
@@ -755,6 +794,7 @@
                         $(".querenBox").fadeIn(300);//验证成功弹出确认资料弹框
                         saveUserInfo();//存储用户所填写的资料
                         showUserInfo();//展示出用户所有填写的信息
+                        console.log(data)
                     }
                 }
             });
@@ -917,29 +957,29 @@
             //提交资料
             function sendAjaxData(){
                 $.ajax({
-                    url:user.url+"activity/front/activity/enroll",
+                    url:window.userInfo.url+"activity/front/activity/enroll",
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify(data),
                     type:"post",
                     dataType:"JSON",
+                    timeout:20000,
                     beforeSend:function (){
                         $("#tijiao").text("正在提交中..");
                     },
                     success:function (result){
                         $("#tijiao").bind("click",tijiao);
                         $("#tijiao").text("提交订单");
-                        console.log(JSON.stringify(data));
                         if(result.result == 1){
                             $(".alert-container").fadeIn(300);
                             $(".alert-container .pay-btn").click(function (){
                                 window.location.href="http://sport.72bike.com/activity/wechatPay/getCode?orderId="+result.orderId;
                             });
                         }else{
-                            alert("提交失败"+result.msg);
+                            alert("提交失败,"+result.msg);
                         }
                     },
                     error:function (){
-                        alert("提交失败");
+                        alert("提交失败,请检查网络!");
                         $("#tijiao").bind("click",tijiao);
                         $("#tijiao").text("提交订单");
                     }
@@ -956,8 +996,31 @@
             $('#bornDate1').date();
             $('#bornDate2').date();
             $("#childBornDate").date();
+            //添加判断该用户是否有其他未支付的订单
+            function getUserOrder(){
+                $.ajax({
+                    url:window.userInfo.url + "activity/front/activity/toEnroll",
+                    data:{
+                        userId:window.userInfo.userId,
+                        id:data.id
+                    },
+                    dataType:"json",
+                    success:function (result){
+                        if(result.result == 1){
+
+                        }else{
+                            alert("您有未支付的订单,请支付后再进行报名");
+                            window.location.href = window.userInfo.url+"userCenter.html";
+                        }
+                    },
+                    error:function (error){
+                        alert("获取数据失败!");
+                    }
+                })
+            }
             //初始化数据
             function initFun(){
+                getUserOrder();
                 getActivityData();
             }
             initFun();

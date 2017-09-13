@@ -190,6 +190,8 @@
   }
   section .content-container .baoming-page ul li:nth-of-type(2){
     width: 30%!important;
+    text-align: center;
+    color: #6cb7e4;
   }
       section .content-container .baoming-page ul li:nth-of-type(3) {
         width: 30%;

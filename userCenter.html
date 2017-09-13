@@ -6,7 +6,7 @@
     <meta name="Description" content=""/>
     <meta name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
-    <link rel="shortcut icon" href="" type="image/x-icon">
+    <link rel="shortcut icon" href="images/72-logo.png" type="image/x-icon">
     <title>订单列表</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/media.css">
@@ -165,29 +165,54 @@
             //展示所有订单数据
             function setResultData(){
             	//展示有多少订单
-            	//alert("dd")
             	var countNum = resultData.list.length > 0? resultData.list.length:0;
             	$("#dingdanCount").text(resultData.list.length);
             	//昵称
             	$("#nickName").text(window.userInfo.name);
                 var dingdanList = [];
-                var statusList = ["未支付","已支付","已失效"];
+                var statusList = ["未支付","已支付","已失效","退款中","已退款"];
                 for(var i = 0;i < resultData.list.length;i++){
-                //alert(resultData.list[0].id)
+                    function getStatus(state,refund){
+                        if(state == 1){//已支付
+                            switch (refund){
+                                case "0":{//未进行退款
+                                    return 1;
+                                    break;
+                                }
+                                case "1":{//退款中
+                                    return 3;
+                                    break;
+                                }
+                                case "2":{//已退款
+                                    return 4;
+                                    break;
+                                }
+                                default:{
+                                    break;
+                                }
+                            }
+                        }else if(state == 0){//未支付
+                            return 0;
+                        }else if(state == 2){//已失效
+                            return 2
+                        }
+                    }
+                    var nowStatus = getStatus(resultData.list[i].state,resultData.list[i].refundState);
+                    //alert(resultData.list[i].refundState)
                     var temp = $("<li class=\"dingdan-list\">" +
                         "<p class=\"dingdan-title\">活动名称<span>"+(resultData.list[i].activityName==null?"":resultData.list[i].activityName)+"</span></p>" +
                         "<p class=\"dingdan-group\">套餐：<span>"+(resultData.list[i].comboName==null?"":resultData.list[i].comboName)+"</span></p>" +
                         "<p class=\"dingdan-code\">签到码：<span>"+(resultData.list[i].signCode==null?"":resultData.list[i].signCode)+"</span></p>" +
                         "<p class=\"dingdan-date\">报名日期：<span>"+(resultData.list[i].createDate==null?"":resultData.list[i].createDate)+"</span></p>" +
                         "<p class=\"dingdan-price\">金额：<span>￥"+(resultData.list[i].totalPrice==null?"":resultData.list[i].totalPrice)+"</span></p>" +
-                        "<p class=\"dingdan-status\">状态：<span>"+statusList[resultData.list[i].state]+"</span></p>" +
+                        "<p class=\"dingdan-status\">状态：<span>"+statusList[nowStatus]+"</span></p>" +
                         "<p class=\"dingdan-info\">" +
                         "<a href=\"javascript:;\" class=\"sm-btn dingdan-xq\" onclick='$.fn.readMore("+i+")'>订单详情</a></p><p class=\"dingdan-edit\"></li>");
-                  console.log(temp)
-                  switch (parseInt(resultData.list[i].state)){
+                  switch (parseInt(nowStatus)){
                         case 1:{//已支付
-                        console.log(temp.children())
-                            //temp.append("<p class=\"dingdan-edit\"><a href=\"javascript:;\" class=\"dingdan-delete sm-btn\" onclick=\"$.fn.editFun('del','"+resultData.list[i].id+"')\">删除订单</a></p>");
+                            if(resultData.list[i].isShow){
+                                temp.append("<p class=\"dingdan-edit\"><a href=\"javascript:;\" class=\"dingdan-reload sm-btn\" onclick=\"$.fn.refundFun('"+resultData.list[i].id+"')\">申请退款</a></p>");
+                            }
                             break;
                         }
                         case 0:{//未支付
@@ -198,53 +223,82 @@
                             temp.append("<p class=\"dingdan-edit\"><a href=\"javascript:;\" class=\"dingdan-reload sm-btn\" onclick=\"$.fn.editFun('rel','"+resultData.list[i].id+"')\">重新报名</a></p>");
                             break;
                         }
+                      case 3:{//退款中
+                          break;
+                      }
+                      case 4:{//已退款
+                          temp.append("<p class=\"dingdan-edit\"><a href=\"javascript:;\" class=\"dingdan-reload sm-btn\" onclick=\"$.fn.editFun('rel','"+resultData.list[i].id+"')\">重新报名</a></p>");
+                          break;
+                      }
                         default:{
                             break;
                         }
                     }
+
                     dingdanList.push(temp);
                 }
                 $("#dingdan-container").append(dingdanList);
             }
+            //用户退款
+            $.fn.refundFun = function (id){
+                if(confirm("您是否确认要申请退款?")){
+                    $.ajax({
+                        url:window.userInfo.url + "activity/wechatPay/refundOrder",
+                        data:{
+                            orderId:id
+                        },
+                        dataType:"json",
+                        success:function (result){
+                            if(result.result == 1){
+                                alert("退款申请成功!请您耐心等待微信商户平台处理结果!");
+                                window.location.href = window.userInfo.url+"userCenter.html";
+                            }else{
+                                alert("退款申请失败!请重新申请");
+                            }
+                        },
+                        error:function (error){
+                            alert("获取数据失败!请检查网络!");
+                        }
+                    });
+                }else{
+                    return;
+                }
+            };
+            //编辑订单
             $.fn.editFun = function (type,id){
-                if(type == "del"){
-                    //alert("删除订单");
-                    editOrder(id,1);
-                }else if(type == "pay"){
-                    ////alert("支付订单");
+                if(type == "pay"){
+                    //alert("支付订单");
                     window.location = "http://sport.72bike.com/activity/wechatPay/getCode?orderId="+id;
                 }else if(type == "rel"){
                     //alert("重新报名")
                     window.location = "http://sport.72bike.com/index.html";
                 }else if(type == "cancel"){
                     //alert("取消订单")
-                    editOrder(id,2);
+                    if(confirm("是否确认取消订单?")){
+                        editOrder(id);
+                    }
                 }
             };
             //操作订单
-            function editOrder(orderId,editType){
+            function editOrder(orderId){
                 $.ajax({
-                    url:"http://sport.72bike.com/activity/front/order/updateOrderState",
+                    url:window.userInfo.url+"activity/front/order/updateOrderState",
                     data:{
                         id:orderId,
-                        type:editType
+                        type:2
                     },
                     type:"post",
+                    timeout:"20000",
                     success:function (data){
                         if(data.result == 1){
-                        	if(editType == 1){
-                        		alert('订单删除成功!');
-                        	}else{
-                        		alert('订单取消成功!');
-                        	}
-                            
-                            window.location.href = "http://sport.72bike.com/userCenter.html"
+                            alert('订单取消成功!');
+                            window.location.href = window.userInfo.url+"userCenter.html"
                         }else{
                             alert("操作失败!");
                         }
                     },
                     error:function (){
-                        alert("操作失败!,api error");
+                        alert("操作失败!请检查网络!");
                     }
                 })
             }
@@ -255,8 +309,34 @@
             };
             //设置查看该订单信息
             function setAdingdanData(index){
-                var statusList = ["未支付","已支付","已失效"];
-                $("#dingdanStatus").text(statusList[resultData.list[index].state]);
+                var statusList = ["未支付","已支付","已失效","退款中","已退款"];
+                function getStatus(state,refund){
+                    if(state == 1){//已支付
+                        switch (refund){
+                            case "0":{//未进行退款
+                                return 1;
+                                break;
+                            }
+                            case "1":{//退款中
+                                return 3;
+                                break;
+                            }
+                            case "2":{
+                                return 4;
+                                break;
+                            }
+                            default:{
+                                break;
+                            }
+                        }
+                    }else if(state == 0){//未支付
+                        return 0;
+                    }else if(state == 2){//已失效
+                        return 2
+                    }
+                }
+                var nowStatus = getStatus(resultData.list[index].state,resultData.list[index].refundState);
+                $("#dingdanStatus").text(statusList[nowStatus]);
                 $("#dingdanNumber").text((resultData.list[index].orderNumb==null?"":resultData.list[index].orderNumb));
                 
                 //$("#dingdanPhone").text(resultData.list[index].telephone);
@@ -294,24 +374,26 @@
                 }
                 //底部按钮,根据订单状态改变需要显示的按钮
                 $(".dingdan-btn").empty();
-                console.log(resultData.list[index].state)
-                if(resultData.list[index].state == 1){//已支付,显示删除订单
-                    // $(".dingdan-btn").removeClass("btn-group").addClass("btn-one");
-                    // $(".dingdan-btn").append("<a href=\"javascript:;\" onclick=\"$.fn.editFun('cancel','"+resultData.list[index].id+"')\" class=\"cancel-btn\">取消订单</a><a href=\"javascript:;\" onclick=\"$.fn.editFun('del','"+resultData.list[index].id+"')\" class=\"del-btn\">删除订单</a>");
-                }else if(resultData.list[index].state == 0){//未支付.显示删除订单和立即支付
+                if(nowStatus == 1){//已支付,显示退款按钮
+                    $(".dingdan-btn").removeClass("btn-group").addClass("btn-one");
+                    if(resultData.list[index].isShow){
+                        $(".dingdan-btn").append("<a href=\"javascript:;\" onclick=\"$.fn.refundFun('"+resultData.list[index].id+"')\" class=\"pay-btn\">申请退款</a>");
+                    }
+                }else if(nowStatus == 0){//未支付.显示立即支付
                     $(".dingdan-btn").removeClass("btn-one").addClass("btn-group");
-                    $(".dingdan-btn").append("<a href=\"javascript:;\" onclick=\"$.fn.editFun('pay','"+resultData.list[index].id+"')\" class=\"pay-btn\" style='width:90%'>立即支付</a>");
-                }else if(resultData.list[index].state == 2){//已失效,显示删除和重新报名
-                    $(".dingdan-btn").removeClass("btn-one").addClass("btn-group");
-                    $(".dingdan-btn").append("<a href=\"javascript:;\" onclick=\"$.fn.editFun('rel','"+resultData.list[index].id+"')\" class=\"pay-btn\" style='width:90%'>重新报名</a>");
-                }else {
+                    $(".dingdan-btn").append("<a href=\"javascript:;\" class=\"dingdan-delete sm-btn\" onclick=\"$.fn.editFun('cancel','"+resultData.list[index].id+"')\">取消订单</a><a href=\"javascript:;\" onclick=\"$.fn.editFun('pay','"+resultData.list[index].id+"')\" class=\"pay-btn\">立即支付</a>");
+                }else if(nowStatus == 2){//已失效,显示重新报名
+                    $(".dingdan-btn").removeClass("btn-group").addClass("btn-one");
+                    $(".dingdan-btn").append("<a href=\"javascript:;\" onclick=\"$.fn.editFun('rel','"+resultData.list[index].id+"')\" class=\"pay-btn\">重新报名</a>");
+                }else if(nowStatus == 3){//退款中,显示空
 
+                }else if(nowStatus == 4){//已退款,显示重新报名
+                    $(".dingdan-btn").removeClass("btn-group").addClass("btn-one");
+                    $(".dingdan-btn").append("<a href=\"javascript:;\" onclick=\"$.fn.editFun('rel','"+resultData.list[index].id+"')\" class=\"pay-btn\">重新报名</a>");
                 }
             }
             function initFun(){
-            //alert(window.userInfo.userId)
-               getAjaxData("http://sport.72bike.com/activity/front/order/selectOrder",{"userId":window.userInfo.userId});
-                //getAjaxData("http://sport.72bike.com/activity/front/order/selectOrder",{"userId":13});
+               getAjaxData(window.userInfo.url+"activity/front/order/selectOrder",{"userId":window.userInfo.userId});
             }
             initFun();
         });

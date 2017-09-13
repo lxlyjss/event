@@ -6,13 +6,13 @@
     <meta name="Description" content=""/>
     <meta name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
-    <link rel="shortcut icon" href="" type="image/x-icon">
+    <link rel="shortcut icon" href="images/72-logo.png" type="image/x-icon">
     <title>赛事报名</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/media.css">
     <script src="js/jquery-1.8.3.min.js"></script>
     <script src="js/main.js"></script>
-      <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ojgwT6Ef7nlIrI5dsbzkePT1"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ojgwT6Ef7nlIrI5dsbzkePT1"></script>
 <style type="text/css">
 	#allmap {width: 90%;height: 100%;margin: 0 auto;overflow: hidden;margin:0;font-family:"微软雅黑";}
     	#myCard{
@@ -303,19 +303,17 @@
     </div>
     <script>
        $(function (){
-            //$.fn.isSign();
+            $.fn.isSign();
             function getActivityData(){
                 $.ajax({
-                    url:"http://sport.72bike.com/activity/front/activity/activityInfo",
+                    url:window.userInfo.url+"activity/front/activity/activityInfo",
                     data:{
                         id:"2"
                     },
                     dataType:"json",
                     success:function (result){
                         if(result.result == 1){
-                        //alert("dd")
                             resultData = result;
-                            console.log(resultData)
                             setActivityData();
                             setGroup();//设置套餐详情
                         }else{
@@ -327,6 +325,7 @@
                     }
                 });
             }
+            //设置套餐详情
             function setGroup(){
                 var types = resultData.types;
                 $("#mealContent").empty();
@@ -391,53 +390,41 @@
                 }
             }
             //邀请卡
-                $("#myCard").click(function (){
-                	$.ajax({
-                		url:"http://sport.72bike.com/activity/front/activity/getInvitationCard",
-                		data:{
-                			userId:window.userInfo.userId
-                		},
-                		dataType:"json",
-                		success:function (data){
-                			if(data.imageUrl){
-                				var url = data.imageUrl;
-                				var img = $("<img />");
-                				img.attr("src",url);
-                				$(".card-img").empty().append(img);
-                				$(".myCard-container").fadeIn(200);
-                			}
-                		},
-                		error:function (){
-                			//alert("获取邀请卡失败！")
-                		}
-                	});
+            $("#myCard").click(function (){
+                $.ajax({
+                    url:window.userInfo.url+"activity/front/activity/getInvitationCard",
+                    data:{
+                        userId:window.userInfo.userId
+                    },
+                    dataType:"json",
+                    success:function (data){
+                        if(data.imageUrl){
+                            var url = data.imageUrl;
+                            var img = $("<img />");
+                            img.attr("src",url);
+                            $(".card-img").empty().append(img);
+                            $(".myCard-container").fadeIn(200);
+                        }
+                    },
+                    error:function (){
+                        //alert("获取邀请卡失败！")
+                    }
                 });
-                $(".close-img").click(function (){
-                	$(".myCard-container").fadeOut(200);
-                });
-                //获取活动信息
-                getActivityData();
-            	//获取报名人列表
-            	getAjaxData("http://sport.72bike.com/activity/front/activity/enrollInfo",reqList);
-
-            	//点击查看更多报名人
+            });
+            //关闭邀请卡
+            $(".close-img").click(function (){
+                $(".myCard-container").fadeOut(200);
+            });
+            //获取活动信息
+            getActivityData();
+            //获取报名人列表
+            getAjaxData(window.userInfo.url+"activity/front/activity/enrollInfo",reqList);
+            //点击查看更多报名人
             $("#addEnrollList").click(function (){
                 reqList.page++;
-                getAjaxData("http://sport.72bike.com/activity/front/activity/enrollInfo",reqList);
+                getAjaxData(window.userInfo.url+"activity/front/activity/enrollInfo",reqList);
             });
         });
-        function showMap(longitude,latitude){
-          var map = new BMap.Map("allmap");    // 创建Map实例
-	      var point = new BMap.Point(longitude,latitude);
-	       map.centerAndZoom(point,11);
-	    // 用经纬度设置地图中心点
-			map.clearOverlays(); 
-				map.enableScrollWheelZoom(true);
-			var marker = new BMap.Marker(point);  // 创建标注
-			map.addOverlay(marker);              // 将标注添加到地图中
-			map.panTo(point);   
-	      $(".map-container").show();
-	    }
     </script>
 </body>
 </html>

@@ -42,6 +42,7 @@ $(function (){
     }
     $.fn.isSign = function () {
         window.userInfo.token = $.fn.getCookie("token");//获取token
+        //alert(window.userInfo.token);
         if (window.userInfo.token != "" && window.userInfo.token != null) {
             $.ajax({
                 url:"http://sport.72bike.com/sso/sso/check.do",
@@ -76,11 +77,14 @@ $(function (){
         }
     }
     //微信分享
-    $.fn.wxShare = function (){
+    $.fn.wxShare = function (url,uId,activityId,orderId){
         $.ajax({
-            url:window.userInfo.url+"",
+            url:window.userInfo.url+"activity/front/activity/shareInfo",
             data:{
-                url:""
+                url:url,
+                userId:uId,
+                id:activityId,
+                orderId:orderId
             },
             dataType:"json",
             success:function (result){

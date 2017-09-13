@@ -6,7 +6,7 @@
     <meta name="Description" content=""/>
     <meta name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
-    <link rel="shortcut icon" href="" type="image/x-icon">
+    <link rel="shortcut icon" href="images/72-logo.png" type="image/x-icon">
     <title>支付成功</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/media.css">
@@ -83,10 +83,11 @@
     </div>
     <script>
         $(function (){
+            $.fn.isSign();
             var data = location.search.split("?");
             var orderId = data[1].split("=")[1];
             $.ajax({
-                url:"http://sport.72bike.com/activity/front/order/orderInfo",
+                url:window.userInfo.url+"activity/front/order/orderInfo",
                 data:{
                     id:orderId
                 },
@@ -102,7 +103,7 @@
                 error:function (){
                     alert("获取订单信息失败!")
                 }
-            })
+            });
         });
     </script>
 </body>

@@ -6,7 +6,7 @@
     <meta name="Description" content=""/>
     <meta name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
-    <link rel="shortcut icon" href="" type="image/x-icon">
+    <link rel="shortcut icon" href="images/72-logo.png" type="image/x-icon">
     <title>支付</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/media.css">
@@ -157,7 +157,7 @@
                     url: 'http://sport.72bike.com/activity/wechatPay/jsOarder',
                     data: {openId:myId,orderId:orderId},
                     beforeSend:function (){
-                          $("#payBtn").text("支付中...");
+                        $("#payBtn").text("支付中...");
                     },
                     dataType: "json",
                     success: function(data){
