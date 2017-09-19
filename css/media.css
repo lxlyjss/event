@@ -183,18 +183,18 @@
     width:40%;
   }
   .baoming-page .meal-title span:nth-of-type(2){
-    width:30%;
+    width:24%;
   }
   .baoming-page .meal-title span:nth-of-type(3){
-    width:30%;
+    width:36%;
   }
   section .content-container .baoming-page ul li:nth-of-type(2){
-    width: 30%!important;
+    width: 24%!important;
     text-align: center;
     color: #6cb7e4;
   }
       section .content-container .baoming-page ul li:nth-of-type(3) {
-        width: 30%;
+        width: 36%;
         text-align: center;
       }
       section .content-container .baoming-page ul li:nth-of-type(2) span {
@@ -542,4 +542,131 @@
 }
 .share-ok img{
   width: 100%;
+}
+/*0915新增扫码*/
+.code-container{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,.9);
+}
+.code-container p .close-code{
+  float: right;
+  width: 20px;
+  margin: 20px;
+}
+.code-text{
+  padding: 0px;
+  margin-bottom: 50px;
+}
+.code-content{
+  width: 50%;
+  margin: 30px auto 10px;
+  padding: 5%;
+  background: #fff;
+}
+.code-content img{
+  width: 100%;
+}
+
+.code-title{
+  font-weight: 900;
+  text-align: center;
+  font-size: 20px;
+}
+.code-info tr td:first-of-type{
+  vertical-align: top;
+  font-weight: 900;
+}
+.code-p{
+  padding: 10px 0;
+}
+.code-p::after{
+  display: block;
+  content: '';
+  clear: both;
+}
+.code-p span{
+  font-size: 16px;
+  float: left;
+}
+.code-p span:first-of-type{
+  text-align: justify;
+  text-align-last:justify;
+  display: inline-block;
+  width:25%;
+  padding-left: 5%;
+  font-weight: 900;
+}
+.code-p span:last-of-type{
+  width: 60%;
+  padding: 0 5%;
+}
+/*联系按钮*/
+#contact-btn{
+  width: 30px;
+  height: 40px;
+  padding-left: 10px;
+  position: fixed;
+  right: 0px;
+  bottom: 100px;
+  z-index: 99999;
+  background: #19af1d;
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
+  box-shadow: 0px 0px 5px 0px #aaa;
+  -webkit-transition: transform .3s;
+  -moz-transition: transform .3s;
+  -ms-transition: transform .3s;
+  -o-transition: transform .3s;
+  transition: transform .3s;
+}
+.tel-btn{
+  width: 100px;
+  padding: 5px 0;
+  background: #0079bf;
+  margin: 0 auto;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+.tel-btn img{
+  width: 18px;
+  vertical-align: -17%;
+}
+.tel-btn span{
+  color: #fff;
+  padding-left: 5px;
+}
+#contact-btn img{
+  width: 90%;
+  margin: 8px 0;
+}
+#contact-content{
+  width: 180px;
+  padding:10px 0;
+  position: fixed;
+  box-shadow: 0px 0px 4px 0px #ccc;
+  bottom: 100px;
+  left: 100%;
+  background: #fff;
+  -webkit-transition: transform .3s;
+  -moz-transition: transform .3s;
+  -ms-transition: transform .3s;
+  -o-transition: transform .3s;
+  transition: transform .3s;
+}
+.content-page4{
+  width: 90%!important;
+  margin: 15px auto;
+}
+.open-contact{
+  transform: translateX(-182px);
+  -webkit-transition: transform .3s;
+  -moz-transition: transform .3s;
+  -ms-transition: transform .3s;
+  -o-transition: transform .3s;
+  transition: transform .3s;
 }

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link rel="shortcut icon" href="images/72-logo.png" type="image/x-icon">
+    <title>人员签到</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/media.css">
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <script src="js/qrcode.min.js"></script>
+    <style>
+        html,body{
+            height: auto;
+        }
+    </style>
+</head>
+<body class="md">
+    <section>
+        <div class="content-container">
+            <h3 class="baoming-title">人员签到</h3>
+            <p class="alert-info">请仔细核对以下信息,确认无误再操作!</p>
+            <div class="content-page" style="padding: 20px 0;">
+                <h1 class="code-title">报名人信息</h1>
+                <br>
+                <p class="code-p"><span>活动名称</span><span id="activityName"></span></p>
+                <p class="code-p"><span>报名人</span><span id="realName"></span></p>
+                <p class="code-p"><span>手机号码</span><span id="telephone"></span></p>
+                <p class="code-p"><span>状态</span><span id="isSign"></span></p>
+            </div>
+            <div class="btn-one">
+                <a href="javascript:;" id="register" >确认签到</a>
+                <a href="javascript:;" id="cancelRegister" style="display: none;">取消签到</a>
+            </div>
+        </div>
+    </section>
+    <script>
+        $(function (){
+            $.fn.isSign();//登录相关
+            var userArr = [],changeArr=[];
+            //获取工作人员id列表
+            function getWorkerId(){
+                $.ajax({
+                    url:window.userInfo.url+"activity/front/activity/selectList",
+                    data:{
+                        activityId:"2"
+                    },
+                    dataType:"json",
+                    async:false,
+                    success:function (result){
+                        if(result.result == 1){
+                            setWorkerData(result);
+                        }else{
+                            alert(result.msg);
+                        }
+                    },
+                    error:function (err){
+                        //alert("获取数据失败!请重新刷新网页!");
+                    }
+                })
+            }
+
+            function setWorkerData(result){
+                userArr = result.changeArr.split(",").concat(result.userArr.split(","))
+                changeArr = result.changeArr.split(",");
+//                console.log(userArr);
+//                console.log(changeArr)
+                if(userArr.indexOf(String(window.userInfo.userId)) == -1){
+                    window.location.href = "noPower.html";
+                }
+            }
+            getWorkerId();//获取工作人员id列表
+
+            var url = window.location.search;
+            window.userInfo.code = $.fn.getUrlData(url,"signCode");
+            if(changeArr.indexOf(String(window.userInfo.userId)) != -1){
+                $("#cancelRegister").show();
+            }
+            function getAjaxData(){
+                $.ajax({
+                    url: window.userInfo.url+"activity/front/activity/signInfo",
+                    data:{
+                        signCode:window.userInfo.code
+                    },
+                    dataType:"json",
+                    success:function (result){
+                        if(result.result == 1){
+                            setResultData(result);
+                        }else {
+                            alert(result.msg);
+                        }
+                    },
+                    error:function (err){
+                        //alert("获取数据失败!")
+                    }
+                });
+            }
+            //展示数据
+            function setResultData(result){
+                $("#activityName").text(result.activityName);
+                $("#realName").text(result.realName);
+                $("#telephone").text(result.telephone);
+                window.userInfo.orderId = result.orderId;
+                if(result.isSign == 0){//未签到
+                    $("#isSign").text("未签到").css("color","red");
+                    $("#register").bind("click",function (){
+                        signCode(1);
+                    });
+                    $("#cancelRegister").css("backgroundColor","#ccc");
+                }else if(result.isSign == 1){//已签到
+                    $("#isSign").text("已签到").css("color","#3c84c3");
+                    $("#register").css("backgroundColor","#ccc");
+                    if(changeArr.indexOf(String(window.userInfo.userId)) != -1){
+                        $("#cancelRegister").bind("click",function (){
+                            signCode(0);
+                        });
+                    }
+                }
+            }
+            //操作签到
+            function signCode(type){
+                $.ajax({
+                    url:window.userInfo.url+"activity/front/activity/sign",
+                    data:{
+                        orderId:window.userInfo.orderId,
+                        isSign:type
+                    },
+                    dataType:"json",
+                    success:function (result){
+                        if(result.result == 1){
+                            alert("操作成功!");
+                            window.location.href=window.location.href+"&math="+Math.random();
+                        }else{
+                            alert(result.msg);
+                        }
+                    },
+                    error:function (err){
+                        //alert("签到失败!请检查网络");
+                    }
+                })
+            }
+            getAjaxData();
+        });
+    </script>
+</body>
+</html>

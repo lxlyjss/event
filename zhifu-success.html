@@ -86,6 +86,13 @@
             $.fn.isSign();
             var data = location.search.split("?");
             var orderId = data[1].split("=")[1];
+            window.shareInfo = {
+                url:window.location.href.split("#")[0],
+                userId:window.userInfo.userId,
+                orderId:orderId,
+                activityId:"2"
+            };
+            $.fn.weShare(window.shareInfo);//分享相关
             $.ajax({
                 url:window.userInfo.url+"activity/front/order/orderInfo",
                 data:{

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <title>Title</title>
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <script src="js/main.js"></script>
+</head>
+<body>
+<p>分享</p>
+<script>
+    $(function (){
+        link = location.href;
+        window.shareInfo = {
+            url:link,
+            userId:"",
+            orderId:"",
+            activityId:""
+        };
+
+        //$.fn.weShare(window.shareInfo);
+        var s = "1";
+        var arr = ["65","96","13","12"];
+        var i = arr.indexOf(s);
+        console.log(i)
+    })
+</script>
+</body>
+</html>

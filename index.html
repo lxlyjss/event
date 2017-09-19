@@ -12,419 +12,554 @@
     <link rel="stylesheet" href="css/media.css">
     <script src="js/jquery-1.8.3.min.js"></script>
     <script src="js/main.js"></script>
-    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ojgwT6Ef7nlIrI5dsbzkePT1"></script>
-<style type="text/css">
-	#allmap {width: 90%;height: 100%;margin: 0 auto;overflow: hidden;margin:0;font-family:"微软雅黑";}
-    	#myCard{
-    		color: #2c9eee;
-    		font-size: 14px;
-    		padding-left: 0px;
-    	}
-    	section{
-    		padding-bottom: 60px; 
-    	}
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <style type="text/css">
+        #allmap {
+            width: 90%;
+            height: 100%;
+            margin: 0 auto;
+            overflow: hidden;
+            margin: 0;
+            font-family: "微软雅黑";
+        }
+
+        #myCard {
+            color: #2c9eee;
+            font-size: 14px;
+            padding-left: 0px;
+        }
+
+        section {
+            padding-bottom: 60px;
+        }
     </style>
 </head>
 <body class="md">
-    <header>
-        <div class="header-container">
-            <div class="header-left">
-                <a href="index.html"><img src="images/72-logo.png" alt=""></a>
-            </div>
-            <div class="header-right">
-                <!--<div class="header-nav">-->
-                    <!--<ul>-->
-                        <!--<li class="Tcenter"><a href="#" class="Fcolor-text-black">首页</a></li>-->
-                        <!--<li class="Tcenter"><a href="#" class="Fcolor-text-black">滑步车培训</a></li>-->
-                        <!--<li class="Tcenter"><a href="#" class="Fcolor-text-black">活动赛事</a></li>-->
-                        <!--<li class="Tcenter"><a href="#" class="Fcolor-text-black">官网</a></li>-->
-                    <!--</ul>-->
-                <!--</div>-->
-                <!--<div class="header-search">-->
-                    <!--<p><input type="text"><span class="iconfont icon-sousuo"></span></p>-->
-                <!--</div>-->
-                <div class="header-user">
-                    <div class="user-info">
-                    	<div class="menu-btn-sm">
-							<span class="menu-line"></span>
-							<span class="menu-line"></span>
-							<span class="menu-line"></span>
-						</div>
+<header>
+    <div class="header-container">
+        <div class="header-left">
+            <a href="index.html"><img src="images/72-logo.png" alt=""></a>
+        </div>
+        <div class="header-right">
+            <div class="header-user">
+                <div class="user-info">
+                    <div class="menu-btn-sm">
+                        <span class="menu-line"></span>
+                        <span class="menu-line"></span>
+                        <span class="menu-line"></span>
                     </div>
                 </div>
-                
             </div>
         </div>
-        <div class="user-list">
+    </div>
+    <div class="user-list">
+        <ul>
+            <li><a href="userCenter.html">个人中心</a></li>
+            <li><a href="javascript:;" id="loginOut">退出</a></li>
+        </ul>
+    </div>
+</header>
+<section>
+    <h3 class="baoming-title">活动详情</h3>
+    <div class="top-container">
+        <div class="event-img">
+            <div class="img-container">
+                <img src="images/saishi.jpeg" alt="">
+            </div>
+        </div>
+        <div class="event-info">
+            <p class="event-title"></p>
+            <p class="event-age">年龄：<span id="activityAge"></span></p>
+            <p class="event-type">赛事类型：<span id="activityType"></span></p>
+            <p class="event-startDate">比赛开始时间：<span id="activityBeginDate"></span></p>
+            <p class="event-startDate">比赛结束时间：<span id="activityEndDate"></span></p>
+            <p class="event-registerDate">报名开始时间：<span id="enrollBeginDate"></span></p>
+            <p class="event-registerDate">报名结束时间：<span id="enrollEndDate"></span></p>
+            <p class="event-registered">已报名：<span id="nowCount"></span>/<span id="totalCount"></span>人</p>
+            <p class="event-place">地点：<span id="address"></span><a href="javascript:;" onclick=""></a></p>
+            <p style="font-size: 20px;"><img src="images/viewCount1.png" style="margin-top: 5px;"/><span id="viewCount"
+                                                                                                         style="padding-right: 20px;font-size: 14px"></span><img
+                    src="images/sharImg1.png" style="width: "/><a href="javascript:;" id="myCard">我的邀请卡</a></p>
+        </div>
+        <div class="event-code">
+            <div class="code-container">
+                <img src="images/code.png" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="content-container">
+        <div class="content-top">
             <ul>
-                <li><a href="userCenter.html">个人中心</a></li>
-                <li><a href="javascript:;" id="loginOut">退出</a></li>
+                <li class="active">赛事详情</li>
+                <li>套餐详情</li>
+                <li id="erollInfo">报名信息(<span id="baomingCount"></span>)</li>
+                <li id="question">常见问题</li>
             </ul>
         </div>
-    </header>
-    <section>
-        <h3 class="baoming-title">活动详情</h3>
-        <div class="top-container">
-            <div class="event-img">
-                <div class="img-container">
-                    <img src="images/saishi.jpeg" alt="">
-                </div>
-            </div>
-            <div class="event-info">
-                <p class="event-title"></p>
-                <p class="event-age">年龄：<span id="activityAge"></span></p>
-                <p class="event-type">赛事类型：<span id="activityType"></span></p>
-                <p class="event-startDate">比赛开始时间：<span id="activityBeginDate"></span></p>
-                <p class="event-startDate">比赛结束时间：<span id="activityEndDate"></span></p>
-                <p class="event-registerDate">报名开始时间：<span id="enrollBeginDate"></span></p>
-                <p class="event-registerDate">报名结束时间：<span id="enrollEndDate"></span></p>
-                <p class="event-registered">已报名：<span id="nowCount"></span>/<span id="totalCount"></span>人</p>
-                <p class="event-place">地点：<span id="address"></span><a href="javascript:;" onclick=""></a></p>
-                <p style="font-size: 20px;"><img src="images/viewCount1.png" style="margin-top: 5px;" /><span id="viewCount" style="padding-right: 20px;font-size: 14px"></span><img src="images/sharImg1.png" style="width: " /><a href="javascript:;" id="myCard">我的邀请卡</a></p>
-            </div>
-            <div class="event-code">
-                <div class="code-container">
-                    <img src="images/code.png" alt="">
-                </div>
-            </div>
-        </div>
-        <div class="content-container">
-            <div class="content-top">
-                <ul>
-                    <li class="active">赛事详情</li>
-                    <li>套餐详情</li>
-                    <li id="erollInfo">报名信息(<span id="baomingCount"></span>)</li>
-                </ul>
-            </div>
-            <div class="content-page1 content-page" style="display: block;">
-                <p class="activity-text">最近北京天气越来越给力，</p>
-                <p class="activity-text">蓝天率直线上升，</p>
-                <p class="activity-text"> 特别适合小伙伴们户外撒欢。</p>
-                <p class="activity-text">  在蓝天白云下你带着娃，</p>
-                <p class="activity-text">  娃带着车，心情都美美哒。</p>
-                <p class="activity-text">   这不，骑二无比又开始搞事情了！</p>
-                <p class="activity-text red-text">  中国2017儿童滑步车赛事嘉年华</p>
-                <p class="activity-text red-text">北京站</p>
-                <p class="activity-text red-text"> 2017年10月14日--15日</p>
-                <p class="activity-text">  永定河自行车公园燥起来！！！</p>
-                <p class="activity-img">
-                    <img src="images/img0.png" alt="">
-                </p>
+        <div class="content-page1 content-page" style="display: block;">
+            <p class="activity-text">最近北京天气越来越给力，</p>
+            <p class="activity-text">蓝天率直线上升，</p>
+            <p class="activity-text"> 特别适合小伙伴们户外撒欢。</p>
+            <p class="activity-text"> 在蓝天白云下你带着娃，</p>
+            <p class="activity-text"> 娃带着车，心情都美美哒。</p>
+            <p class="activity-text"> 这不，骑二无比又开始搞事情了！</p>
+            <p class="activity-text red-text"> 中国2017儿童滑步车赛事嘉年华</p>
+            <p class="activity-text red-text">北京站</p>
+            <p class="activity-text red-text"> 2017年10月14日--15日</p>
+            <p class="activity-text"> 永定河自行车公园燥起来！！！</p>
+            <p class="activity-img">
+                <img src="images/img0.png" alt="">
+            </p>
 
-                <p class="activity-text">这场儿童滑步车赛事嘉年华</p>
-                <p class="activity-text red-text"> 规模盛大、政企共促、人群高端；</p>
-                <p class="activity-text">各大媒体跟踪报道，</p>
-                <p class="activity-text"> 让孩子在镜头前绽放自我！</p>
-                <p class="activity-text red-text"> 骑二无比致力于打造中国儿童滑步车</p>
-				<p class="activity-text red-text">          第一赛事IP</p>
-                <p class="activity-text"> 未来发展成为“地区巡回赛+总决赛” 的持续模式！</p>
-                <p class="activity-text"> 本次比赛不仅有丰富的内容</p>
-                <p class="activity-text">还有知名机构的大力支持</p>
-                <p class="activity-text"> 让我们用热烈且激动的掌声</p>
-                <p class="activity-text red-text" style="font-size: 22px"> 感谢TOYBOX 中国</p>
-                <p class="activity-img">
-                    <img src="images/img1.jpg" alt="">
-                </p>
-                <p class="activity-img" style="text-align:center;">
-                    <img src="images/img_2.jpeg" alt="">
-                    <br>
-                    <span style="font-size: 14px;color: #999">(本图片来自TOYBOX 中国)</span>
-                </p>
-
-                <p class="activity-text"><b>活动地点：</b>永定河自行车运动公园</p>
-                <p class="activity-text" style="font-size: 14px"> （河北省廊坊市固安县106国道进京检查站西行100米）</p>
-                <p class="activity-img">
-                    <img src="images/img2.jpg" alt="">
-                </p>
-
-                <p class="activity-text"> <b>活动时间</b></p>
-				<p class="activity-text">       2017年10月14日13:00——15日18:00</p>
-                <p class="activity-text"><b>活动内容</b></p>
-				<p class="activity-text" style="text-indent: 5em;text-align:left;">1、亲子异装骑行</p>
-                <p class="activity-text" style="text-indent: 5em;text-align:left;">2、BMX现场表演</p>
-                <p class="activity-text" style="text-indent: 5em;text-align:left;">3、平地竞速</p>
-                <p class="activity-text" style="text-indent: 5em;text-align:left;">4、pump track技术赛</p>
-                <p class="activity-text" style="text-indent: 5em;text-align:left;">5、趣味赛及娱乐项目</p>
-                <p class="activity-text">................</p>
-                <p class="activity-text">等一系列你想不到的内容！</p>
-                <p class="activity-img">
-                    <img src="images/img2_1.jpg" alt="">
-                </p>
-                <p class="activity-img">
-                    <img src="images/img2_2.jpg" alt="">
-                </p>
-                <p class="activity-img">
-                    <img src="images/img3.jpeg" alt="">
-                </p>
-
-                <p class="activity-text"><b>国际山地车赛道&Pump Track</b></p>
-                <p class="activity-img">
-                    <img src="images/img4.jpg" alt="">
-                </p>
-                <p class="activity-img">
-                    <img src="images/img5.jpg" alt="">
-                </p>
-                <p class="activity-img" style="text-align:center;">
-                    <img src="images/img6.jpeg" alt="">
-                    <br>
-                    <span style="font-size: 14px;color: #999">(本图片来自TOYBOX 中国)</span>
-                </p>
-
-                <p class="activity-text"><b>永定河最受欢迎的自行车公园</b></p>
-                <p class="activity-img">
-                    <img src="images/img7.jpg" alt="">
-                </p>
-                <p class="activity-img">
-                    <img src="images/img8.jpg" alt="">
-                </p>
-                <p class="activity-img">
-                    <img src="images/img9.jpg" alt="">
-                </p>
-
-
-                <p class="activity-text"><b>各类酒店</b></p>
-                <p class="activity-text"><b>活动优惠价格超乎想象</b></p>
-                <p class="activity-text"><b>五星酒店——福朋喜来登酒店</b></p>
-                <p class="activity-text">（距离最近的五星酒店）</p>
-                <p class="activity-img">
-                    <img src="images/img10.jpeg" alt="">
-                </p>
-                <p class="activity-text"><b>舒适酒店——百悦酒店</b></p>
-                <p class="activity-text">（商务型，价格亲民）</p>
-                <p class="activity-img">
-                    <img src="images/img11.jpeg" alt="">
-                </p>
-                <p class="activity-text"><b>舒适酒店——Funny(芬妮)概念酒店</b></p>
-                <p class="activity-text">（概念酒店，价格亲民）</p>
-                <p class="activity-img">
-                    <img src="images/img12.jpeg" alt="">
-                </p>
-                <p class="activity-text"><b>经济酒店——贝壳酒店</b></p>
-                <p class="activity-text">（经济实惠）</p>
-                <p class="activity-img" style="text-align:center;">
-                    <img src="images/img13.jpeg" alt="">
-                </p>
-
-                <p class="activity-text">当然</p>
-                <p class="activity-text">吸引您的不仅仅只有这些</p>
-                <p class="activity-text">还有.......</p>
-                <p class="activity-text">骑二无比给你的无比价格</p>
-                <p class="activity-text">如果你只是游玩</p>
-                <p class="activity-text">请选择报名的"无比"价格</p>
-
-                <p class="activity-img" style="text-align:center;">
-                    <img style="width: 20%;" src="images/img-arrow.png" alt="">
-                </p>
-                <p class="activity-text red-text">（两位/一位 成人+一位 宝宝）</p>
-                <p class="activity-text red-text" style="font-size: 30px;line-height: 50px;"><b>472元</b></p>
-                <p class="activity-text">以下是骑二无比提供</p>
-                <p class="activity-text">含酒店套餐的"无比"价格</p>
-                <p class="activity-img" style="text-align:center;">
-                    <img style="width: 20%;" src="images/img-arrow.png" alt="">
-                </p>
-
-                <p class="activity-text red-text"><b>（两位/一位 成人+一位 宝宝/+五星级酒店）</b></p>
-                <p class="activity-text red-text" style="font-size: 30px;line-height: 50px;"><b>992元</b></p>
-                <p class="activity-text red-text"><b>（两位/一位 成人+一位 宝宝/+舒适酒店）</b></p>
-                <p class="activity-text red-text" style="font-size: 30px;line-height: 50px;"><b>772元</b></p>
-                <p class="activity-text red-text"><b>（两位/一位 成人+一位 宝宝/+经济酒店）</b></p>
-                <p class="activity-text red-text" style="font-size: 30px;line-height: 50px;"><b>602元</b></p>
-
-                <p class="activity-text red-text">如果您家还有一位可爱的宝宝一同参加</p>
-                <p class="activity-text red-text">价格则是</p>
-                <p class="activity-img" style="text-align:center;">
-                    <img style="width: 20%;" src="images/img-arrow.png" alt="">
-                </p>
-
-                <p class="activity-text red-text">加一位宝宝额外加</p>
-                <p class="activity-text red-text" style="font-size: 30px;line-height: 50px;"><b>172元</b></p>
-                <p class="activity-text red-text">此价格包含：</p>
-                <p class="activity-text red-text">公园门票、大额保险、以上定制VIP活动</p>
-                <p class="activity-text red-text">本期只限报名300家庭</p>
-                <p class="activity-text red-text">为了方便组织和确保路上安全</p>
-                <p class="activity-text red-text">每个家庭都需上报真实证件号码</p>
-                <p class="activity-text"><b>以上价格只为</b></p>
-                <p class="activity-text"><b>骑二无比的家长们</b></p>
-                <p class="activity-text">！！！</p>
-                <p class="activity-text">一切活动最终解释权归骑二无比</p>
-
-                <p class="activity-text">咨询热线</p>
-                <p class="activity-text">010-80448861</p>
-                <p class="activity-text">010-80446885</p>
-                <p class="activity-text">13601099644</p>
-                <p class="activity-text" style="text-align:left;">免责声明</p>
-                <p class="activity-text red-text" style="text-align:left;">所有活动参与者必须明确自身能力及健康状况可以完成嘉年华骑行活动，活动中因为任何个人原因导致受伤、财物损失、或者死亡都不得向主办单位、活动参与者要求任何形式的赔偿，一旦确认报名，即表示接受主办单位的所有免责规定，如遇极端天气，在不降低活动品质的情况下行程可能有变。</p>
-                <p style="line-height: 40px;margin: 15px 0;"> </p>
-                <p class="activity-text">在活动中</p>
-                <p class="activity-text">我们一起成长</p>
-                <p class="activity-text"> 我们互相照顾</p>
-                <p class="activity-text">我们一起欢乐</p>
-                <p class="activity-text">我们一起学习走步</p>
-                <p class="activity-text">我们一起学习奔跑</p>
-                <p class="activity-text"> 我们一起学习骑行</p>
-                <p class="activity-text">我们一起面对失败</p>
-                <p class="activity-text">我们一起赢得荣誉</p>
-                <p class="activity-text">骑并快乐着</p>
-                <p class="activity-img">
-                    <img src="images/img14.jpg" alt="">
-                </p>
-                <p class="activity-img">
-                    <img src="images/img15.jpeg" alt="">
-                </p>
-                <p class="activity-img" style="text-align:center;">
-                    <img src="images/img16.jpeg" alt="">
-                    <br>
-                    <span style="font-size: 14px;color: #999;">（本图片来自TOYBOX 中国）</span>
-                </p>
-                <p class="activity-text">后记：</p>
-                <p class="activity-text">你们是不是已经蠢蠢欲动了</p>
-                <p class="activity-text"> 抓紧时间报名吧！</p>
+            <p class="activity-text">这场儿童滑步车赛事嘉年华</p>
+            <p class="activity-text red-text"> 规模盛大、政企共促、人群高端；</p>
+            <p class="activity-text">各大媒体跟踪报道，</p>
+            <p class="activity-text"> 让孩子在镜头前绽放自我！</p>
+            <p class="activity-text red-text"> 骑二无比致力于打造中国儿童滑步车</p>
+            <p class="activity-text red-text"> 第一赛事IP</p>
+            <p class="activity-text"> 未来发展成为“地区巡回赛+总决赛” 的持续模式！</p>
+            <p class="activity-text"> 本次比赛不仅有丰富的内容</p>
+            <p class="activity-text">还有知名机构的大力支持</p>
+            <p class="activity-text"> 让我们用热烈且激动的掌声</p>
+            <p class="activity-text red-text" style="font-size: 22px"> 感谢TOYBOX 中国</p>
+            <p class="activity-img">
+                <img src="images/img1.jpg" alt="">
+            </p>
+            <p class="activity-img" style="text-align:center;">
+                <img src="images/img_2.jpeg" alt="">
                 <br>
-                <br>
-            </div>
-            <div class="content-page2 content-page" id="mealContent" style="display: none;">
+                <span style="font-size: 14px;color: #999">(本图片来自TOYBOX 中国)</span>
+            </p>
 
+            <p class="activity-text"><b>活动地点：</b>永定河自行车运动公园</p>
+            <p class="activity-text" style="font-size: 14px"> （河北省廊坊市固安县106国道进京检查站西行100米）</p>
+            <p class="activity-img">
+                <img src="images/img2.jpg" alt="">
+            </p>
+
+            <p class="activity-text"><b>活动时间</b></p>
+            <p class="activity-text"> 2017年10月14日13:00——15日18:00</p>
+            <p class="activity-text"><b>活动内容</b></p>
+            <p class="activity-text" style="text-indent: 5em;text-align:left;">1、亲子异装骑行</p>
+            <p class="activity-text" style="text-indent: 5em;text-align:left;">2、BMX现场表演</p>
+            <p class="activity-text" style="text-indent: 5em;text-align:left;">3、平地竞速</p>
+            <p class="activity-text" style="text-indent: 5em;text-align:left;">4、pump track技术赛</p>
+            <p class="activity-text" style="text-indent: 5em;text-align:left;">5、趣味赛及娱乐项目</p>
+            <p class="activity-text">................</p>
+            <p class="activity-text">等一系列你想不到的内容！</p>
+            <p class="activity-img">
+                <img src="images/img2_1.jpg" alt="">
+            </p>
+            <p class="activity-img">
+                <img src="images/img2_2.jpg" alt="">
+            </p>
+            <p class="activity-img">
+                <img src="images/img3.jpeg" alt="">
+            </p>
+
+            <p class="activity-text"><b>国际山地车赛道&Pump Track</b></p>
+            <p class="activity-img">
+                <img src="images/img4.jpg" alt="">
+            </p>
+            <p class="activity-img">
+                <img src="images/img5.jpg" alt="">
+            </p>
+            <p class="activity-img" style="text-align:center;">
+                <img src="images/img6.jpeg" alt="">
+                <br>
+                <span style="font-size: 14px;color: #999">(本图片来自TOYBOX 中国)</span>
+            </p>
+
+            <p class="activity-text"><b>永定河最受欢迎的自行车公园</b></p>
+            <p class="activity-img">
+                <img src="images/img7.jpg" alt="">
+            </p>
+            <p class="activity-img">
+                <img src="images/img8.jpg" alt="">
+            </p>
+            <p class="activity-img">
+                <img src="images/img9.jpg" alt="">
+            </p>
+
+
+            <p class="activity-text"><b>各类酒店</b></p>
+            <p class="activity-text"><b>活动优惠价格超乎想象</b></p>
+            <p class="activity-text"><b>五星酒店——福朋喜来登酒店</b></p>
+            <p class="activity-text">（距离最近的五星酒店）</p>
+            <p class="activity-img">
+                <img src="images/img10.jpeg" alt="">
+            </p>
+            <p class="activity-text"><b>舒适酒店——百悦酒店</b></p>
+            <p class="activity-text">（商务型，价格亲民）</p>
+            <p class="activity-img">
+                <img src="images/img11.jpeg" alt="">
+            </p>
+            <p class="activity-text"><b>舒适酒店——Funny(芬妮)概念酒店</b></p>
+            <p class="activity-text">（概念酒店，价格亲民）</p>
+            <p class="activity-img">
+                <img src="images/img12.jpeg" alt="">
+            </p>
+            <p class="activity-text"><b>经济酒店——贝壳酒店</b></p>
+            <p class="activity-text">（经济实惠）</p>
+            <p class="activity-img" style="text-align:center;">
+                <img src="images/img13.jpeg" alt="">
+            </p>
+
+            <p class="activity-text">当然</p>
+            <p class="activity-text">吸引您的不仅仅只有这些</p>
+            <p class="activity-text">还有.......</p>
+            <p class="activity-text">骑二无比给你的无比价格</p>
+            <p class="activity-text">如果你只是游玩</p>
+            <p class="activity-text">请选择报名的"无比"价格</p>
+
+            <p class="activity-img" style="text-align:center;">
+                <img style="width: 20%;" src="images/img-arrow.png" alt="">
+            </p>
+            <p class="activity-text red-text">（两位/一位 成人+一位 宝宝）</p>
+            <p class="activity-text red-text" style="font-size: 30px;line-height: 50px;"><b>472元</b></p>
+            <p class="activity-text">以下是骑二无比提供</p>
+            <p class="activity-text">含酒店套餐的"无比"价格</p>
+            <p class="activity-img" style="text-align:center;">
+                <img style="width: 20%;" src="images/img-arrow.png" alt="">
+            </p>
+
+            <p class="activity-text red-text"><b>（两位/一位 成人+一位 宝宝/+五星级酒店）</b></p>
+            <p class="activity-text red-text" style="font-size: 30px;line-height: 50px;"><b>992元</b></p>
+            <p class="activity-text red-text"><b>（两位/一位 成人+一位 宝宝/+舒适酒店）</b></p>
+            <p class="activity-text red-text" style="font-size: 30px;line-height: 50px;"><b>772元</b></p>
+            <p class="activity-text red-text"><b>（两位/一位 成人+一位 宝宝/+经济酒店）</b></p>
+            <p class="activity-text red-text" style="font-size: 30px;line-height: 50px;"><b>602元</b></p>
+
+            <p class="activity-text red-text">如果您家还有一位可爱的宝宝一同参加</p>
+            <p class="activity-text red-text">价格则是</p>
+            <p class="activity-img" style="text-align:center;">
+                <img style="width: 20%;" src="images/img-arrow.png" alt="">
+            </p>
+
+            <p class="activity-text red-text">加一位宝宝额外加</p>
+            <p class="activity-text red-text" style="font-size: 30px;line-height: 50px;"><b>172元</b></p>
+            <p class="activity-text red-text">此价格包含：</p>
+            <p class="activity-text red-text">公园门票、大额保险、以上定制VIP活动</p>
+            <p class="activity-text red-text">本期只限报名300家庭</p>
+            <p class="activity-text red-text">为了方便组织和确保路上安全</p>
+            <p class="activity-text red-text">每个家庭都需上报真实证件号码</p>
+            <p class="activity-text"><b>以上价格只为</b></p>
+            <p class="activity-text"><b>骑二无比的家长们</b></p>
+            <p class="activity-text">！！！</p>
+            <p class="activity-text">一切活动最终解释权归骑二无比</p>
+
+            <p class="activity-text">咨询热线</p>
+            <p class="activity-text">010-80448861</p>
+            <p class="activity-text">010-80446885</p>
+            <p class="activity-text">13601099644</p>
+            <p class="activity-text" style="text-align:left;">免责声明</p>
+            <p class="activity-text red-text" style="text-align:left;">
+                所有活动参与者必须明确自身能力及健康状况可以完成嘉年华骑行活动，活动中因为任何个人原因导致受伤、财物损失、或者死亡都不得向主办单位、活动参与者要求任何形式的赔偿，一旦确认报名，即表示接受主办单位的所有免责规定，如遇极端天气，在不降低活动品质的情况下行程可能有变。</p>
+            <p style="line-height: 40px;margin: 15px 0;"></p>
+            <p class="activity-text">在活动中</p>
+            <p class="activity-text">我们一起成长</p>
+            <p class="activity-text"> 我们互相照顾</p>
+            <p class="activity-text">我们一起欢乐</p>
+            <p class="activity-text">我们一起学习走步</p>
+            <p class="activity-text">我们一起学习奔跑</p>
+            <p class="activity-text"> 我们一起学习骑行</p>
+            <p class="activity-text">我们一起面对失败</p>
+            <p class="activity-text">我们一起赢得荣誉</p>
+            <p class="activity-text">骑并快乐着</p>
+            <p class="activity-img">
+                <img src="images/img14.jpg" alt="">
+            </p>
+            <p class="activity-img">
+                <img src="images/img15.jpeg" alt="">
+            </p>
+            <p class="activity-img" style="text-align:center;">
+                <img src="images/img16.jpeg" alt="">
+                <br>
+                <span style="font-size: 14px;color: #999;">（本图片来自TOYBOX 中国）</span>
+            </p>
+            <p class="activity-text">后记：</p>
+            <p class="activity-text">你们是不是已经蠢蠢欲动了</p>
+            <p class="activity-text"> 抓紧时间报名吧！</p>
+            <br>
+            <br>
+        </div>
+        <div class="content-page2 content-page" id="mealContent" style="display: none;">
+
+        </div>
+        <div class="content-page3 content-page" style="display: none;">
+            <ul class="register-list">
+            </ul>
+            <p style="text-align:center;color: #2c9eee;font-size: 16px;"><a href="javascript:;" id="addEnrollList"
+                                                                            style="color: #2c9eee;">点击查看更多</a></p>
+        </div>
+        <div class="content-page content-page4" style="display: none;">
+            <div class="question-content">
+                <p>
+                    <strong>1、 &nbsp;问：活动是什么时间？几号几点签到？</strong>
+                </p>
+                <p>
+                    &nbsp; &nbsp; &nbsp; &nbsp;答：活动时间2017年10月14日-15日，签到时间2017年10月14日下午13:00签到。
+                </p>
+                <p>
+                    <strong>2、 &nbsp;问：付费成功后可以帮我查一下是否报名成功？</strong>
+                </p>
+                <p>
+                    &nbsp; &nbsp; &nbsp; &nbsp;答：付费成功后有成功报名的短信发送到您的手机，或者点击右上角的图标，会出现个人中心，点击进去后便可查看您的订单详情。
+                </p>
+                <p>
+                    <strong>3、 &nbsp;问：多加一间房，怎么操作？</strong>
+                </p>
+                <p>
+                    &nbsp; &nbsp; &nbsp; &nbsp;答：联系客服人员，后台帮您备注，房钱转给工作人员即可。工作人员微信：doniwang 备注【加房间】。
+                </p>
+                <p>
+                    <strong>4、 &nbsp;问：酒店住宿订两间房能否安排在一起？</strong>
+                </p>
+                <p>
+                    &nbsp; &nbsp; &nbsp; &nbsp;答：可以，联系客服人员，可在后台帮您备注，或直接加工作人员的微信同上。
+                </p>
+                <p>
+                    <strong>5、 &nbsp;问；是否可以开发票？</strong>
+                </p>
+                <p>
+                    &nbsp; &nbsp; &nbsp; &nbsp;答：酒店不能开发票，报名费可以开发票。
+                </p>
+                <p>
+                    <strong>6、 &nbsp;问：带着二宝是否需要多加个报名名额？</strong>
+                </p>
+                <p>
+                    &nbsp; &nbsp; &nbsp; &nbsp;答：如果二宝不足2岁是不需要增加报名名额。
+                </p>
+                <p>
+                    <strong>7、 &nbsp;问：异装骑行是什么?</strong>
+                </p>
+                <p>
+                    &nbsp; &nbsp; &nbsp; &nbsp;答：异装骑行是宝宝和家长一起装扮成各式各样的卡通人物或电影人物，例如:蜘蛛侠、葫芦娃等。
+                </p>
+                <p>
+                    <strong>8、 &nbsp;问：如何签到？</strong>
+                </p>
+                <p>
+                    &nbsp; &nbsp; &nbsp; &nbsp;答：现场扫码签到；到达现场后有工作人员协助签到。
+                </p>
+                <p>
+                    <strong>9、 &nbsp;问：门票472元包括什么？</strong>
+                </p>
+                <p>
+                    &nbsp; &nbsp; &nbsp; &nbsp;答：包括：门票、保险、赛事包以及定制VIP活动。
+                </p>
+                <p>
+                    <strong>10、问：可以带其他品牌的车子吗？</strong>
+                </p>
+                <p>
+                    &nbsp; &nbsp; &nbsp; &nbsp;答：本次赛事嘉年华不限品牌。
+                </p>
             </div>
-            <div class="content-page3 content-page" style="display: none;">
-                <ul class="register-list">
-                </ul>
-                <p style="text-align:center;color: #2c9eee;font-size: 16px;"><a href="javascript:;" id="addEnrollList" style="color: #2c9eee;">点击查看更多</a></p>
+            <div style="padding: 20px;">
+                <p class="Tcenter">如果还不能解决您的问题,请联系客服</p>
+                <p class="Tcenter">点击拨打客服电话: <a href="tel:010-80448861">010-80448861</a></p>
             </div>
         </div>
-        <div class="btn-one" style="position: fixed;bottom: 0;width: 103%;margin:0 -12px -10px -12px;">
-            <a href="baoming.html" class="baoming-btn">立即报名</a>
-        </div>
-    </section>
-    <!--邀请卡-->
-    <div class="myCard-container">
-    	<p class="closeCard"><img class="close-img" src="images/closeImg.png" style="width:20px;position:absolute;right:10px;z-index:99"></p>
-    	<div class="card-img"></div>
-    	<p style="text-align:center;color:#ccc;font-size:14px;position:absolute;right:0;left:0;margin:10px auto;top:0">长按保存图片后分享给朋友</p>
     </div>
-    <script>
-       $(function (){
-            $.fn.isSign();
-            function getActivityData(){
-                $.ajax({
-                    url:window.userInfo.url+"activity/front/activity/activityInfo",
-                    data:{
-                        id:"2"
-                    },
-                    dataType:"json",
-                    success:function (result){
-                        if(result.result == 1){
-                            resultData = result;
-                            setActivityData();
-                            setGroup();//设置套餐详情
-                        }else{
-                            //alert("获取活动详情失败!result=0");
-                        }
-                    },
-                    error:function (){
-                        //alert("获取活动详情失败!");
+    <div class="btn-one" style="position: fixed;bottom: 0;width: 103%;margin:0 -12px -10px -12px;">
+        <a href="baoming.html" class="baoming-btn">立即报名</a>
+    </div>
+</section>
+<!--邀请卡-->
+<div class="myCard-container">
+    <p class="closeCard"><img class="close-img" src="images/closeImg.png"
+                              style="width:20px;position:absolute;right:10px;z-index:99"></p>
+    <div class="card-img"></div>
+    <p style="text-align:center;color:#ccc;font-size:14px;position:absolute;right:0;left:0;margin:10px auto;top:0">
+        长按保存图片后分享给朋友</p>
+</div>
+<!--资讯按钮-->
+<div id="contact-btn">
+    <img src="images/contact.png" alt="">
+</div>
+<div id="contact-content">
+    <p class="Tcenter" style="font-size: 16px;">客服电话</p>
+    <p class="Tcenter"><a href="tel:010-80448861"><i style="color: #19af1d;font-size: 22px">010-80448861</i></a></p>
+    <p class="Tcenter tel-btn"><a href="tel:010-80448861"><img src="images/tel.png" alt=""><span>拨打电话</span></a></p>
+    <p class="Tcenter" style="margin-top: 10px;">关注公众号联系客服</p>
+    <p class="Tcenter">
+        <img src="images/dingyue.jpg" style="width: 100%;" alt="">
+        <span style="text-align:center;font-size: 12px;color: #999;">长按识别图中二维码</span>
+    </p>
+</div>
+<script>
+    $(function () {
+        $.fn.isSign();//登录相关
+        window.shareInfo = {
+            url: window.location.href.split("#")[0],
+            userId: window.userInfo.userId,
+            orderId: "",
+            activityId: "2"
+        };
+
+        function getActivityData() {
+            $.ajax({
+                url: window.userInfo.url + "activity/front/activity/activityInfo",
+                data: {
+                    id: "2"
+                },
+                dataType: "json",
+                success: function (result) {
+                    if (result.result == 1) {
+                        resultData = result;
+                        setActivityData();//设置页面活动信息
+                        setGroup();//设置套餐详情
+                        $.fn.weShare(window.shareInfo);//分享相关
+                    } else {
+                        //alert("获取活动详情失败!result=0");
                     }
-                });
-            }
-            //设置套餐详情
-            function setGroup(){
-                var types = resultData.types;
-                $("#mealContent").empty();
-                for(var i = 0; i < types.length;i++){
-                    var temp = $("<div class='content-info'><div class=\"content-card\"><p>套餐名称：<span class=\"taocan-title\">"+types[i].name+"</span></p><p>价&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;格：<span class=\"taocan-price\">￥<i>"+types[i].price+"</i></span></p><p>年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;龄：<span class=\"taocan-age\">"+types[i].age+"</span></p><p>总&nbsp;&nbsp;名&nbsp;&nbsp;额：<span class=\"taocan-person\"><i>"+types[i].nowCount+"</i>/<i>"+types[i].totalCount+"</i></span></p></div><div class=\"content-shuoming\"><p>说明：</p><p>"+types[i].remark+"</p></div></div>");
-                    $("#mealContent").append(temp);
+                },
+                error: function () {
+                    //alert("获取活动详情失败!");
                 }
-            }
-            //写入页面活动数据
-            function setActivityData(){
-                var activity = resultData.activity;
-                $(".event-info .event-title").text(activity.title);
-                $("#activityAge").text(activity.age);
-                $("#activityType").text(activity.type);
-                $("#activityBeginDate").text(activity.activityBeginDate);
-                $("#activityEndDate").text(activity.activityEndDate);
-                $("#enrollBeginDate").text(activity.enrollBeginDate);
-                $("#enrollEndDate").text(activity.enrollEndDate);
-                $("#nowCount").text(activity.nowCount);
-                $("#totalCount").text(activity.totalCount);
-                $("#address").text(activity.address);
-                $("#viewCount").text(resultData.count.viewCount);
-            }
-            //获取报名人信息列表
-            var reqList = {
-                id:"2",//活动id
-                page:1,//当前第几页
-                pageNum:10//每页请求条数
-            };
-            var siginList;//存储报名列表
-            //获取报名列表
-            function getAjaxData(url,data){
-                $.ajax({
-                    url:url,
-                    data:data,
-                    async:true,
-                    type:"post",
-                    dateType:"json",
-                    success:function (result){
-                        console.log(result);
-                        if(result.result == 1){
-                            siginList = result;
-                            setSiginList();
-                        }
-                    },
-                    error:function (err){
-                        //alert("获取数据失败！请重新刷新网页！");
-                    }
-                });
-            }
-            //设置报名列表
-            function setSiginList(){
-            	$("#baomingCount").text(siginList.count);
-                for(var i = 0; i < siginList.enrollList.length;i++){
-                    var temp = $("<li class=\"list\">" +
-                        "<p class=\"user-name\" style=\"text-indent: 1em\">报名人：<span>"+siginList.enrollList[i].name+"</span></p>" +
-                        "<p class=\"user-group\" style=\"text-indent: 2em\">套餐：<span>"+siginList.enrollList[i].comboName+"</span></p>" +
-                        "<p class=\"user-date\">报名日期：<span>"+siginList.enrollList[i].createDate+"</span></p>" +
-                        "<p class=\"user-status\" style=\"text-indent: 2em\">状态：<span>"+siginList.enrollList[i].state+"</span></p>" +
-                        "</li>");
-                    $(".register-list").append(temp);
+            });
+        }
+
+        //设置套餐详情
+        function setGroup() {
+            var types = resultData.types;
+            $("#mealContent").empty();
+            for (var i = 0; i < types.length; i++) {
+                var basePrice = 0;
+                if (i > 2) {
+                    basePrice = 472;
                 }
+                var temp = $("<div class='content-info'><div class=\"content-card\"><p>套餐名称：<span class=\"taocan-title\">" + types[i].name + "</span></p><p>价&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;格：<span class=\"taocan-price\">￥<i>" + (types[i].price + basePrice) + "</i></span></p><p>年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;龄：<span class=\"taocan-age\">" + types[i].age + "</span></p><p>总&nbsp;&nbsp;名&nbsp;&nbsp;额：<span class=\"taocan-person\"><i>" + types[i].nowCount + "</i>/<i>" + types[i].totalCount + "</i></span></p></div><div class=\"content-shuoming\"><p>说明：</p><p>" + types[i].remark + "</p></div></div>");
+                $("#mealContent").append(temp);
             }
-            //邀请卡
-            $("#myCard").click(function (){
-                $.ajax({
-                    url:window.userInfo.url+"activity/front/activity/getInvitationCard",
-                    data:{
-                        userId:window.userInfo.userId
-                    },
-                    dataType:"json",
-                    success:function (data){
-                        if(data.imageUrl){
-                            var url = data.imageUrl;
-                            var img = $("<img />");
-                            img.attr("src",url);
-                            $(".card-img").empty().append(img);
-                            $(".myCard-container").fadeIn(200);
-                        }
-                    },
-                    error:function (){
-                        //alert("获取邀请卡失败！")
+        }
+
+        //写入页面活动数据
+        function setActivityData() {
+            var activity = resultData.activity;
+            $(".event-info .event-title").text(activity.title);
+            $("#activityAge").text(activity.age);
+            $("#activityType").text(activity.type);
+            $("#activityBeginDate").text(activity.activityBeginDate);
+            $("#activityEndDate").text(activity.activityEndDate);
+            $("#enrollBeginDate").text(activity.enrollBeginDate);
+            $("#enrollEndDate").text(activity.enrollEndDate);
+            $("#nowCount").text(activity.nowCount);
+            $("#totalCount").text(activity.totalCount);
+            $("#address").text(activity.address);
+            $("#viewCount").text(resultData.count.viewCount);
+        }
+
+        //获取报名人信息列表
+        var reqList = {
+            id: "2",//活动id
+            page: 1,//当前第几页
+            pageNum: 10//每页请求条数
+        };
+        var siginList;//存储报名列表
+        //获取报名列表
+        function getAjaxData(url, data) {
+            $.ajax({
+                url: url,
+                data: data,
+                async: true,
+                type: "post",
+                dateType: "json",
+                success: function (result) {
+                    console.log(result);
+                    if (result.result == 1) {
+                        siginList = result;
+                        setSiginList();
                     }
-                });
+                },
+                error: function (err) {
+                    //alert("获取数据失败！请重新刷新网页！");
+                }
             });
-            //关闭邀请卡
-            $(".close-img").click(function (){
-                $(".myCard-container").fadeOut(200);
-            });
-            //获取活动信息
-            getActivityData();
-            //获取报名人列表
-            getAjaxData(window.userInfo.url+"activity/front/activity/enrollInfo",reqList);
-            //点击查看更多报名人
-            $("#addEnrollList").click(function (){
-                reqList.page++;
-                getAjaxData(window.userInfo.url+"activity/front/activity/enrollInfo",reqList);
+        }
+
+        //设置报名列表
+        function setSiginList() {
+            $("#baomingCount").text(siginList.count);
+            for (var i = 0; i < siginList.enrollList.length; i++) {
+                var temp = $("<li class=\"list\">" +
+                    "<p class=\"user-name\" style=\"text-indent: 1em\">报名人：<span>" + siginList.enrollList[i].name + "</span></p>" +
+                    "<p class=\"user-group\" style=\"text-indent: 2em\">套餐：<span>" + siginList.enrollList[i].comboName + "</span></p>" +
+                    "<p class=\"user-date\">报名日期：<span>" + siginList.enrollList[i].createDate + "</span></p>" +
+                    "<p class=\"user-status\" style=\"text-indent: 2em\">状态：<span>" + siginList.enrollList[i].state + "</span></p>" +
+                    "</li>");
+                $(".register-list").append(temp);
+            }
+        }
+
+        //邀请卡
+        $("#myCard").click(function () {
+            $.ajax({
+                url: window.userInfo.url + "activity/front/activity/getInvitationCard",
+                data: {
+                    userId: window.userInfo.userId
+                },
+                dataType: "json",
+                success: function (data) {
+                    if (data.imageUrl) {
+                        var url = data.imageUrl;
+                        var img = $("<img />");
+                        img.attr("src", url);
+                        $(".card-img").empty().append(img);
+                        $(".myCard-container").fadeIn(200);
+                    }
+                },
+                error: function () {
+                    //alert("获取邀请卡失败！");
+                }
             });
         });
-    </script>
+        //关闭邀请卡
+        $(".close-img").click(function () {
+            $(".myCard-container").fadeOut(200);
+        });
+
+        //获取常见问题列表
+        function getQuestion() {
+            $.ajax({
+                url: window.userInfo.url+"activity/front/activity/qaList",
+                data: {
+                    activityId: "2"
+                },
+                dataType: "json",
+                success: function (result) {
+                    if (result.result == 1) {
+                        setQuestion(result);
+                    } else {
+                        alert(result.msg);
+                    }
+                },
+                error: function () {
+                    //alert("获取问题列表失败!请检查网络")
+                }
+            })
+        }
+        //设置常见问题
+        function setQuestion(result) {
+            $(".content-page4").html(result.qaList.context);
+        }
+
+        getActivityData();//获取活动信息
+        getQuestion();//获取常见问题列表信息
+        //获取报名人列表
+        getAjaxData(window.userInfo.url + "activity/front/activity/enrollInfo", reqList);
+        //点击查看更多报名人
+        $("#addEnrollList").click(function () {
+            reqList.page++;
+            getAjaxData(window.userInfo.url + "activity/front/activity/enrollInfo", reqList);
+        });
+        //客服点击功能
+        $("#contact-btn").click(function (){
+            $(this).toggleClass("open-contact");
+            $("#contact-content").toggleClass("open-contact");
+        });
+
+    });
+</script>
 </body>
 </html>

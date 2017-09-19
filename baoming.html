@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/media.css">
     <link rel="stylesheet" href="css/date.css">
     <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
     <script src="js/date.js"></script>
     <script src="js/main.js"></script>
     <style>
@@ -363,6 +364,14 @@
         $(function (){
             $.fn.isSign();//判断登录
             var user = window.userInfo;
+            //分享相关
+            window.shareInfo = {
+                url:window.location.href.split("#")[0],
+                userId:window.userInfo.userId,
+                orderId:"",
+                activityId:"2"
+            };
+            $.fn.weShare(window.shareInfo);//分享相关
             //传给后台数据格式
             var data = {
                 id:"2",//活动id
@@ -530,7 +539,7 @@
                 setPrice($("#allPrice p span"),getAllPrice());
                 data.allPrice = getAllPrice();
 
-                setBaseMeal();
+                setBaseMeal(baseMeal);
             }
             //设置数量
             function setCount(ele,count){
@@ -553,12 +562,10 @@
             }
 
             //选择基础套餐
-            function setBaseMeal(){
-                var nowIndex = baseMeal;
-                console.log(nowIndex)
+            function setBaseMeal(val){
                 for(var i = 0;i < data.mealData.length;i++){
                     if(data.mealData[i].type == "0"){
-                        if(data.mealData[i].comboTypeId == nowIndex){
+                        if(data.mealData[i].comboTypeId == val){
                             data.mealData[i].count = "1";
                             $("#realName2").parent().parent().show();
                             $("#userSex2").parent().show();
@@ -578,7 +585,9 @@
             }
 
             $("input[name=baseMeal]").on("change",function (){
-                setBaseMeal();
+                var val = $("input[name=baseMeal]:checked").val();
+                baseMeal = val;
+                setBaseMeal(val);
             });
             //豪华
             $("#nice").on("change",function (){

@@ -45,7 +45,7 @@ $(function (){
         //alert(window.userInfo.token);
         if (window.userInfo.token != "" && window.userInfo.token != null) {
             $.ajax({
-                url:"http://sport.72bike.com/sso/sso/check.do",
+                url:window.userInfo.url+"sso/sso/check.do",
                 dataType:"json",
                 data:{"token":window.userInfo.token},
                 async:false,
@@ -75,61 +75,108 @@ $(function (){
         		window.location.href = window.userInfo.url + "activity/front/loginout";
         	});
         }
-    }
+    };
+    $.fn.getUrlData = function (url,val){
+        var url = url.slice(1).split("&");
+        for(var i = 0;i < url.length;i++){
+            if(url[i].indexOf(val) != -1){
+                var index = url[i].indexOf("=");
+                return url[i].slice(index+1);
+            }
+        }
+        return null;
+    };
     //微信分享
-    $.fn.wxShare = function (url,uId,activityId,orderId){
+    $.fn.weShare = function (shareData){
         $.ajax({
             url:window.userInfo.url+"activity/front/activity/shareInfo",
-            data:{
-                url:url,
-                userId:uId,
-                id:activityId,
-                orderId:orderId
-            },
+            type:"GET",
+            data:shareData,
+            async:true,
             dataType:"json",
-            success:function (result){
+            success:function (data){
                 wx.config({
-                    debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-                    appId: '', // 必填，公众号的唯一标识
-                    timestamp: '', // 必填，生成签名的时间戳
-                    nonceStr: '', // 必填，生成签名的随机串
-                    signature: '',// 必填，签名，见附录1
+                    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来
+                    appId: data.sign.appId, // 必填，公众号的唯一标识
+                    timestamp: data.sign.timestamp, // 必填，生成签名的时间戳
+                    nonceStr: data.sign.nonceStr, // 必填，生成签名的随机串
+                    signature: data.sign.signature,// 必填，签名，见附录1
                     jsApiList: [
                         "onMenuShareTimeline",
                         "onMenuShareAppMessage"
                     ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
                 });
-                wx.ready(function (){
-                    wx.onMenuShareTimeline({
-                        title: '', // 分享标题
-                        link: '', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-                        imgUrl: '', // 分享图标
-                        success: function () {
-                            // 用户确认分享后执行的回调函数
-                        },
-                        cancel: function () {
-                            // 用户取消分享后执行的回调函数
-                        }
-                    });
-                    wx.onMenuShareAppMessage({
-                        title: '', // 分享标题
-                        desc: '', // 分享描述
-                        link: '', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-                        imgUrl: '', // 分享图标
-                        type: '', // 分享类型,music、video或link，不填默认为link
-                        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-                        success: function () {
-                            // 用户确认分享后执行的回调函数
-                        },
-                        cancel: function () {
-                            // 用户取消分享后执行的回调函数
-                        }
-                    });
+                if(data){
+                    weixin(data,shareData);
+                }
+                wx.error(function (res) {
+                    //alert(res);
                 });
+
             },
-            error:function (){
-                alert("获取微信分享接口失败!")
+            error:function (error){
+                console.log(error)
             }
-        })
+        });
+        function weixin(data,shareData){
+            wx.ready(function(res) {
+                wx.onMenuShareAppMessage({
+                    title: data.share.title,
+                    desc:data.share.des,
+                    link: data.share.link,
+                    imgUrl: data.share.imgUrl,
+                    trigger: function(res) {},
+                    success: function(res) {
+                        $.ajax({
+                            url:window.userInfo.url+"activity/front/activity/share",
+                            data:{
+                                userId:shareData.userId,
+                                activityId:shareData.activityId,
+                                type:"1"//朋友
+                            },
+                            dataType:"json",
+                            success:function (result){
+                                if(result.result == 1){
+                                    //alert("分享成功");
+                                }
+                            },
+                            error:function (error){
+                                //alert("分享失败!");
+                            }
+                        });
+                    },
+                    cancel: function(res) {},
+                    fail: function(res) {}
+                });
+                wx.onMenuShareTimeline({
+                    title: data.share.title,
+                    desc:data.share.des,
+                    link: data.share.link,
+                    imgUrl: data.share.imgUrl,
+                    trigger: function(res) {},
+                    success: function(res) {
+                        $.ajax({
+                            url:window.userInfo.url+"activity/front/activity/share",
+                            data:{
+                                userId:shareData.userId,
+                                activityId:shareData.activityId,
+                                type:"0"//朋友圈
+                            },
+                            dataType:"json",
+                            success:function (result){
+                                if(result.result == 1){
+                                    //alert("分享成功");
+                                }
+                            },
+                            error:function (error){
+                                //alert("分享失败!");
+                            }
+                        });
+                    },
+                    cancel: function(res) {},
+                    fail: function(res) {}
+                });
+            });
+        }
     }
 });

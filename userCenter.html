@@ -11,7 +11,10 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/media.css">
     <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/qrcode.min.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
     <script src="js/main.js"></script>
+
 </head>
 <body class="md">
     <header>
@@ -135,9 +138,23 @@
             </div>
         </div>
     </div>
+    <div class="code-container" style="display: none">
+        <p><img src="images/closeImg.png" alt="" class="close-code" onclick="$('.code-container').fadeOut(300)"></p>
+        <p style="line-height: 30px;text-align:center;;color: #fff;font-size: 16px;padding: 0 20px;margin-top: 100px;">请在活动开始当天出示此二维码 <br>让工作人员扫码进行签到</p>
+        <div class="code-content" id="codeContent">
+        </div>
+        <p style="text-align:center;color: #fff;" class="code-text"></p>
+    </div>
     <script>
         $(function (){
             $.fn.isSign();//登录
+            window.shareInfo = {
+                url:window.location.href.split("#")[0],
+                userId:window.userInfo.userId,
+                orderId:"",
+                activityId:"2"
+            };
+            $.fn.weShare(window.shareInfo);//分享相关
             $("#userImg").css("backgroundImage","url("+window.userInfo.userImg+")");
             var resultData;
             function getAjaxData (url,data){
@@ -210,6 +227,7 @@
                         "<a href=\"javascript:;\" class=\"sm-btn dingdan-xq\" onclick='$.fn.readMore("+i+")'>订单详情</a></p><p class=\"dingdan-edit\"></li>");
                   switch (parseInt(nowStatus)){
                         case 1:{//已支付
+                            temp.append("<p class=\"dingdan-edit\"><a href=\"javascript:;\" class='sm-btn' onclick=\"$.fn.setQrCode('"+resultData.list[i].signCode+"')\" class=\"pay-btn\">签到码</a></p>");
                             if(resultData.list[i].isShow){
                                 temp.append("<p class=\"dingdan-edit\"><a href=\"javascript:;\" class=\"dingdan-reload sm-btn\" onclick=\"$.fn.refundFun('"+resultData.list[i].id+"')\">申请退款</a></p>");
                             }
@@ -374,7 +392,7 @@
                 }
                 //底部按钮,根据订单状态改变需要显示的按钮
                 $(".dingdan-btn").empty();
-                if(nowStatus == 1){//已支付,显示退款按钮
+                if(nowStatus == 1){//已支付,显示退款按钮和查看签到码按钮
                     $(".dingdan-btn").removeClass("btn-group").addClass("btn-one");
                     if(resultData.list[index].isShow){
                         $(".dingdan-btn").append("<a href=\"javascript:;\" onclick=\"$.fn.refundFun('"+resultData.list[index].id+"')\" class=\"pay-btn\">申请退款</a>");
@@ -392,6 +410,23 @@
                     $(".dingdan-btn").append("<a href=\"javascript:;\" onclick=\"$.fn.editFun('rel','"+resultData.list[index].id+"')\" class=\"pay-btn\">重新报名</a>");
                 }
             }
+            //新增签到码二维码
+            $.fn.setQrCode = function (code){
+                $(".code-container").fadeIn(300);
+                $(".code-text").text(code);
+                $(".code-container").bind("touchmove",function (ev){
+                    ev.preventDefault();
+                });
+                $("#codeContent").empty();
+                var qrcode = new QRCode('codeContent', {
+                    text: window.userInfo.url+'manageCode.html?signCode='+code,
+                    width: 256,
+                    height: 256,
+                    colorDark: '#000000',
+                    colorLight: '#ffffff',
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+            };
             function initFun(){
                getAjaxData(window.userInfo.url+"activity/front/order/selectOrder",{"userId":window.userInfo.userId});
             }
