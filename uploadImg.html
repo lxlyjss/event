@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link rel="shortcut icon" href="images/72-logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/vote.css">
+    <title>最"man"宝宝评选</title>
+    <style>
+        .loading-warpper{
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0px;
+            left: 0px;
+        }
+        .mint-indicator-wrapper{
+            top: 50%;
+            left: 50%;
+            position: absolute;
+            -webkit-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+            border-radius: 5px;
+            background: rgba(0,0,0,.7);
+            color: #fff;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        .mint-indicator-spin {
+            display: inline-block;
+            text-align: center;
+        }
+        .mint-spinner-snake{
+            -webkit-animation: mint-spinner-rotate .8s infinite linear;
+            animation: mint-spinner-rotate .8s infinite linear;
+            border: 4px solid transparent;
+            border-radius: 50%;
+            border-top-color: rgb(204, 204, 204);
+            border-left-color: rgb(204, 204, 204);
+            border-bottom-color: rgb(204, 204, 204);
+            height: 32px;
+            width: 32px;
+
+        }
+        @-webkit-keyframes mint-spinner-rotate {
+            0% {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+            100% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+        @keyframes mint-spinner-rotate {
+            0% {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+            100% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+        .mint-indicator-mask {
+            top: 0;
+            left: 0;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            background: transparent;
+        }
+        .mint-indicator-text {
+            display: block;
+            color: #fff;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+    </style>
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/main.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="img-content">
+        <div class="img-show"></div>
+        <div class="upload-btn">
+            <input type="file" style="display: none;" accept="image/*" id="file" multiple="multiple">
+            <span class="select-btn" id="choseImg">选择图片</span>
+            <input type="hidden" id="imgData">
+        </div>
+        <div class="user-content">
+            <input type="text" placeholder="宝宝姓名" id="babyName">
+            <input type="number" placeholder="联系手机" id="telephone">
+        </div>
+        <div class="upload-btn">
+            <span class="select-btn" id="submit">提交</span>
+        </div>
+        <p class="img-alert">提示：您如果已经为宝宝准备好了异装骑行的造型，欢迎提前剧透，上传来参与票选吧</p>
+    </div>
+    <div class="event-info">
+        <p>说明</p>
+    </div>
+    <div class="baomin-btn">
+        <a href="kids.html" style="color: #fff;text-decoration: none;">返回首页</a>
+    </div>
+</div>
+<div class="alert-container" id="shuoming" style="display: none;">
+    <div class="shuoming-info">
+        <div class="closeBtn"><img src="images/closeImg.png"></div>
+        <p class="shuoming-title">活动说明</p>
+        <p class="shuoming-text">上传您孩子（不限男女）最“man”最酷的照片，参与最酷宝宝评比，赢取丰厚奖品。</p>
+        <p class="shuoming-btn"><span>参与资格</span></p>
+        <p class="shuoming-text">1、成功报名《中国2017儿童滑步车赛事嘉年华--北京站》后，可参与此活动。</p>
+        <p class="shuoming-text">2、有热情，有活力，有自信的宝宝，不限男女；</p>
+        <p class="shuoming-btn"><span>参与时间</span></p>
+        <p class="shuoming-text">即日起至2017年9月29日晚上12：59：59</p>
+        <p class="shuoming-btn"><span>奖品及评奖说明</span></p>
+        <p class="shuoming-text">以2017年9月29日晚上12:59:59秒的票数为准进行评选，奖品等级如下：</p>
+        <p class="shuoming-text">一等奖：1名   奖品：滑步车一辆</p>
+        <p class="shuoming-text">二等奖：3名   奖品：专业骑行服一件</p>
+        <p class="shuoming-text">三等奖：10名   奖品：骑二无比kidsT恤一件</p>
+        <p class="shuoming-btn"><span>其他注意事项</span></p>
+        <p class="shuoming-text">1、若票数发生相等结果，将有骑二无比内部讨论决议。</p>
+        <p class="shuoming-text">2、若发现使用其他软件作弊等情况，一经发现，取消评比资格。</p>
+        <p class="shuoming-text">3、评比结果将在活动当天公示，现场领取奖品。</p>
+    </div>
+</div>
+<!--加载动画-->
+<div class="loading-warpper" style="display: none;">
+    <div class="mint-indicator-wrapper" style="padding: 20px;">
+			<span class="mint-indicator-spin">
+				<div class="mint-spinner-snake">
+
+				</div>
+			</span>
+        <span class="mint-indicator-text">加载中...</span>
+        <div class="mint-indicator-mask"></div>
+    </div>
+</div>
+<script>
+    $(function (){
+        //说明
+        $(".event-info").click(function (){
+            $("#shuoming").fadeIn(200);
+        });
+        $(".closeBtn").click(function (){
+            $("#shuoming").fadeOut(200);
+        });
+        $("#shuoming").on("touchmove",function (e){
+            e.preventDefault();
+        });
+
+        var sendData = {
+            userId:window.userInfo.userId,
+            activityId:"2",
+            image:"",
+            babyName:"",
+            telephone:""
+        };
+        //点击选择图片
+        $("#choseImg").click(function (){
+            $("#file").trigger("click");
+        });
+
+        $("#file").on("change",function (){
+            var f = $(this)[0].value;
+            //判断图片类型
+            if(!/\.(gif|jpg|jpeg|bmp|png)$/.test(f)){
+                alert("图片类型必须是.gif,jpeg,jpg,bmp中的一种")
+                return false;
+            }
+            var excelFile =$(this)[0].files[0];
+            $(this).val("");
+            if (excelFile) {
+                $(".loading-warpper").show();
+                var FR = new FileReader();
+                FR.addEventListener("load", function (e) {
+                    $(".loading-warpper").hide();
+                    $(".img-show").css({
+                        "background": "url(" + e.target.result + ") no-repeat",
+                        "backgroundSize": "100%",
+                        "backgroundPosition": "center",
+                        "backgroundRepeat": "noRepeat"
+                    });
+                    $("#imgData").val(e.target.result);
+                });
+                FR.readAsDataURL(excelFile);
+            }
+        });
+        //输入用户名和号码验证
+        function regNumber(){
+            if($("#imgData").val() == ""){
+                alert("请选择宝宝的照片");
+                return false;
+            }
+            if($("#babyName").val() == "" ){
+                alert("请输入宝宝的姓名");
+                return false;
+            }
+            //判断电话
+            if($("#telephone").val() == ""){
+                alert("请输入电话号码!");
+                return false;
+            }else{
+                var reg = /^1[3|4|5|7|8][0-9]\d{4,8}$/;
+                if(reg.test($("#telephone").val()) == false){
+                    alert("手机号码格式错误");
+                    return false;
+                }
+            }
+            return true;
+        }
+        //提交
+        $("#submit").click(function (){
+            sendData.image = $("#imgData").val();
+            sendData.babyName = $("#babyName").val();
+            sendData.telephone = $("#telephone").val();
+            if(regNumber() == true){//验证通过
+                $(".loading-warpper").show();
+                $.ajax({
+                    url: window.userInfo.url+"activity/front/activity/uploadInfo",
+                    data:{
+                        userId:sendData.userId,
+                        activityId: sendData.activityId,
+                        image:sendData.image,
+                        babyName:sendData.babyName,
+                        telephone:sendData.telephone
+                    },
+                    type:"post",
+                    dataType:"json",
+                    success:function (res){
+                        $(".loading-warpper").hide();
+                        console.log(sendData);
+                        console.log(res);
+                        if(res.result == 1){
+                            alert("提交成功!");
+                            alert(res.voteId)
+                            location.href = "changeImg.html?voteId="+res.voteId;
+                        }else{
+                            alert(res.msg);
+                        }
+                    },
+                    error:function (){
+                        $(".loading-warpper").hide();
+                        console.log(sendData);
+                        alert("网络连接失败!");
+                    }
+                })
+            }
+        });
+        function initFun(){
+
+        }
+        initFun();
+    });
+</script>
+</body>
+</html>

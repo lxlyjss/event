@@ -19,10 +19,12 @@ $(function (){
     //登录
     window.userInfo = {
         name:"",//用户名
-        userId:"",//用户id
+        // userId:"",//用户id
+        userId:"10",
         roleImg:"",//用户头像
         token:"",//用户登录的token
-        url:"http://sport.72bike.com/"//网址
+        // url:"http://sport.72bike.com/"//网址
+        url:"http://192.168.9.17:8080/",
     };
     $.fn.setCookie = function (name,value){
         var path="";

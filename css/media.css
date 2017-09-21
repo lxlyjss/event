@@ -105,7 +105,8 @@
       section .top-container .event-code {
         display: none; }
     section .content-container .content-top ul li {
-      font-size: 14px; }
+      font-size: 14px;
+      height: 30px;}
     section .content-container .content-page {
       width: 100%; }
     section .content-container .content-page2 .content-info {
@@ -398,6 +399,7 @@
       section .content-page1 .activity-text {
         font-size: 16px;
         line-height: 30px;
+        color: #555;
         text-align: center; }
   section .content-page1 .red-text{
     color: #f00;
@@ -669,4 +671,17 @@
   -ms-transition: transform .3s;
   -o-transition: transform .3s;
   transition: transform .3s;
+}
+
+
+.question-content p{
+  font-size: 16px;
+  line-height: 28px;
+}
+.question-content p:nth-of-type(2n+1){
+  margin-top: 10px;
+}
+.question-content p:nth-of-type(2n){
+  padding-left: 26px;
+  line-height: 20px;
 }

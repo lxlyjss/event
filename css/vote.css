@@ -1,0 +1,368 @@
+body,html{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: #ddea28;
+}
+p{
+    margin: 0;
+}
+ul,li{
+    list-style: none;
+    padding-left: 0;
+}
+.container{
+    width: 100%;
+    max-width: 600%;
+    margin: 0 auto;
+    position: relative;
+}
+.audio{
+    position: absolute;
+    top: 0px;
+    left: 10px;
+    width: 40px;
+    height: 40px;
+    background: url("../images/audio2.png") no-repeat;
+    -webkit-background-size: 200% 100%;
+    background-size: 200% 100%;
+}
+.event-info{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    right: 10px;
+    top: 0px;
+    background: red;
+
+}
+.head-img{
+    width: 70%;
+    margin: 20px auto;
+    height: 150px;
+    background: url("../images/img16.jpeg") no-repeat;
+    -webkit-background-size: 100%;
+    background-size: 100%;: ;
+}
+.event-time{
+    width: 100%;
+    height: 30px;
+}
+.event-time>p{
+    width: 80%;
+    margin: 0 auto;
+    font-size: 16px;
+    padding: 5px 0;
+    background: rgba(0,0,0,.3);
+    color: #fff;
+    text-align: center;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+}
+.search{
+    width: 100%;
+    height: 30px;
+    margin: 15px 0;
+    text-align: center;
+}
+.search>label>input[type=text]{
+    width: 50%;
+    height: 100%;
+    border: none;
+    outline: none;
+    padding-left: 10px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+.search>label>input[type=button]{
+    width: 50px;
+    height: 30px;
+    background: #3e7ac4;
+    color: #fff;
+    margin-left: 10px;
+    font-size: 16px;
+    text-align: center;
+    border: none;
+    vertical-align: middle;
+    outline: none;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+.rank{
+    width: 100%;
+    height: 30px;
+    text-align: center;
+    font-size: 18px;
+    background: orange;
+    color: #fff;
+    line-height: 30px;
+}
+ul.list-content{
+    width: 94%;
+    padding: 15px 3%;
+}
+ul.list-content::after{
+    content: '';
+    display: block;
+    clear: both;
+}
+.list{
+    width: 44%;
+    float: left;
+    margin-left: 4%;
+    background: #ccc;
+    margin-bottom: 15px;
+}
+.list-title{
+    width: 100%;
+    height: 30px;
+    margin: 0;
+    line-height: 30px;
+    font-size: 16px;
+    color: #fff;
+    background: #0079bf;
+    text-align: center;
+}
+.img-box{
+    width: 100%;
+    padding-top: 140%;
+}
+.list-info{
+    width: 100%;
+    background: #6ea715;
+    padding: 10px 0;
+}
+.count{
+    width: 100%;
+    height: 30px;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 16px;
+    margin: 0px auto;
+}
+.btn{
+    width: 60%;
+    margin: 10px auto 0;
+    height: 30px;
+    background: #0079bf;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    text-align: center;
+    color: #fff;
+    line-height: 30px;
+    font-size: 16px;
+}
+.baomin-btn{
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    background: #0079bf;
+}
+.alert-container{
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.8);
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+.alert-content{
+    width: 80%;
+    height: 200px;
+    background: #fff;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.alert-title{
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 16px;
+    border-bottom: 1px solid #ccc;
+}
+
+.alert-info{
+    width: 100%;
+    height: 100px;
+}
+.alert-info>p{
+    font-size: 16px;
+    padding: 10px 15px;
+}
+.alert-btn{
+    width: 100%;
+    height: 40px;
+    position: absolute;
+    bottom: 0;
+}
+.alert-btn>a{
+    width: 50%;
+    height: 40px;
+    line-height:40px;
+    text-decoration: none;
+    display: block;
+    float: left;
+    text-align: center;
+    font-size: 16px;
+    color: #fff;
+    background: #0079bf;
+}
+.alert-btn>a:first-of-type::after{
+    content: '';
+    display: block;
+    height: 100%;
+    background: #ccc;
+    width: 1px;
+    position: absolute;
+    right: 50%;
+    top: 0;
+}
+.closeBtn{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 15px;
+    top: 20px;
+}
+.closeBtn>img{
+    width: 100%;
+}
+.shuoming-info{
+    width: 90%;
+    margin: 20px auto;
+}
+.shuoming-title{
+    font-size: 18px;
+    text-align: center;
+    color: #fff;
+    margin: 10px 0;
+}
+.shuoming-text{
+    font-size: 14px;
+    color: #fff;
+    line-height:20px;
+}
+.shuoming-btn{
+    margin: 10px 0;
+}
+.shuoming-btn>span{
+    background: #fff;
+    padding: 0 10px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+/*图片上传页面*/
+.img-content{
+    width: 100%;
+    padding-top: 30px;
+    padding-bottom: 40px;
+}
+.img-show{
+    width: 40%;
+    padding-top: 60%;
+    border: 1px solid #9c8787;
+    margin: 0px auto;
+}
+.upload-btn{
+    width: 120px;
+    height: 40px;
+    margin: 30px auto;
+    line-height:40px;
+    background: #3e7ac4;
+    text-align: center;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+.select-btn{
+    font-size: 18px;
+    color: #fff;
+}
+.user-content{
+    width: 60%;
+    margin: 0 auto;
+}
+.user-content>input{
+    width: 100%;
+    height: 30px;
+    margin-bottom: 5px;
+    border: none;
+    outline:none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding-left: 10px;
+    font-size: 16px;
+}
+.img-alert{
+    font-size: 16px;
+    padding: 15px;
+}
+
+.user-info-content{
+    width: 40%;
+    margin: 0 auto;
+}
+.user-info-content>p{
+    color: #000;
+    font-size: 18px;
+    text-align: center;
+}
+.return-btn>a{
+    color: #000;
+    background: #3e7ac4;
+    display: block;
+    width: 44%;
+    font-size: 18px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    float: left;
+    margin-left: 4%;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+/*分享*/
+/*支付成功后分享功能*/
+.share-content{
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.8);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index:99999;
+}
+.share-content .share-img{
+    width: 80%;
+    margin:30px auto;
+
+}
+.share-img img{
+    width: 100%;
+}
+.share-content .share-ok{
+    width: 50%;
+    margin: 100px auto;
+}
+.share-ok img{
+    width: 100%;
+}
