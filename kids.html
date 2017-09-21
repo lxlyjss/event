@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link rel="shortcut icon" href="images/72-logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/vote.css">
+    <title>最"man"宝宝评选</title>
+    <style>
+        .loading-warpper{
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0px;
+            left: 0px;
+        }
+        .mint-indicator-wrapper{
+            top: 50%;
+            left: 50%;
+            position: absolute;
+            -webkit-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+            border-radius: 5px;
+            background: rgba(0,0,0,.7);
+            color: #fff;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        .mint-indicator-spin {
+            display: inline-block;
+            text-align: center;
+        }
+        .mint-spinner-snake{
+            -webkit-animation: mint-spinner-rotate .8s infinite linear;
+            animation: mint-spinner-rotate .8s infinite linear;
+            border: 4px solid transparent;
+            border-radius: 50%;
+            border-top-color: rgb(204, 204, 204);
+            border-left-color: rgb(204, 204, 204);
+            border-bottom-color: rgb(204, 204, 204);
+            height: 32px;
+            width: 32px;
+
+        }
+        @-webkit-keyframes mint-spinner-rotate {
+            0% {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+            100% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+        @keyframes mint-spinner-rotate {
+            0% {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+            100% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+        .mint-indicator-mask {
+            top: 0;
+            left: 0;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            background: transparent;
+        }
+        .mint-indicator-text {
+            display: block;
+            color: #fff;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+    </style>
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/main.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!--<div class="audio">-->
+        <!--</div>-->
+        <div class="content">
+            <div class="head-img">
+            </div>
+            <div class="event-time">
+                <p>活动倒计时：<span id="time"></span></p>
+            </div>
+            <div class="search">
+                <label for="">
+                    <input type="text" placeholder="输入编号,宝宝姓名搜索" id="searchText">
+                    <input type="button" value="搜索" id="search">
+                </label>
+            </div>
+            <div class="rank">
+                <p>排行榜</p>
+            </div>
+            <ul class="list-content">
+                <!--<li class="list">-->
+                    <!--<p class="list-title">1号 张三</p>-->
+                    <!--<div class="img-box" style="background: url(images/add12.gif) no-repeat;-webkit-background-size: cover;background-size: cover;background-position: center;">-->
+                    <!--</div>-->
+                    <!--<div class="list-info">-->
+                        <!--<p class="count">得票8</p>-->
+                        <!--<p class="btn" onclick="$.fn.vote(1)">投票</p>-->
+                    <!--</div>-->
+                <!--</li>-->
+            </ul>
+        </div>
+        <div class="event-info">
+            <p>说明</p>
+        </div>
+        <div class="baomin-btn" id="join">
+            我要参与
+        </div>
+    </div>
+    <div class="alert-container" id="tishi" style="display: none;">
+        <div class="alert-content">
+            <p class="alert-title">提示</p>
+            <div class="alert-info">
+                <p>您还未报名参与《中国2017儿童滑步车赛事嘉年华--北京站》，报名后即可参与。</p>
+            </div>
+            <div class="alert-btn">
+                <a href="javascript:;" id="returnHome">返回首页</a>
+                <a href="http://sport.72bike.com">立即报名</a>
+            </div>
+        </div>
+    </div>
+    <div class="alert-container" id="shuoming" style="display: none;">
+        <div class="shuoming-info">
+            <div class="closeBtn"><img src="images/closeImg.png"></div>
+            <p class="shuoming-title">活动说明</p>
+            <p class="shuoming-text">上传您孩子（不限男女）最“man”最酷的照片，参与最酷宝宝评比，赢取丰厚奖品。</p>
+            <p class="shuoming-btn"><span>参与资格</span></p>
+            <p class="shuoming-text">1、成功报名《中国2017儿童滑步车赛事嘉年华--北京站》后，可参与此活动。</p>
+            <p class="shuoming-text">2、有热情，有活力，有自信的宝宝，不限男女；</p>
+            <p class="shuoming-btn"><span>参与时间</span></p>
+            <p class="shuoming-text">即日起至2017年9月29日晚上12：59：59</p>
+            <p class="shuoming-btn"><span>奖品及评奖说明</span></p>
+            <p class="shuoming-text">以2017年9月29日晚上12:59:59秒的票数为准进行评选，奖品等级如下：</p>
+            <p class="shuoming-text">一等奖：1名   奖品：滑步车一辆</p>
+            <p class="shuoming-text">二等奖：3名   奖品：专业骑行服一件</p>
+            <p class="shuoming-text">三等奖：10名   奖品：骑二无比kidsT恤一件</p>
+            <p class="shuoming-btn"><span>其他注意事项</span></p>
+            <p class="shuoming-text">1、若票数发生相等结果，将有骑二无比内部讨论决议。</p>
+            <p class="shuoming-text">2、若发现使用其他软件作弊等情况，一经发现，取消评比资格。</p>
+            <p class="shuoming-text">3、评比结果将在活动当天公示，现场领取奖品。</p>
+        </div>
+    </div>
+    <!--加载动画-->
+    <div class="loading-warpper">
+        <div class="mint-indicator-wrapper" style="padding: 20px;">
+			<span class="mint-indicator-spin">
+				<div class="mint-spinner-snake">
+
+				</div>
+			</span>
+            <span class="mint-indicator-text">加载中...</span>
+            <div class="mint-indicator-mask"></div>
+        </div>
+    </div>
+    <script>
+        $(function (){
+            //时间
+            function getDate(){
+                var nowTime = new Date().getTime();
+                //比赛结束时间
+                var endTime = 1507823999000;
+                var t = endTime-nowTime;
+                var day=Math.floor(t/1000/60/60/24);
+                var hour=Math.floor(t/1000/60/60%24);
+                var min=Math.floor(t/1000/60%60);
+                return day+"天"+hour+"时"+min+"分";
+            }
+            //说明
+            $(".event-info").click(function (){
+                $("#shuoming").fadeIn(200);
+            });
+            $(".closeBtn").click(function (){
+                $("#shuoming").fadeOut(200);
+            });
+            $("#shuoming").on("touchmove",function (e){
+                e.preventDefault();
+            });
+
+            //存储数据
+            var resultData;
+
+            var sendData = {
+                userId:window.userInfo.userId,
+                activityId:"2",
+                query:"",//搜索
+                page:"1",
+                pageNum:"10"
+            };
+
+            //搜索
+            $("#search").click(function (){
+                sendData.query = $("#searchText").val();
+                $(".list-content").empty();//搜索需要清空数据
+                getAjaxData();
+            });
+            //获取已投票数据
+            function getAjaxData(){
+                $(".loading-warpper").show();
+                $.ajax({
+                    url: window.userInfo.url+"activity/front/activity/voteList",
+                    data:sendData,
+                    dataType:"json",
+                    success:function (res){
+                        $(".loading-warpper").hide();
+                        console.log(res);
+                        console.log(sendData)
+                        if(res.result == 1){
+                            resultData = res;
+                            setResultData();
+                            //type:0未参与,1已参与
+                            //vote//该项目的id
+                        }else{
+                            alert(res.msg);
+                        }
+                    },
+                    error:function (){
+                        $(".loading-warpper").hide();
+                        alert("获取数据失败!")
+                    }
+                });
+            }
+            //设置投票数据
+            function setResultData(){
+                //判断是否参与过该活动
+                if(resultData.type ==0){//未参与该活动
+                    joinEvent();//参加活动
+                }else{//参与过
+                    $("#join").text("查看我的宝宝信息").click(function (){
+                        window.location.href = "changeImg.html?voteId="+resultData.vote.id;
+                    });
+                }
+                for(var i=0;i< resultData.votes.length;i++){
+                    var temp = $("<li class=\"list\">" +
+                        "<p class=\"list-title\">"+resultData.votes[i].id+"号&nbsp;&nbsp;&nbsp;"+resultData.votes[i].babyName+"</p>" +
+                        "<div class=\"img-box\" style=\"background: url("+resultData.votes[i].imageUrl+") no-repeat;-webkit-background-size: 100%;background-size: 100%;background-position: center;\">" +
+                        "</div>" +
+                        "<div class=\"list-info\">" +
+                        "<p class=\"count\">得票 <span>"+resultData.votes[i].count+"</span></p>" +
+                        "<p class=\"btn\" onclick=\"$.fn.vote("+resultData.votes[i].id+",this)\">投票</p>" +
+                        "</div>" +
+                        "</li>");
+                    $(".list-content").append(temp);
+                }
+            }
+            //点击报名参与
+            function joinEvent(){
+                $("#join").click(function (){
+                    $.ajax({//判断当前用户是否已经参与过这个活动,
+                        url: window.userInfo.url+"activity/front/activity/voteJoin",
+                        data:{
+                            userId: sendData.userId,
+                            activityId:"2"
+                        },
+                        dataType:"json",
+                        success:function (res){
+                            console.log(res)
+                            $(".loading-warpper").hide();
+                            if(res.result == 1){//未参与过,跳转到上传图片页面
+                                window.location.href = "uploadImg.html";
+                            }else if(res.result == 0){//已参与过这个活动
+                                alert(res.msg);
+                            }else if(res.result == 2){//未报名,提示参与报名,跳转活动页面
+                                $("#tishi").fadeIn(200);
+                            }
+                        },
+                        error:function (){
+                            $(".loading-warpper").hide();
+                            alert("获取数据失败!")
+                        }
+                    });
+                });
+                //alert弹框
+                $(".alert-container").on("touchmove",function (e){
+                    e.stopPropagation();
+                    e.preventDefault();
+                });
+                $("#returnHome").click(function (){
+                    $(".alert-container").fadeOut(200);
+                });
+            }
+
+            //投票
+            $.fn.vote = function (id,t){
+                $(".loading-warpper").show();
+                var data = {
+                    userId:window.userInfo.userId,
+                    voteId:id
+                };
+                $.ajax({
+                    url: window.userInfo.url+"activity/front/activity/vote",
+                    data:data,
+                    dataType:"json",
+                    success:function (res){
+                        $(".loading-warpper").hide();
+                        if(res.result == 1){//可以投票
+                            alert("投票成功!")
+                            $(t).text("已投票").css("background","#ccc");
+                            $(t).siblings("p").children("span")
+                                .text(parseInt($(t)
+                                    .siblings("p")
+                                    .children("span")
+                                    .text())+1);
+                        }else if(res.result == 0){
+                            alert(res.msg);
+                        }
+                    },
+                    error:function (){
+                        $(".loading-warpper").hide();
+                        alert("获取数据失败")
+                    }
+                })
+            };
+
+            function initFun(){
+                $("#time").text(getDate());//设置活动截止时间
+                getAjaxData();//获取投票数据
+            }
+            initFun();
+        });
+    </script>
+</body>
+</html>
