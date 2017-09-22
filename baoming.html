@@ -667,77 +667,109 @@
             setChildren($("#addChildren .select-num").children("button").eq(2),true);
             //提交资料验证
             function checkInput(){
-                //
+                //定义一个变量
+                var a = true;
+
                 if($("#realName").val() == ""){
                     alert("请输入家长姓名！");
-                    return false;
+                    a = false;
+                    return;
                 }
                 if($("#bornDate1").val() == "" && $("#bornDate2").val() == ""){
                     alert("请输入出生日期！");
-                    return false;
+                    a = false;
+                    return;
+                }
+                //判断增加的人的信息
+                if($(".childName").length> 0){
+                    $(".childName").each(function (index){
+                        if($(".childName").eq(index).val() == ""){
+                            alert("请输入小孩的姓名！");
+                            a = false;
+                            return false;
+                            return;
+                        }
+                    });
                 }
                 //判断证件
                 if($("#zhengjianNumber1").val() == ""){
                     alert("请输入证件号码!");
-                    return false;
+                    a = false;
+                    return;
                 }else{
                     if($("#zhengjianType1").val() == 0){
                         var reg = /(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
                         if(reg.test($("#zhengjianNumber1").val()) == false){
                             alert("请输入有效证件！");
-                            return false
+                            a = false;
+                            return;
                         }
                     }
                 }
-                //判断增加的人的信息
-                if($(".childName").length> 0){
-                    if($(".childName").val() == ""){
-                        alert("请输入小孩的姓名！");
-                        return false;
-                    }
-                }
+
                 if($(".zhengjianNumber").length > 0 ){
                     $(".zhengjianNumber").each(function (index){
                         if($(".zhengjianNumber").eq(index).val() == ""){
                             alert("请输入证件号码！");
+                            a = false;
                             return false;
+                            return;
                         }else{
                             if($(".zhengjianType").eq(index).val() == 0){
                                 var reg = /(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
                                 if(reg.test($(".zhengjianNumber").eq(index).val()) == false){
                                     alert("请输入有效证件！");
+                                    a = false;
                                     return false;
+                                    return;
                                 }
                             }
                         }
                     });
                 }
                 if($(".bornDate").length > 0){
-                    if($(".bornDate").val() == ""){
-                        alert("请输入小孩的生日！");
-                        return false;
-                    }
+                    $(".bornDate").each(function (index){
+                        if($(".bornDate").eq(index).val() == ""){
+                            alert("请输入小孩的生日！");
+                            a = false;
+                            return false;
+                            return;
+                        }else{
+                            var maxDate = 20151015;
+                            var minDate = 20101016;
+                            if(parseInt($(".bornDate").eq(index).val().replace(/-/g,"")) > maxDate || parseInt($(".bornDate").eq(index).val().replace(/-/g,"")) < minDate){
+                                alert("本活动小孩年龄限制为2-6岁,若有其他需求,请联系客服!");
+                                a = false;
+                                return false;
+                                return;
+                            }
+                        }
+                    });
                 }
                 //判断当前选的套餐
                 if(baseMeal == 4){
                     if($("#realName2").val() == ""){
                         alert("请输入家长姓名！");
-                        return false;
+                        a = false;
+                        return;
                     }
                     if($("#bornDate2").val() == ""){
                         alert("请输入家长出生日期！");
-                        return false;
+                        a = false;
+                        return;
                     }
                     //判断第二个家长证件
                     if($("#zhengjianNumber2").val() == ""){
                         alert("请输入证件号码!");
-                        return false;
+                        a = false;
+                        return;
                     }else{
                         if($("#zhengjianType2").val() == 0) {
                             var reg = /(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
                             if (reg.test($("#zhengjianNumber2").val()) == false) {
                                 alert("请输入有效证件！");
-                                return false;
+                                a = false;
+                                return;
                             }
                         }
                     }
@@ -745,53 +777,74 @@
                 //判断电话
                 if($("#phoneNumber").val() == ""){
                     alert("请输入电话号码！");
-                    return false;
+                    a = false;
+                    return;
                 }else{
                 	var reg = /^1[3|4|5|7|8][0-9]\d{4,8}$/;
                 	if(reg.test($("#phoneNumber").val()) == false){
                 		alert("手机号码格式错误");
-                		return false;
+                        a = false;
+                        return;
                 	}
                 }
                 //判断小孩姓名
                 if($("#childName").val() == ""){
                     alert("请输入小孩姓名！");
-                    return false;
+                    a = false;
+                    return;
                 }
                 if($("#childBornDate").val() == ""){
                     alert("请输入小孩出生日期！");
-                    return false;
+                    a = false;
+                    return;
+                }else{//判断小孩生日年龄
+                    var maxDate = 20151015;
+                    var minDate = 20101016;
+                    if(parseInt($("#childBornDate").val().replace(/-/g,"")) > maxDate || parseInt($("#childBornDate").val().replace(/-/g,"")) < minDate){
+                        alert("本活动小孩年龄限制为2-6岁,若有其他需求,请联系客服!");
+                        a = false;
+                        return;
+                    }
                 }
                 //判断小孩证件
                 if($("#zhengjianNumber3").val() == ""){
                     alert("请输入小孩的证件号码!");
-                    return false;
+                    a = false;
+                    return;
                 }else{
                     if($("#zhengjianType3").val() == 0) {
                         var reg = /(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
                         if (reg.test($("#zhengjianNumber3").val()) == false) {
                             alert("请输入有效证件！");
-                            return false;
+                            a = false;
+                            return;
                         }
                     }
                 }
                 //紧急联系人姓名
                 if($("#jinjiName").val() == ""){
                     alert("请输入紧急联系人姓名！");
-                    return false;
+                    a = false;
+                    return;
                 }
                 //紧急联系人电话
                 if($("#jinjiPhone").val() == ""){
                     alert("请输入紧急联系人电话！");
-                    return false;
+                    a = false;
+                    return;
                 }else{
                 	var reg = /^1[3|4|5|7|8][0-9]\d{4,8}$/;
-                	if(reg.test($("#phoneNumber").val()) == false){
+                	if(reg.test($("#jinjiPhone").val()) == false){
                 		alert("手机号码格式错误");
-                		return false;
+                        a = false;
+                        return;
                 	}
                 }
-                return true;
+                if(a == true){
+                    return true;
+                }else{
+                    return false;
+                }
             }
             //点击提交资料按钮
             $("#sendInfo").click(function (){

@@ -8,7 +8,7 @@
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <link rel="shortcut icon" href="images/72-logo.png" type="image/x-icon">
     <link rel="stylesheet" href="css/vote.css">
-    <title>最酷宝宝评选</title>
+    <title>最"man"宝宝评选</title>
     <style>
         .loading-warpper{
             width: 100%;
@@ -81,77 +81,21 @@
             margin-top: 10px;
             font-size: 16px;
         }
-        /*裁剪图片*/
-        .phoneClip-wrapper{
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            background: #000;
-        }
-        .phoneClip-cut{
-            height: 500px;
-        }
-        .phoneClip-btn{
-            width: 100%;
-            height: 50px;
-            position: absolute;
-            bottom: 0;
-        }
-        .phoneClip-btn button{
-            width: 33.33%;
-            height: 50px;
-            border: none;
-            outline: none;
-            float: left;
-            color: #fff;
-            font-size: 18px;
-        }
-        .phoneClip-btn .phoneClip-open{
-            background: #3088cd;
-        }
-        .phoneClip-btn .phoneClip-close{
-            background: #cd4935;
-        }
-        .phoneClip-btn .phoneClip-done{
-            background: #34c422;
-        }
-        #phoneClipFile{
-            display: block;
-            width: 33%;
-            height: 50px;
-            position: absolute;
-            left: 0;
-            top: 0;
-            opacity: 0;
-        }
-        .img-show{
-            width: 160px;
-            padding-top: 0;
-            height: 210px;
-        }
-        .img-show>img{
-            width: 100%;
-        }
     </style>
     <script src="js/jquery-1.8.3.min.js"></script>
-    <script src="js/iscroll-zoom.js"></script>
-    <script src="js/hammer.js"></script>
-    <script src="js/jquery.photoClip.js"></script>
     <script src="js/main.js"></script>
 </head>
 <body>
 <div class="container">
     <div class="img-content">
         <div class="img-show"></div>
-        <div class="upload-btn" id="choseImg">
+        <div class="upload-btn">
             <input type="file" style="display: none;" accept="image/*" id="file" multiple="multiple">
-            <span class="select-btn">修改图片</span>
+            <span class="select-btn" id="choseImg">修改图片</span>
             <input type="hidden" id="imgData">
         </div>
-        <div class="upload-btn" id="submit">
-            <span class="select-btn">提交</span>
+        <div class="upload-btn">
+            <span class="select-btn" id="submit">提交</span>
         </div>
         <div class="user-info-content">
             <p class="user-number">编号: <span id="number"></span></p>
@@ -161,8 +105,7 @@
 
     </div>
     <div class="event-info">
-        <!--<p>说明</p>-->
-        <img src="images/shuoming.png" alt="">
+        <p>说明</p>
     </div>
     <div class="return-btn">
         <a href="kids.html" style="color: #fff;text-decoration: none;">返回首页</a>
@@ -199,7 +142,7 @@
     </div>
 </div>
 <!--加载动画-->
-<div class="loading-warpper" style="display: none;">
+<div class="loading-warpper">
     <div class="mint-indicator-wrapper" style="padding: 20px;">
 			<span class="mint-indicator-spin">
 				<div class="mint-spinner-snake">
@@ -210,58 +153,6 @@
         <div class="mint-indicator-mask"></div>
     </div>
 </div>
-<!--裁剪图片-->
-<div class="phoneClip-wrapper" style="display: none;">
-    <div class="phoneClip-container">
-        <p style="color: #fff;font-size: 16px;text-align:center;margin: 10px 0;">双指滑动可缩放和旋转</p>
-        <div class="phoneClip-cut"></div>
-        <div class="phoneClip-btn">
-            <button class="phoneClip-open">选择图片</button>
-            <input id="phoneClipFile" type="file" accept="image/*" multiple />
-            <button class="phoneClip-close">取消</button>
-            <button class="phoneClip-done">保存</button>
-        </div>
-    </div>
-    <div id="phoneClip-view"></div>
-</div>
-<script>
-    $(function (){
-        //点击显示裁剪框
-        $("#choseImg").click(function (){
-            $(".phoneClip-wrapper").slideDown(300);
-        });
-        //裁剪完成之后
-        function cutFinish(imgUrl){
-            $(".phoneClip-wrapper").slideUp(300);
-            $(".img-show").empty().append("<img src='"+imgUrl+"'>");
-            $("#imgData").val(imgUrl);
-        }
-        //取消裁剪
-        $(".phoneClip-close").click(function (){
-            $(".phoneClip-wrapper").slideUp(300);
-        });
-        //初始化裁剪框
-        $(".phoneClip-cut").photoClip({
-            width:160,
-            height:210,
-            file:"#phoneClipFile",
-            view:".phoneClip-view",
-            ok:".phoneClip-done",
-            loadStart: function() {
-//                console.log("照片读取中");
-                $(".loading-warpper").show();
-            },
-            loadComplete: function() {
-//                console.log("照片读取完成");
-                $(".loading-warpper").hide();
-            },
-            clipFinish: function(dataURL) {
-                //console.log(dataURL);
-                cutFinish(dataURL);
-            }
-        });
-    });
-</script>
 <script>
     $(function (){
         //说明
@@ -290,7 +181,7 @@
                 },
                 dataType:"json",
                 success:function (res){
-                    console.log(sendData);
+                    console.log(sendData.id);
                     console.log(res);
                     $(".loading-warpper").hide();
                     if(res.result == 1){
@@ -318,6 +209,36 @@
             $("#count").text(result.vote.count);
             $("#level").text(result.num);
         }
+
+        $("#choseImg").click(function (){
+            $("#file").trigger("click");
+        });
+
+        $("#file").on("change",function (){
+            var f = $(this)[0].value;
+            //判断图片类型
+            if(!/\.(gif|jpg|jpeg|bmp|png)$/.test(f)){
+                alert("图片类型必须是.gif,jpeg,jpg,bmp中的一种")
+                return false;
+            }
+            $(".loading-warpper").show();
+            var excelFile =$(this)[0].files[0];
+            $(this).val("");
+            if (excelFile) {
+                var FR = new FileReader();
+                FR.addEventListener("load", function (e) {
+                    $(".loading-warpper").hide();
+                    $(".img-show").css({
+                        "background": "url(" + e.target.result + ") no-repeat",
+                        "backgroundSize": "100%",
+                        "backgroundPosition": "center",
+                        "backgroundRepeat": "noRepeat"
+                    });
+                    $("#imgData").val(e.target.result);
+                });
+                FR.readAsDataURL(excelFile);
+            }
+        });
         //提交
         $("#submit").click(function (){
             if($("#imgData").val() == ""){
@@ -337,7 +258,7 @@
                 type:"post",
                 dataType:"json",
                 success:function (res){
-                    console.log(sendData)
+                    console.log()
                     $(".loading-warpper").hide();
                     if(res.result == 1){
                         alert("修改成功")

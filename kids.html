@@ -8,7 +8,7 @@
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <link rel="shortcut icon" href="images/72-logo.png" type="image/x-icon">
     <link rel="stylesheet" href="css/vote.css">
-    <title>最"man"宝宝评选</title>
+    <title>最酷宝宝评选</title>
     <style>
         .loading-warpper{
             width: 100%;
@@ -91,9 +91,10 @@
         <!--</div>-->
         <div class="content">
             <div class="head-img">
+                <img src="images/header.png" style="width: 100%;" alt="">
             </div>
             <div class="event-time">
-                <p>活动倒计时：<span id="time"></span></p>
+                <p><img src="images/time.png" width="20" style="vertical-align: -17%;margin-right: 5px;" alt="">活动倒计时：<span id="time"></span></p>
             </div>
             <div class="search">
                 <label for="">
@@ -102,7 +103,7 @@
                 </label>
             </div>
             <div class="rank">
-                <p>排行榜</p>
+                <p><img src="images/rank.png" style="width: 20px;margin-right: 5px;" alt="">排行榜</p>
             </div>
             <ul class="list-content">
                 <!--<li class="list">-->
@@ -115,12 +116,14 @@
                     <!--</div>-->
                 <!--</li>-->
             </ul>
+            <p class="loadMore">加载更多...</p>
         </div>
         <div class="event-info">
-            <p>说明</p>
+            <!--<p>说明</p>-->
+            <img src="images/shuoming.png" alt="">
         </div>
         <div class="baomin-btn" id="join">
-            我要参与
+            <img src="images/person.png" class="person" alt="">我要参与
         </div>
     </div>
     <div class="alert-container" id="tishi" style="display: none;">
@@ -139,21 +142,20 @@
         <div class="shuoming-info">
             <div class="closeBtn"><img src="images/closeImg.png"></div>
             <p class="shuoming-title">活动说明</p>
-            <p class="shuoming-text">上传您孩子（不限男女）最“man”最酷的照片，参与最酷宝宝评比，赢取丰厚奖品。</p>
+            <p class="shuoming-text">上传您孩子（不限男女）最酷的照片，参与最酷宝宝评比，赢取丰厚奖品。</p>
             <p class="shuoming-btn"><span>参与资格</span></p>
             <p class="shuoming-text">1、成功报名《中国2017儿童滑步车赛事嘉年华--北京站》后，可参与此活动。</p>
-            <p class="shuoming-text">2、有热情，有活力，有自信的宝宝，不限男女；</p>
+            <p class="shuoming-text">2、上传您宝宝“最酷,卖萌,搞怪”的照片参与评选，不限男女。</p>
             <p class="shuoming-btn"><span>参与时间</span></p>
-            <p class="shuoming-text">即日起至2017年9月29日晚上12：59：59</p>
+            <p class="shuoming-text">即日起至2017年10月12日23：59：59</p>
             <p class="shuoming-btn"><span>奖品及评奖说明</span></p>
-            <p class="shuoming-text">以2017年9月29日晚上12:59:59秒的票数为准进行评选，奖品等级如下：</p>
+            <p class="shuoming-text">以2017年10月12日23:59:59秒的票数为准进行评选，奖项及奖品如下：</p>
             <p class="shuoming-text">一等奖：1名   奖品：滑步车一辆</p>
             <p class="shuoming-text">二等奖：3名   奖品：专业骑行服一件</p>
-            <p class="shuoming-text">三等奖：10名   奖品：骑二无比kidsT恤一件</p>
+            <p class="shuoming-text">三等奖：10名   奖品：骑二无比kids T恤一件</p>
             <p class="shuoming-btn"><span>其他注意事项</span></p>
-            <p class="shuoming-text">1、若票数发生相等结果，将有骑二无比内部讨论决议。</p>
-            <p class="shuoming-text">2、若发现使用其他软件作弊等情况，一经发现，取消评比资格。</p>
-            <p class="shuoming-text">3、评比结果将在活动当天公示，现场领取奖品。</p>
+            <p class="shuoming-text">1、若发现使用其他软件作弊等情况，一经发现，取消评比资格。</p>
+            <p class="shuoming-text">2、成绩及奖品将在10月14日《中国2017儿童滑步车赛事嘉年华--北京站》活动当天现场公布和发放。</p>
         </div>
     </div>
     <!--加载动画-->
@@ -170,6 +172,7 @@
     </div>
     <script>
         $(function (){
+            //$.fn.isSign();
             //时间
             function getDate(){
                 var nowTime = new Date().getTime();
@@ -189,7 +192,10 @@
                 $("#shuoming").fadeOut(200);
             });
             $("#shuoming").on("touchmove",function (e){
-                e.preventDefault();
+                e.stopPropagation();
+            });
+            $(document).on("touchmove",function (e){
+                e.stopPropagation();
             });
 
             //存储数据
@@ -207,6 +213,7 @@
             $("#search").click(function (){
                 sendData.query = $("#searchText").val();
                 $(".list-content").empty();//搜索需要清空数据
+                sendData.page = 1;
                 getAjaxData();
             });
             //获取已投票数据
@@ -241,26 +248,33 @@
                 if(resultData.type ==0){//未参与该活动
                     joinEvent();//参加活动
                 }else{//参与过
-                    $("#join").text("查看我的宝宝信息").click(function (){
+                    $("#join").html("<img src=\"images/person.png\" class=\"person\" >查看我的宝宝信息").click(function (){
                         window.location.href = "changeImg.html?voteId="+resultData.vote.id;
                     });
                 }
-                for(var i=0;i< resultData.votes.length;i++){
-                    var temp = $("<li class=\"list\">" +
-                        "<p class=\"list-title\">"+resultData.votes[i].id+"号&nbsp;&nbsp;&nbsp;"+resultData.votes[i].babyName+"</p>" +
-                        "<div class=\"img-box\" style=\"background: url("+resultData.votes[i].imageUrl+") no-repeat;-webkit-background-size: 100%;background-size: 100%;background-position: center;\">" +
-                        "</div>" +
-                        "<div class=\"list-info\">" +
-                        "<p class=\"count\">得票 <span>"+resultData.votes[i].count+"</span></p>" +
-                        "<p class=\"btn\" onclick=\"$.fn.vote("+resultData.votes[i].id+",this)\">投票</p>" +
-                        "</div>" +
-                        "</li>");
-                    $(".list-content").append(temp);
+                if(resultData.votes.length > 0){
+                    for(var i=0;i< resultData.votes.length;i++){
+                        var temp = $("<li class=\"list\">" +
+                            "<p class=\"list-title\">"+resultData.votes[i].id+"号&nbsp;&nbsp;&nbsp;"+resultData.votes[i].babyName+"</p>" +
+                            "<div class=\"img-box\" style=\"background: url("+resultData.votes[i].imageUrl+") no-repeat;-webkit-background-size: 100%;background-size: 100%;background-position: center;\">" +
+                            "</div>" +
+                            "<div class=\"list-info\">" +
+                            "<p class=\"btn\" onclick=\"$.fn.vote("+resultData.votes[i].id+",this)\"><img src='images/star.png' class='star'><span>投票</span></p>" +
+                            "<p class=\"count\">得票 <span>"+resultData.votes[i].count+"</span></p>" +
+                            "</div>" +
+                            "</li>");
+                        $(".list-content").append(temp);
+                    }
+                    lock = false;
+                }else{
+                    $(".loadMore").text("没有更多了‘(*>﹏<*)′");
+                    lock = true;
                 }
             }
             //点击报名参与
             function joinEvent(){
                 $("#join").click(function (){
+                    $(".loading-warpper").show();
                     $.ajax({//判断当前用户是否已经参与过这个活动,
                         url: window.userInfo.url+"activity/front/activity/voteJoin",
                         data:{
@@ -327,9 +341,27 @@
                 })
             };
 
+            //加载更多
+            var lock = false;
+            function loadMore(){
+                $(document).on("scroll",function (){
+                    var scrollTop = $(window).scrollTop()+$(window).height();
+                    var isShow = ($(window).scrollTop()+$(window).height()) >= $(".loadMore").offset().top ? true : false;
+//                    console.log(isShow);
+                    if(isShow==true && lock==false){
+                        lock = true;
+                        $(".loadMore").text("正在加载,请稍候(*^__^*)")
+                        sendData.page++;
+                        getAjaxData();
+                    }
+
+                });
+            }
+            //初始化
             function initFun(){
                 $("#time").text(getDate());//设置活动截止时间
                 getAjaxData();//获取投票数据
+                loadMore();
             }
             initFun();
         });

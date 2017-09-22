@@ -64,12 +64,12 @@
                     <p style="padding: 20px;">系统已将您的报名码发送至您的手机，请注意查收并且妥善保管！</p>
                 </div>
             </div>
-            <div class="result-content btn-group">
-                <a href="index.html" class="return-prev">返回首页</a>
-                <a href="userCenter.html" class="tijiao-btn" id="read-dingdan">查看订单</a>
-            </div>
+            <p style="padding: 0 20px;font-size: 16px;color: #6d9216;">快来参加“最酷宝宝”的评选活动吧，晒出宝宝最酷的照片，分享到您的朋友圈，邀请朋友投票，票选最多的，将会获得滑步车大奖！还有骑行服、T恤等众多奖品等你来领！</p>
             <div class="share-btn btn-one">
-                <a href="javascript:;" onclick="$('.share-content').fadeIn(300)">分享</a>
+                <a href="kids.html" style="font-size: 18px;">立即参与赢取</a>
+            </div>
+            <div class="result-content btn-one" style="text-align:center;">
+                <a href="userCenter.html" style="font-size: 18px;color: #000;background: transparent;border: 1px solid #ccc;">查看订单</a>
             </div>
         </div>
     </section>
@@ -83,7 +83,7 @@
     </div>
     <script>
         $(function (){
-            $.fn.isSign();
+            //$.fn.isSign();
             var data = location.search.split("?");
             var orderId = data[1].split("=")[1];
             window.shareInfo = {
