@@ -388,7 +388,11 @@
             $("#daywrapper ul").html("");
             var str = "<li>&nbsp;</li>";
             for (var i = opts.beginday; i <= opts.endday; i++) {
-                str += '<li>' + i + '日</li>';
+                if(i<10){
+                    str += '<li>' + '0'+i + '日</li>';
+                }else{
+                    str += '<li>' + i + '日</li>';
+                }
             }
             return str + "<li>&nbsp;</li>";
         }

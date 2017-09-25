@@ -37,6 +37,7 @@
     width: 96%;
     margin: 10px auto;
     }
+  
     section .baoming-title {
       font-size: 16px;
       margin-top: 10px;
@@ -105,8 +106,7 @@
       section .top-container .event-code {
         display: none; }
     section .content-container .content-top ul li {
-      font-size: 14px;
-      height: 30px;}
+      font-size: 14px;}
     section .content-container .content-page {
       width: 100%; }
     section .content-container .content-page2 .content-info {
@@ -552,20 +552,21 @@
   position: fixed;
   top: 0;
   left: 0;
-  background: rgba(0,0,0,.9);
+  background: rgba(240,240,240,1);
 }
 .code-container p .close-code{
-  float: right;
   width: 20px;
-  margin: 20px;
+  position: absolute;
+  right: 20px;
+  top: 10px;
 }
 .code-text{
   padding: 0px;
-  margin-bottom: 50px;
+  margin-bottom: 10px;
 }
 .code-content{
-  width: 50%;
-  margin: 30px auto 10px;
+  width: 120px;
+  margin: 10px auto;
   padding: 5%;
   background: #fff;
 }
@@ -684,4 +685,38 @@
 .question-content p:nth-of-type(2n){
   padding-left: 26px;
   line-height: 20px;
+}
+
+.content-page2 .content-info:nth-of-type(1) p.allCount-person {
+  display: none;
+}
+.content-page2 .content-info:nth-of-type(2) p.allCount-person{
+  display: none;
+}
+.content-page2 .content-info:nth-of-type(3) p.allCount-person{
+  display: none;
+}
+
+/*9月25新增扫码组别*/
+.code-header{
+  font-size: 16px;
+  line-height: 40px;
+  background: #0079bf;
+  text-align: center;
+  color: #fff;
+
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.child-group{
+  width: 90%;
+  padding: 0px 5%;
+}
+.child-group p{
+  line-height:20px;
+  font-size: 14px;
+}
+.child-group ul li{
+  padding: 5px 0;
+  border-bottom: 1px solid #ddd;
 }

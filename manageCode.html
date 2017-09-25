@@ -22,17 +22,15 @@
 </head>
 <body class="md">
     <section>
-        <div class="content-container">
-            <h3 class="baoming-title">人员签到</h3>
-            <p class="alert-info">请仔细核对以下信息,确认无误再操作!</p>
-            <div class="content-page" style="padding: 20px 0;">
-                <h1 class="code-title">报名人信息</h1>
-                <br>
-                <p class="code-p"><span>活动名称</span><span id="activityName"></span></p>
-                <p class="code-p"><span>报名人</span><span id="realName"></span></p>
-                <p class="code-p"><span>手机号码</span><span id="telephone"></span></p>
-                <p class="code-p"><span>状态</span><span id="isSign"></span></p>
+        <div class="code-container">
+            <p class="code-header"><span class="code-title">赛事签到码</span></p>
+            <p style="padding: 10px 20px;">报名套餐:<span id="meal-show">两大一小(豪华酒店住宿)</span></p>
+            <div class="child-group">
+                <ul>
+                </ul>
             </div>
+            <p style="padding: 10px 20px;">签到状态: <span style="color: #2c9eee;" id="isSign">未签到</span></p>
+            <hr style="color: #ddd;">
             <div class="btn-one">
                 <a href="javascript:;" id="register" >确认签到</a>
                 <a href="javascript:;" id="cancelRegister" style="display: none;">取消签到</a>
@@ -42,6 +40,7 @@
     <script>
         $(function (){
             $.fn.isSign();//登录相关
+//            window.userInfo.userId = 6;
             var userArr = [],changeArr=[];
             //获取工作人员id列表
             function getWorkerId(){
@@ -101,18 +100,26 @@
                 });
             }
             //展示数据
-            function setResultData(result){
-                $("#activityName").text(result.activityName);
-                $("#realName").text(result.realName);
-                $("#telephone").text(result.telephone);
-                window.userInfo.orderId = result.orderId;
-                if(result.isSign == 0){//未签到
+            function setResultData(order){
+                //设置小孩信息
+                $(".child-group ul").empty();
+                for(var i = 0; i< order.users.length;i++){
+                    var temp = $("<li class=\"child-list\">" +
+                        "                <p>小孩姓名:<span>"+order.users[i].realname+"</span></p>" +
+                        "                <p>出生日期:<span>"+order.users[i].birthday+"</span></p>" +
+                        "                <p>参赛组别:<span>"+order.users[i].groupName+"</span></p>" +
+                        "                <p>比赛时间:<span>"+order.users[i].groupBeginDate+"</span></p>" +
+                        "            </li>");
+                    $(".child-group ul").append(temp);
+                }
+                window.userInfo.orderId = order.orderId;
+                if(order.isSign == 0){//未签到
                     $("#isSign").text("未签到").css("color","red");
                     $("#register").bind("click",function (){
                         signCode(1);
                     });
                     $("#cancelRegister").css("backgroundColor","#ccc");
-                }else if(result.isSign == 1){//已签到
+                }else if(order.isSign == 1){//已签到
                     $("#isSign").text("已签到").css("color","#3c84c3");
                     $("#register").css("backgroundColor","#ccc");
                     if(changeArr.indexOf(String(window.userInfo.userId)) != -1){

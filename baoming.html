@@ -72,15 +72,16 @@
                 <p class="meal-title"><b><span>套餐名称</span><span>剩余数量</span><span>选择</span></b></p>
                 <ul class="jichu" id="baseMeal">
                     <li>一大一小</li>
-                    <li></li>
+                    <li style="visibility: hidden"></li>
                     <li><input type="radio" value="3" name="baseMeal"></li>
                 </ul>
                 <ul class="jichu" id="baseMeal1">
                     <li>两大一小</li>
-                    <li></li>
+                    <li style="visibility: hidden"></li>
                     <li><input type="radio" value="4" name="baseMeal"></li>
                 </ul>
                 <p>附加套餐：(可选)</p>
+                <p class="alert-info" style="font-size: 12px;border-bottom: none;">*若以下套餐名额报满，而您依然希望入住对应酒店<br>请与客服联系。</p>
                 <ul class="fujia" id="niceHotel">
                     <li>豪华酒店住宿(福朋喜来登酒店)</li>
                     <li></li>
@@ -98,7 +99,7 @@
                 </ul>
                 <ul class="fujia" id="addChildren">
                     <li>增加小孩</li>
-                    <li></li>
+                    <li style="visibility: hidden"></li>
                     <li class="select-num"><button>-</button><button class="child-num"></button><button>+</button></li>
                 </ul>
             </div>
@@ -113,7 +114,7 @@
                         <tbody>
                         <tr><td><nobr>家长姓名</nobr></td><td><input type="text" id="realName" placeholder="请输入真实姓名"></td></tr>
                         <tr><td>性别</td><td id="userSex"><label><input type="radio" checked name="userSex" value="0">男</label><label><input type="radio" name="userSex" value="1">女</label></td></tr>
-                        <tr><td>出生日期</td><td><input type="text" id="bornDate1" placeholder="请选择出生日期"></td></tr>
+                        <tr><td>出生日期</td><td><input type="date" id="bornDate1" placeholder="请选择出生日期"></td></tr>
                         <tr><td>证件类型</td><td>
                             <select id="zhengjianType1">
                                 <option value="0">身份证</option>
@@ -132,7 +133,7 @@
                             <tbody>
                             <tr><td><nobr>家长姓名</nobr></td><td><input type="text" id="realName2" placeholder="请输入真实姓名"></td></tr>
                             <tr><td>性别</td><td id="userSex2"><label><input type="radio" checked name="userSex2" value="0">男</label><label><input type="radio" name="userSex2" value="1">女</label></td></tr>
-                            <tr><td>出生日期</td><td><input type="text" id="bornDate2" placeholder="请选择出生日期"></td></tr>
+                            <tr><td>出生日期</td><td><input type="date" id="bornDate2" placeholder="请选择出生日期"></td></tr>
                             <tr><td>证件类型</td><td>
                                 <select id="zhengjianType2">
                                     <option value="0">身份证</option>
@@ -151,7 +152,7 @@
 
                         <tr><td>小孩姓名</td><td><input type="text" id="childName" placeholder="请输入真实姓名"></td></tr>
                         <tr><td>性别</td><td id="childSex"><label><input type="radio" checked name="childSex" value="0">男</label><label><input type="radio" name="childSex" value="1">女</label></td></tr>
-                        <tr><td>出生日期</td><td><input type="text" id="childBornDate" placeholder="请选择出生日期"></td></tr>
+                        <tr><td>出生日期</td><td><input type="date" id="childBornDate" placeholder="请选择出生日期"></td></tr>
                         <tr><td>证件类型</td><td>
                             <select id="zhengjianType3">
                                 <option value="0">身份证</option>
@@ -191,6 +192,7 @@
                     <h3 class="sm-title">已选套餐</h3>
                     <p style="text-align: center" class="base-title">家庭类型：</p>
                     <p style="text-align:center;">附加套餐：</p>
+
                 </div>
                 <div class="price">
                     <p>套餐总金额：￥<span id="QallPrice"></span></p>
@@ -470,7 +472,6 @@
                 });
             }
             function setMealData(){
-                console.log(resultData)
                 data.mealData[0].type = resultData[0].type;
                 data.mealData[0].comboName = resultData[0].name;
                 data.mealData[0].comboTypeId = resultData[0].id;
@@ -655,10 +656,10 @@
                     $(".addChildrenContainer").empty();
                     var count = parseInt(data.mealData[5].count);
                     for(var i = 0; i < count;i++){
-                        var cloneChild = $('<div class="child-info" id="addChildren'+i+'"><h3 class="sm-title">增加小孩('+(i+1)+'):</h3><table><tbody><tr><td>小孩姓名</td><td><input type="text" class="childName" placeholder="请输入真实姓名"></td></tr><tr><td>性别</td><td><label><input type="radio" checked name="childSex'+i+'" value="0">男</label><label><input type="radio" name="childSex'+i+'" value="1">女</label></td></tr><tr><td>出生日期</td><td><input type="text" class="bornDate" placeholder="请选择出生日期"></td></tr><tr><td>证件类型</td><td><select class="zhengjianType"><option value="0">身份证</option><option value="1">护照</option><option value="2">港澳通行证</option><option value="3">台湾通行证</option></select></td></tr><tr><td>证件号码</td><td><input type="text" class="zhengjianNumber" placeholder="请输入证件号码"></td></tr></tbody></table></div>');
+                        var cloneChild = $('<div class="child-info" id="addChildren'+i+'"><h3 class="sm-title">增加小孩('+(i+1)+'):</h3><table><tbody><tr><td>小孩姓名</td><td><input type="text" class="childName" placeholder="请输入真实姓名"></td></tr><tr><td>性别</td><td><label><input type="radio" checked name="childSex'+i+'" value="0">男</label><label><input type="radio" name="childSex'+i+'" value="1">女</label></td></tr><tr><td>出生日期</td><td><input type="date" class="bornDate" placeholder="请选择出生日期"></td></tr><tr><td>证件类型</td><td><select class="zhengjianType"><option value="0">身份证</option><option value="1">护照</option><option value="2">港澳通行证</option><option value="3">台湾通行证</option></select></td></tr><tr><td>证件号码</td><td><input type="text" class="zhengjianNumber" placeholder="请输入证件号码"></td></tr></tbody></table></div>');
                         $(".addChildrenContainer").append(cloneChild);
-                        var newBorn = "addChildren"+i;
-                        $("#"+newBorn+" .bornDate").date();
+//                        var newBorn = "addChildren"+i;
+//                        $("#"+newBorn+" .bornDate").date();
                     }
                 }
             }
@@ -1055,9 +1056,9 @@
                 $(".alert-container1").fadeOut(300);
             });
             //时间选择
-            $('#bornDate1').date();
-            $('#bornDate2').date();
-            $("#childBornDate").date();
+//            $('#bornDate1').date();
+//            $('#bornDate2').date();
+//            $("#childBornDate").date();
             //添加判断该用户是否有其他未支付的订单
             function getUserOrder(){
                 $.ajax({

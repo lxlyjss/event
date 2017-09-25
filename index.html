@@ -92,7 +92,7 @@
             <ul>
                 <li class="active">赛事详情</li>
                 <li>套餐详情</li>
-                <li id="erollInfo">报名信息(<span id="baomingCount"></span>)</li>
+                <li id="erollInfo">报名信息</li>
                 <li id="question">常见问题</li>
             </ul>
         </div>
@@ -509,7 +509,7 @@
                 if (i > 2) {
                     basePrice = 472;
                 }
-                var temp = $("<div class='content-info'><div class=\"content-card\"><p>套餐名称：<span class=\"taocan-title\">" + types[i].name + "</span></p><p>价&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;格：<span class=\"taocan-price\">￥<i>" + (types[i].price + basePrice) + "</i></span></p><p>年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;龄：<span class=\"taocan-age\">" + types[i].age + "</span></p><p>总&nbsp;&nbsp;名&nbsp;&nbsp;额：<span class=\"taocan-person\"><i>" + types[i].nowCount + "</i>/<i>" + types[i].totalCount + "</i></span></p></div><div class=\"content-shuoming\"><p>说明：</p><p>" + types[i].remark + "</p></div></div>");
+                var temp = $("<div class='content-info'><div class=\"content-card\"><p>套餐名称：<span class=\"taocan-title\">" + types[i].name + "</span></p><p>价&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;格：<span class=\"taocan-price\">￥<i>" + (types[i].price + basePrice) + "</i></span></p><p>年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;龄：<span class=\"taocan-age\">" + types[i].age + "</span></p><p class='allCount-person'>总&nbsp;&nbsp;名&nbsp;&nbsp;额：<span class=\"taocan-person\"><i>" + types[i].nowCount + "</i>/<i>" + types[i].totalCount + "</i></span></p></div><div class=\"content-shuoming\"><p>说明：</p><p>" + types[i].remark + "</p></div></div>");
                 $("#mealContent").append(temp);
             }
         }
@@ -524,7 +524,7 @@
             $("#activityEndDate").text(activity.activityEndDate);
             $("#enrollBeginDate").text(activity.enrollBeginDate);
             $("#enrollEndDate").text(activity.enrollEndDate);
-            $("#nowCount").text(activity.nowCount);
+            $("#nowCount").text(resultData.babyCount);
             $("#totalCount").text(activity.totalCount);
             $("#address").text(activity.address);
             $("#viewCount").text(resultData.count.viewCount);
@@ -560,7 +560,7 @@
 
         //设置报名列表
         function setSiginList() {
-            $("#baomingCount").text(siginList.count);
+            //$("#baomingCount").text(siginList.count);
             for (var i = 0; i < siginList.enrollList.length; i++) {
                 var temp = $("<li class=\"list\">" +
                     "<p class=\"user-name\" style=\"text-indent: 1em\">报名人：<span>" + siginList.enrollList[i].name + "</span></p>" +

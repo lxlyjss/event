@@ -306,11 +306,24 @@ ul.list-content::after{
     margin: 0px auto;
 }
 .upload-btn{
-    width: 120px;
+    width: 42%;
     height: 40px;
-    margin: 30px auto;
+    margin-left: 5%;
+    margin-bottom: 20px;
     line-height:40px;
-    background: #a1cd5b;;
+    background: #a1cd5b;
+    float: left;
+    text-align: center;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+.upload-btn1{
+    width: 100px;
+    height: 40px;
+    margin: 10px auto;
+    line-height:40px;
+    background: #a1cd5b;
     text-align: center;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;

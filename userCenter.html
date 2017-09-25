@@ -161,12 +161,30 @@
     </div>
 </div>
 <div class="code-container" style="display: none">
-    <p><img src="images/closeImg.png" alt="" class="close-code" onclick="$('.code-container').fadeOut(300)"></p>
-    <p style="line-height: 30px;text-align:center;;color: #fff;font-size: 16px;padding: 0 20px;margin-top: 100px;">
-        请在活动开始当天出示此二维码 <br>让工作人员扫码进行签到</p>
-    <div class="code-content" id="codeContent">
+    <p class="code-header"><span class="code-title">赛事签到码</span><img src="images/closeImg.png" alt="" class="close-code" onclick="$('.code-container').fadeOut(300)"></p>
+    <p style="padding: 10px 20px;">报名套餐:<span id="meal-show">两大一小(豪华酒店住宿)</span></p>
+    <div class="child-group">
+        <ul>
+            <!--<li class="child-list">-->
+                <!--<p>小孩姓名:<span>姓氏</span></p>-->
+                <!--<p>出生日期:<span>2015-04-25</span></p>-->
+                <!--<p>参赛组别:<span>3岁组</span></p>-->
+                <!--<p>比赛时间:<span>2017-10-15 08:30</span></p>-->
+            <!--</li>-->
+            <!--<li class="child-list">-->
+                <!--<p>小孩姓名:<span>姓氏</span></p>-->
+                <!--<p>出生日期:<span>2015-04-25</span></p>-->
+                <!--<p>参赛组别:<span>3岁组</span></p>-->
+                <!--<p>比赛时间:<span>2017-10-15 08:30</span></p>-->
+            <!--</li>-->
+        </ul>
     </div>
-    <p style="text-align:center;color: #fff;" class="code-text"></p>
+    <p style="padding: 10px 20px;">签到状态: <span style="color: #2c9eee;" id="isSign"></span></p>
+    <hr style="color: #ddd;">
+
+    <p style="text-align:center;" class="code-text"></p>
+    <div class="code-content" id="codeContent"></div>
+    <p style="line-height: 30px;text-align:center;font-size: 16px;padding: 0 20px;">请向工作人员出示此码,完成签到<br>若有问题,联系客服: 80448861</p>
 </div>
 <script>
     $(function () {
@@ -195,7 +213,7 @@
                         resultData = result;
                         setResultData();
                     } else {
-                        alert("fail");
+                        //alert("fail");
                     }
                 },
                 error: function (err) {
@@ -241,7 +259,6 @@
                 }
 
                 var nowStatus = getStatus(resultData.list[i].state, resultData.list[i].refundState);
-                //alert(resultData.list[i].refundState)
                 var temp = $("<li class=\"dingdan-list\">" +
                     "<p class=\"dingdan-title\">活动名称<span>" + (resultData.list[i].activityName == null ? "" : resultData.list[i].activityName) + "</span></p>" +
                     "<p class=\"dingdan-group\">套餐：<span>" + (resultData.list[i].comboName == null ? "" : resultData.list[i].comboName) + "</span></p>" +
@@ -253,9 +270,9 @@
                     "<a href=\"javascript:;\" class=\"sm-btn dingdan-xq\" onclick='$.fn.readMore(" + i + ")'>订单详情</a></p><p class=\"dingdan-edit\"></li>");
                 switch (parseInt(nowStatus)) {
                     case 1: {//已支付
-                        temp.append("<p class=\"dingdan-edit\"><a href=\"javascript:;\" class='sm-btn' onclick=\"$.fn.setQrCode('" + resultData.list[i].signCode + "')\" class=\"pay-btn\">签到码</a></p>");
                         if (resultData.list[i].isShow) {
                             temp.append("<p class=\"dingdan-edit\"><a href=\"javascript:;\" class=\"dingdan-reload sm-btn\" onclick=\"$.fn.refundFun('" + resultData.list[i].id + "')\">申请退款</a></p>");
+                        temp.append("<p class=\"dingdan-edit\"><a href=\"javascript:;\" class='sm-btn' onclick=\"$.fn.setQrCode('" +i+"')\" class=\"pay-btn\">签到码</a></p><p class=\"dingdan-edit\"><a href=\"kids.html\" class=\"pay-btn sm-btn\" style='padding: 0 10px;background:#a1cd5b;width: auto;'>最酷宝宝评选</a></p>");
                         }
                         break;
                     }
@@ -278,12 +295,10 @@
                         break;
                     }
                 }
-
                 dingdanList.push(temp);
             }
             $("#dingdan-container").append(dingdanList);
         }
-
         //用户退款
         $.fn.refundFun = function (id) {
             if (confirm("您是否确认要申请退款?")) {
@@ -324,7 +339,6 @@
                 }
             }
         };
-
         //操作订单
         function editOrder(orderId) {
             $.ajax({
@@ -427,7 +441,7 @@
             if (nowStatus == 1) {//已支付,显示退款按钮和查看签到码按钮
                 $(".dingdan-btn").removeClass("btn-group").addClass("btn-one");
                 if (resultData.list[index].isShow) {
-                    $(".dingdan-btn").append("<a href=\"javascript:;\" onclick=\"$.fn.refundFun('" + resultData.list[index].id + "')\" class=\"pay-btn\">申请退款</a>");
+                    $(".dingdan-btn").append("<a href=\"kids.html\" class=\"pay-btn\">分享赢大奖</a><a href=\"javascript:;\" onclick=\"$.fn.refundFun('" + resultData.list[index].id + "')\" class=\"pay-btn\">申请退款</a>");
                 }
             } else if (nowStatus == 0) {//未支付.显示立即支付
                 $(".dingdan-btn").removeClass("btn-one").addClass("btn-group");
@@ -442,17 +456,32 @@
                 $(".dingdan-btn").append("<a href=\"javascript:;\" onclick=\"$.fn.editFun('rel','" + resultData.list[index].id + "')\" class=\"pay-btn\">重新报名</a>");
             }
         }
-
         //新增签到码二维码
-        $.fn.setQrCode = function (code) {
+        $.fn.setQrCode = function (i) {
+            var order = resultData.list[i];
             $(".code-container").fadeIn(300);
-            $(".code-text").text(code);
+            $(".code-text").text(order.signCode);
             $(".code-container").bind("touchmove", function (ev) {
                 ev.preventDefault();
             });
+            $("#meal-show").text(order.comboName);//报名套餐
+            //设置小孩信息
+            $(".child-group ul").empty();
+            for(var i = 0; i< order.length;i++){
+                var temp = $("<li class=\"child-list\">" +
+                    "<p>小孩姓名:<span>"+order.groups[i].realname+"</span></p>" +
+                    "<p>出生日期:<span>"+order.groups[i].birthday+"</span></p>" +
+                    "<p>参赛组别:<span>"+order.groups[i].groupName+"</span></p>" +
+                    "<p>比赛时间:<span>"+order.groups[i].groupBeginDate+"</span></p>" +
+                    "</li>");
+                $(".child-group ul").append(temp);
+            }
+            //设置签到状态
+            $("#isSign").text(order.isSign==0?"未签到":"已签到");
+            //设置二维码信息
             $("#codeContent").empty();
             var qrcode = new QRCode('codeContent', {
-                text: window.userInfo.url + 'manageCode.html?signCode=' + code,
+                text: window.userInfo.url + 'manageCode.html?signCode=' + order.signCode,
                 width: 256,
                 height: 256,
                 colorDark: '#000000',
@@ -464,7 +493,6 @@
         function initFun() {
             getAjaxData(window.userInfo.url + "activity/front/order/selectOrder", {"userId": window.userInfo.userId});
         }
-
         initFun();
     });
 </script>

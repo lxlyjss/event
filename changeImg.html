@@ -8,7 +8,8 @@
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <link rel="shortcut icon" href="images/72-logo.png" type="image/x-icon">
     <link rel="stylesheet" href="css/vote.css">
-    <title>最酷宝宝评选</title>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <title>骑二无比最酷宝宝评选</title>
     <style>
         .loading-warpper{
             width: 100%;
@@ -144,7 +145,7 @@
 <body>
 <div class="container">
     <div class="img-content">
-        <div class="img-show"></div>
+        <div class="img-show" style="margin-bottom: 20px;"></div>
         <div class="upload-btn" id="choseImg">
             <input type="file" style="display: none;" accept="image/*" id="file" multiple="multiple">
             <span class="select-btn">修改图片</span>
@@ -173,21 +174,25 @@
     <div class="shuoming-info">
         <div class="closeBtn"><img src="images/closeImg.png"></div>
         <p class="shuoming-title">活动说明</p>
-        <p class="shuoming-text">上传您孩子（不限男女）最“man”最酷的照片，参与最酷宝宝评比，赢取丰厚奖品。</p>
+        <p class="shuoming-text">上传您孩子（不限男女）最酷的照片，参与最酷宝宝评比，赢取丰厚奖品。</p>
         <p class="shuoming-btn"><span>参与资格</span></p>
-        <p class="shuoming-text">1、成功报名《中国2017儿童滑步车赛事嘉年华--北京站》后，可参与此活动。</p>
-        <p class="shuoming-text">2、有热情，有活力，有自信的宝宝，不限男女；</p>
+        <p class="shuoming-text">1、成功报名且参与《中国2017儿童滑步车赛事嘉年华--北京站》，可获得评选资格。</p>
+        <p class="shuoming-text">2、上传您宝宝“最酷,卖萌,搞怪”的照片参与评选，不限男女。</p>
         <p class="shuoming-btn"><span>参与时间</span></p>
-        <p class="shuoming-text">即日起至2017年9月29日晚上12：59：59</p>
+        <p class="shuoming-text">即日起至2017年10月12日23：59：59</p>
         <p class="shuoming-btn"><span>奖品及评奖说明</span></p>
-        <p class="shuoming-text">以2017年9月29日晚上12:59:59秒的票数为准进行评选，奖品等级如下：</p>
+        <p class="shuoming-text">以2017年10月12日23:59:59秒的票数为准进行评选，奖项及奖品如下：</p>
         <p class="shuoming-text">一等奖：1名   奖品：滑步车一辆</p>
         <p class="shuoming-text">二等奖：3名   奖品：专业骑行服一件</p>
-        <p class="shuoming-text">三等奖：10名   奖品：骑二无比kidsT恤一件</p>
-        <p class="shuoming-btn"><span>其他注意事项</span></p>
-        <p class="shuoming-text">1、若票数发生相等结果，将有骑二无比内部讨论决议。</p>
-        <p class="shuoming-text">2、若发现使用其他软件作弊等情况，一经发现，取消评比资格。</p>
-        <p class="shuoming-text">3、评比结果将在活动当天公示，现场领取奖品。</p>
+        <p class="shuoming-text">三等奖：10名   奖品：骑二无比kids T恤一件</p>
+        <p class="shuoming-btn"><span>注意事项</span></p>
+        <p class="shuoming-text">1、一个家庭若有多个小孩儿，只能参与一次评选。</p>
+        <p class="shuoming-text">2、报名《中国2017儿童滑步车赛事嘉年华--北京站》活动后,若申请退款,则无法参与最终评选。</p>
+        <p class="shuoming-text">3、若发现使用其他软件作弊等情况，一经发现，取消评比资格。</p>
+        <p class="shuoming-text">4、成绩及奖品将在10月14日《中国2017儿童滑步车赛事嘉年华--北京站》活动当天现场公布和发放。</p>
+
+        <br>
+        <p class="shuoming-text" style="text-align:center;">此次活动的最终解释权归骑二无比</p>
     </div>
 </div>
 <div class="share-content" style="display: none;">
@@ -264,6 +269,14 @@
 </script>
 <script>
     $(function (){
+        $.fn.isSign();
+        //分享相关
+        window.shareInfo = {
+            url:window.location.href.split("#")[0],
+            userId:window.userInfo.userId,
+            activityId:"2"
+        };
+        $.fn.weShareTouPiao(window.shareInfo);
         //说明
         $(".event-info").click(function (){
             $("#shuoming").fadeIn(200);
@@ -272,7 +285,7 @@
             $("#shuoming").fadeOut(200);
         });
         $("#shuoming").on("touchmove",function (e){
-            e.preventDefault();
+            //e.preventDefault();
         });
 
         var sendData = {
@@ -294,14 +307,18 @@
                     console.log(res);
                     $(".loading-warpper").hide();
                     if(res.result == 1){
-                        setResultData(res);
+                        if(res.vote.userId == window.userInfo.userId){
+                            setResultData(res);
+                        }else{
+                            window.location.href = "http://sport.72bike.com/kids.html";
+                        }
                     }else{
                         alert(res.msg);
                     }
                 },
                 error:function (err){
                     $(".loading-warpper").hide();
-                    alert("获取数据失败");
+                    //alert("获取数据失败");
                 }
             })
         }
@@ -347,7 +364,7 @@
                 },
                 error:function (err){
                     $(".loading-warpper").hide();
-                    alert("获取数据失败!");
+                    //alert("获取数据失败!");
                 }
             })
         });
