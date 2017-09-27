@@ -23,7 +23,7 @@
 <body class="md">
     <section>
         <div class="code-container">
-            <p class="code-header"><span class="code-title">赛事签到码</span></p>
+            <p class="code-header"><span class="code-title">赛事签到</span></p>
             <p style="padding: 10px 20px;">报名套餐:<span id="meal-show">两大一小(豪华酒店住宿)</span></p>
             <div class="child-group">
                 <ul>
@@ -105,11 +105,11 @@
                 $(".child-group ul").empty();
                 for(var i = 0; i< order.users.length;i++){
                     var temp = $("<li class=\"child-list\">" +
-                        "                <p>小孩姓名:<span>"+order.users[i].realname+"</span></p>" +
-                        "                <p>出生日期:<span>"+order.users[i].birthday+"</span></p>" +
-                        "                <p>参赛组别:<span>"+order.users[i].groupName+"</span></p>" +
-                        "                <p>比赛时间:<span>"+order.users[i].groupBeginDate+"</span></p>" +
-                        "            </li>");
+                        "<p>小孩姓名:<span>"+order.users[i].realname+"</span></p>" +
+                        "<p>出生日期:<span>"+order.users[i].birthday+"</span></p>" +
+                        "<p>参赛组别:<span>"+order.users[i].groupName+"</span></p>" +
+                        "<p>比赛时间:<span>"+order.users[i].groupBeginDate+"</span></p>" +
+                        "</li>");
                     $(".child-group ul").append(temp);
                 }
                 window.userInfo.orderId = order.orderId;

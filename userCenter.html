@@ -162,7 +162,7 @@
 </div>
 <div class="code-container" style="display: none">
     <p class="code-header"><span class="code-title">赛事签到码</span><img src="images/closeImg.png" alt="" class="close-code" onclick="$('.code-container').fadeOut(300)"></p>
-    <p style="padding: 10px 20px;">报名套餐:<span id="meal-show">两大一小(豪华酒店住宿)</span></p>
+    <p style="padding: 10px 20px;">报名套餐:<span id="meal-show"></span></p>
     <div class="child-group">
         <ul>
             <!--<li class="child-list">-->
@@ -459,6 +459,7 @@
         //新增签到码二维码
         $.fn.setQrCode = function (i) {
             var order = resultData.list[i];
+            console.log(order)
             $(".code-container").fadeIn(300);
             $(".code-text").text(order.signCode);
             $(".code-container").bind("touchmove", function (ev) {
@@ -467,7 +468,7 @@
             $("#meal-show").text(order.comboName);//报名套餐
             //设置小孩信息
             $(".child-group ul").empty();
-            for(var i = 0; i< order.length;i++){
+            for(var i = 0; i< order.groups.length;i++){
                 var temp = $("<li class=\"child-list\">" +
                     "<p>小孩姓名:<span>"+order.groups[i].realname+"</span></p>" +
                     "<p>出生日期:<span>"+order.groups[i].birthday+"</span></p>" +
@@ -492,6 +493,7 @@
 
         function initFun() {
             getAjaxData(window.userInfo.url + "activity/front/order/selectOrder", {"userId": window.userInfo.userId});
+//            getAjaxData(window.userInfo.url + "activity/front/order/selectOrder", {"userId": 58});
         }
         initFun();
     });
